@@ -1,7 +1,13 @@
-
-import './App.css';
 import { lazy, Suspense } from 'react';
 const Board = lazy(() => import('chess_components/Board'));
+
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Login from '../Login/Login';
+import MyGameCard from '../MyGameCard/MyGameCard';
+import Users from '../Users/Users';
+import Friends from '../Friends/Friends';
+import './App.css';
 
 function App() {
   return (
