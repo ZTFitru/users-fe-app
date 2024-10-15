@@ -6,18 +6,17 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: 'user-host',
+      name: 'host-app',
       remotes: {
-        // todo_components: "http://localhost:4173/assets/remoteEntry.js",
-        chess_fe_microservice: "http://localhost:4173/assets/remoteEntry.js",
+        chess_components:
+          'http://chess-fe-microservice.vercel.app/assets/remoteEntry.js',
       },
-      shared: ["react"],
+      shared: ['react', 'react-dom'],
     }),
   ],
   build: {
     modulePreload: false,
-    target: "esnext",
-
+    target: 'esnext',
     minify: false,
     cssCodeSplit: false,
   },

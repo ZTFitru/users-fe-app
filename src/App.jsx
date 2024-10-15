@@ -1,57 +1,15 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
 
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <div>
-//         <a href="https://vitejs.dev" target="_blank">
-//           <img src={viteLogo} className="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} className="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.jsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
-//   )
-// }
-
-// export default App
-
-
-import { useState } from "react";
-// import List from "todo_components/List";
-import List from "chess_fe_microservice/components/Board";
-import Input from "todo_components/Input";
+import './App.css';
+import { lazy, Suspense } from 'react';
+const Board = lazy(() => import('chess_components/Board'));
 
 function App() {
-  const [newTodo, setNewTodo] = useState("");
-  const [todos, setTodos] = useState([]);
-  const onSubmit = () => {
-    setTodos((prev) => [...prev, newTodo]);
-    setNewTodo("");
-  };
-
   return (
     <>
-      <Input value={newTodo} onChange={setNewTodo} onSubmit={onSubmit} />
-      <List items={todos} />
+      <h1>Host App</h1>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Board msg='This guy i tell ya....' />
+      </Suspense>
     </>
   );
 }
