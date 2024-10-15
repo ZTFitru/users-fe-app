@@ -1,7 +1,8 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import federation from "@originjs/vite-plugin-federation";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import federation from '@originjs/vite-plugin-federation';
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
@@ -9,7 +10,7 @@ export default defineConfig({
       name: 'host-app',
       remotes: {
         chess_components:
-          'http://chess-fe-microservice.vercel.app/assets/remoteEntry.js',
+          'https://chess-fe-microservice.vercel.app/assets/remoteEntry.js',
       },
       shared: ['react', 'react-dom'],
     }),
@@ -21,6 +22,5 @@ export default defineConfig({
     cssCodeSplit: false,
   },
 });
-
 
 
