@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import './UserCard.css';
 
 function UserCard() {
   return (
@@ -6,4 +8,4 @@ function UserCard() {
   )
 }
 
-export default UserCard
+export default UserCard;

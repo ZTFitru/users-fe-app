@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import './StartGamePopUp';
 
 function StartGamePopUp() {
   return (
@@ -6,4 +8,4 @@ function StartGamePopUp() {
   )
 }
 
-export default StartGamePopUp
+export default StartGamePopUp;

@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import './RemoveFriendPopUp.css';
 
 function RemoveFriendPopUp() {
   return (
@@ -6,4 +8,4 @@ function RemoveFriendPopUp() {
   )
 }
 
-export default RemoveFriendPopUp
+export default RemoveFriendPopUp;

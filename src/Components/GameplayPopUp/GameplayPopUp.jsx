@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import './GameplayPopUp.css';
 
 function GameplayPopUp() {
   return (
@@ -6,4 +8,4 @@ function GameplayPopUp() {
   )
 }
 
-export default GameplayPopUp
+export default GameplayPopUp;

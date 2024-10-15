@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import './MyGameCard.css';
 
 function MyGameCard() {
   return (
@@ -6,4 +8,4 @@ function MyGameCard() {
   )
 }
 
-export default MyGameCard
+export default MyGameCard;
