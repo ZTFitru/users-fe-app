@@ -4,7 +4,11 @@ import './GamePlay.css';
 
 function GamePlay() {
   return (
-    <div>GamePlay</div>
+    <div>GamePlay
+         {/* <Suspense fallback={<div>Loading...</div>}>
+        <Board msg='This guy i tell ya....' />
+      </Suspense> */}
+    </div>
   )
 }
 
