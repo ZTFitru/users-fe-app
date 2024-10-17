@@ -1,17 +1,26 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import chessLogo from '../../assets/chess-with-frienemies-1.svg';
 import eye from '../../assets/eye.png'
 import './Login.css';
 
-function Login() {
+function Login({ userIsLogedIn }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('')
+    const navigate = useNavigate();
 
     const signInBtn = (e) => {
       e.preventDefault();
       
+      if(email === 'whatever@example.com' && password === 'password' ) {
+        userIsLogedIn()
+        navigate('/myGames/:userId')
+      } else {
+        setError('invalid thing') // error.message
+      }
     }
 
     return (
@@ -20,6 +29,7 @@ function Login() {
             <img src={chessLogo} alt='chess pieces' />
             <h2>Sign In</h2>
             <form onSubmit={signInBtn}>
+              {error && <div>{error}</div>}
                 <div>
                     <label>Email</label>
                     <input

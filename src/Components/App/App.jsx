@@ -16,6 +16,7 @@ import MyGames from '../MyGames/MyGames';
 function App() {
   
   const [userData, setUserData] = useState(null);
+  const [isLogedIn, setIsLogedIn ] = useState(false);
   const navigate = useNavigate();
   
 
@@ -31,15 +32,19 @@ function App() {
     }
     fetchUsers();
   }, []);
+
+  const userIsLogedIn = () => {
+    setIsLogedIn(true)
+  }
   
   return (
     <>
       <h1><span>Chess with </span><span>Frien-EMIMES</span></h1>
       <Routes>
-        <Route path='/' element={<Login />}/>
-        <Route path='/my_games/:username' element={<MyGames />}/>
+        <Route path='/' element={<Login userIsLogedIn={userIsLogedIn} />}/>
+        <Route path='/my_games/:userId' element={<MyGames />}/>
         <Route path='/users/:userId' element={<Users />}/>
-        <Route path='/friends/:username' element={<Friends />}/>
+        <Route path='/friends/:userId' element={<Friends />}/>
         {/* <Route path='/' element={<GamePlay />}/> */}
         {/* <Route path='/' element={<Stats />}/> */}
       </Routes>
