@@ -1,13 +1,12 @@
-// import { lazy, Suspense } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-
+import userData from '../../../mockUsers.json'
 // const Board = lazy(() => import('chess_components/Board'));
 import { getUser } from '../../../apiCalls';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
-import MyGameCard from '../MyGameCard/MyGameCard';
+// import MyGameCard from '../MyGameCard/MyGameCard';
 import Users from '../Users/Users';
 import Friends from '../Friends/Friends';
 import './App.css';
@@ -15,7 +14,7 @@ import MyGames from '../MyGames/MyGames';
 
 function App() {
 
-  // const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
   const [isLogedIn, setIsLogedIn] = useState(false);
   const navigate = useNavigate();
 
@@ -33,6 +32,14 @@ function App() {
   //   fetchUsers();
   // }, []);
 
+  useEffect(() => {
+    const grabUserData = ()=> {
+      setUserData(userData.data)
+    }
+
+    grabUserData()
+  }, [])
+
   const userIsLogedIn = () => {
     setIsLogedIn(true)
   }
@@ -46,15 +53,16 @@ function App() {
       {/* {isLogedIn && <Header userLogOut={userLogOut} />} */}
       <Header />
       <Routes>
-        <Route path='/' element={<Login userIsLogedIn={userIsLogedIn} />} />
-        {/* <Route path='/my_games/:userId' element={<MyGames />}/> */}
-        <Route path='/users/:userId' element={isLogedIn && <Users />} />
-        {/* <Route path='/friends/:userId' element={<Friends />} /> */}
+        {/* <Route path='/' element={<Login userIsLogedIn={userIsLogedIn} />} /> */}
+        {/* <Route path='/my_games/:username' element={<MyGames />}/> */}
+        <Route path='/' element={<Users />} />
+        {/* path='/users/:username' */}
+        {/* <Route path='/friends/:username' element={<Friends />} /> */}
         {/* <Route path='/' element={<GamePlay />}/> */}
         {/* <Route path='/' element={<Stats />}/> */}
       </Routes>
       <Footer />
-      {/* isLogedIn && <Footer /> */}
+      {/* {isLogedIn && <Footer />} */}
     </>
   );
 }

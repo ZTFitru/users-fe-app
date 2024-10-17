@@ -17,7 +17,8 @@ function Login({ userIsLogedIn }) {
 
         if (email === 'whatever@example.com' && password === 'password') {
             userIsLogedIn()
-            navigate('/myGames/:userId')
+            // navigate('/myGames/:userId')
+            navigate('/users/:username')
         } else {
             setError('invalid thing') // error.message
         }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Link } from "react-router-dom";
 import chessLogo2 from '../../assets/chess-with-frienemies-2.svg';
 import { FaTimes } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -23,7 +23,7 @@ function Header({ userLogOut }) {
             </div>
             <nav>
                 <ul className={`header-link ${isOpen ? 'open' : ''}`}>
-                    <li onClick={()=> setIsOpen(false)}>Users</li>
+                    <li><Link to='/users/:userId' onClick={()=> setIsOpen(false)}>Users</Link></li>
                     <li onClick={()=> setIsOpen(false)}>Frien-EMIES</li>
                     <li onClick={()=> setIsOpen(false)}>Games</li>
                     <li>

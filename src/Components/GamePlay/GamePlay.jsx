@@ -1,4 +1,5 @@
 import React from 'react';
+// import { lazy, Suspense } from 'react';
 
 import './GamePlay.css';
 
