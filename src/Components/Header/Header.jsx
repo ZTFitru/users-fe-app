@@ -16,13 +16,16 @@ function Header({ userLogOut }) {
 
     return (
         <header>
-            <img src={chessLogo2} alt='chess pieces' />
-            <h1><span>Chess with </span><span>Frien-EMIMES</span></h1>
-            <div onClick={displayMenu}>
+            <img src={chessLogo2} alt='chess pieces' className='header-logo'/>
+            <h1><span className='header-chess-with'>Chess with </span><span className='header-frien-emies'>Frien-EMIMES</span></h1>
+            <div onClick={displayMenu} className='hamburger-menu'>
                 {isOpen ? <FaTimes /> : <GiHamburgerMenu />}
             </div>
             <nav>
-                <ul>
+                <ul className={`header-link ${isOpen ? 'open' : ''}`}>
+                    <li onClick={()=> setIsOpen(false)}>Users</li>
+                    <li onClick={()=> setIsOpen(false)}>Frien-EMIES</li>
+                    <li onClick={()=> setIsOpen(false)}>Games</li>
                     <li>
                         <button onClick={userLogOut}>Sign Out</button>
                     </li>

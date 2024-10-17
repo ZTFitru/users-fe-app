@@ -1,0 +1,45 @@
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    background-color: var(--color-2);
+    position: fixed;
+}
+
+.header-logo {
+    width: 3rem;
+    height: auto;
+    padding: 2vw;
+}
+
+.login-section h1 {
+    margin-top: 8vw;
+}
+
+.header-chess-with,
+.header-frien-emies {
+    color: var(--color-1);
+    font-weight: 400;
+    font-size: 5vw;
+}
+
+.header-chess-with {
+    font-family: "Oswald", sans-serif;
+}
+
+.header-frien-emies {
+    font-family: "Shadows Into Light", cursive;
+}
+
+.header-link.open {
+    max-width: 300px;
+}
+
+.header-link {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: var(--color-3);
+    right: 0;
+    overflow: hidden;
+}

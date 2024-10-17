@@ -1,0 +1,76 @@
+{
+    "data": [
+        {
+            "type": "user",
+            "id": 1,
+            "attributes": {
+                "username": "bob",
+                "email": "bob@turing.com",
+                "avatar": "image1_string_goes_here.jpg"
+            }
+        },
+        {
+            "type": "user",
+            "id": 2,
+            "attributes": {
+                "username": "rob",
+                "email": "rob@turing.com",
+                "avatar": "image2_string_goes_here.jpg"
+            }
+        },
+        {
+            "type": "user",
+            "id": 3,
+            "attributes": {
+                "username": "knob",
+                "email": "knob@turing.com",
+                "avatar": "image3_string_goes_here.jpg"
+            }
+        },
+        {
+            "type": "user",
+            "id": 4,
+            "attributes": {
+                "username": "jan",
+                "email": "jan@turing.com",
+                "avatar": "image4_string_goes_here.jpg"
+            }
+        },
+        {
+            "type": "user",
+            "id": 5,
+            "attributes": {
+                "username": "kat",
+                "email": "kat@turing.com",
+                "avatar": "image5_string_goes_here.jpg"
+            }
+        },
+        {
+            "type": "user",
+            "id": 6,
+            "attributes": {
+                "username": "abdul",
+                "email": "abdul@turing.com",
+                "avatar": "image6_string_goes_here.jpg"
+            }
+        },
+        {
+            "type": "user",
+            "id": 7,
+            "attributes": {
+                "username": "jeff",
+                "email": "jeff@turing.com",
+                "avatar": "image7_string_goes_here.jpg"
+            }
+        },
+        {
+            "type": "user",
+            "id": 8,
+            "attributes": {
+                "username": "chatgpt",
+                "email": "chatgpt@turing.com",
+                "avatar": "image8_string_goes_here.jpg"
+            }
+        }
+    ]
+}
