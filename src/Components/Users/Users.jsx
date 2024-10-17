@@ -4,11 +4,10 @@ import UserCard from '../UserCard/UserCard';
 import './Users.css';
 
 function Users() {
-  // const [allUsers, setAllUsers] = useState([])
   const [searchUser, setSearchUser] = useState('')
 
   const filterUsers = userData.data.filter(user => 
-    user.attributes.username.toLowerCase().includes(searchUser)
+    user.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
   )
 
 
