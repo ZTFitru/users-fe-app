@@ -5,7 +5,7 @@ import chessLogo from '../../assets/chess-with-frienemies-1.svg';
 import eye from '../../assets/eye.png'
 import './Login.css';
 
-function Login({ userIsLogedIn }) {
+function Login({ userIsLoggedIn }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,11 +16,11 @@ function Login({ userIsLogedIn }) {
         e.preventDefault();
 
         if (email === 'whatever@example.com' && password === 'password') {
-            userIsLogedIn()
-            // navigate('/myGames/:userId')
-            navigate('/users/:username')
+            userIsLoggedIn()
+            // navigate('/:userName/my_games/')
+            navigate('/search/frien-emies')
         } else {
-            setError('invalid thing') // error.message
+            setError('Invalid entry, please try again') // error.message
         }
     }
 

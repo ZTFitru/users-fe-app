@@ -15,12 +15,25 @@ import MyGames from '../MyGames/MyGames';
 function App() {
 
   const [userData, setUserData] = useState({});
-  const [isLogedIn, setIsLogedIn] = useState(false);
+  const [isLogedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    
-  })
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUser();
+        setUserData(userData.data); 
+        setIsLoggedIn(true); 
+      } catch (err) {
+        console.error('Error fetching user data:', err);
+        navigate(`/error/${err.status || 500}`, {
+          state: { message: err.message || 'An unexpected error occurred.' }
+        });
+      }
+    };
+
+    fetchUserData();
+  }, [navigate]);
 
   // useEffect(() => {
   //   const fetchUsers = async () => {
@@ -44,11 +57,11 @@ function App() {
   }, [])
 
   const userIsLogedIn = () => {
-    setIsLogedIn(true)
+    setIsLoggedIn(true)
   }
 
   const userLogOut = () => {
-    setIsLogedIn(false)
+    setIsLoggedIn(false)
   }
 
   return (
@@ -57,7 +70,7 @@ function App() {
       <Header userLogOut={userLogOut} />}
       {/* <Header /> */}
       <Routes>
-        <Route path='/' element={<Login userIsLogedIn={userIsLogedIn} />} />
+        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} />} />
         <Route path='/:userName/my_games/' element={<MyGames />}/>
         <Route path='/search/frien-emies' element={<Users />} />
         <Route path='/:username/frien-emies' element={<Friends />} />
