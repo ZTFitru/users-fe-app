@@ -1,5 +1,6 @@
 import React from 'react';
 // import { lazy, Suspense } from 'react';
+// const Board = lazy(() => import('chess_components/Board'));
 
 import './GamePlay.css';
 

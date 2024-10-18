@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import chessLogo2 from '../../assets/chess-with-frienemies-2.svg';
 import { FaTimes } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 
+import chessLogo2 from '../../assets/chess-with-frienemies-2.svg';
 
 import './Header.css';
 

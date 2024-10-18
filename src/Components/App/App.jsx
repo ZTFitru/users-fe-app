@@ -50,19 +50,19 @@ function App() {
 
   return (
     <>
-      {/* {isLogedIn && <Header userLogOut={userLogOut} />} */}
-      <Header />
+      {isLogedIn && 
+      <Header userLogOut={userLogOut} />}
+      {/* <Header /> */}
       <Routes>
-        {/* <Route path='/' element={<Login userIsLogedIn={userIsLogedIn} />} /> */}
-        {/* <Route path='/:userID/my_games/' element={<MyGames />}/> */}
-        <Route path='/' element={<Users />} />
-        {/* path='/users/:username' */}
-        {/* <Route path='/friends/:username' element={<Friends />} /> */}
-        {/* <Route path='/' element={<GamePlay />}/> */}
-        {/* <Route path='/' element={<Stats />}/> */}
+        <Route path='/' element={<Login userIsLogedIn={userIsLogedIn} />} />
+        <Route path='/:userName/my_games/' element={<MyGames />}/>
+        <Route path='/search/frien-emies' element={<Users />} />
+        <Route path='/:username/frien-emies' element={<Friends />} />
+        <Route path='/gameId' element={<GamePlay />}/>
+        <Route path='/:username/statistics' element={<Stats />}/>
       </Routes>
-      <Footer />
-      {/* {isLogedIn && <Footer />} */}
+      {/* <Footer /> */}
+      {isLogedIn && <Footer />}
     </>
   );
 }
