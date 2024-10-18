@@ -18,6 +18,9 @@ function App() {
   const [isLogedIn, setIsLogedIn] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    
+  })
 
   // useEffect(() => {
   //   const fetchUsers = async () => {

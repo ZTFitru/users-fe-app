@@ -49,7 +49,7 @@ export const getFriendsIndex = async (userId) => {
         }
         const data = await res.json()
         return data
-    } catch {
+    } catch (err) {
         return console.error('Error in fetching Frien-EMIES list:', err)
     }
 }
@@ -62,7 +62,7 @@ export const getGamesIndex = async (userId) => {
         }
         const data = await res.json()
         return data
-    } catch {
+    } catch (err) {
         return console.error('Error in fetching games list:', err)
     }
 }
@@ -111,14 +111,14 @@ export const postLogOutUser = async (userId, user) => {
     }
 }
 
-export const postAddFreind = async () => {
+export const postAddFriend = async (user) => {
     try {
         const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/add_friend`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(user)
         });
 
         if (!res.ok) {
