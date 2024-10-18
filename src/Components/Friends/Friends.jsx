@@ -20,7 +20,9 @@ function Friends() {
                 onChange={(e) => handleSearch(e.target.value)}
             />
             <div>
-                user cards here
+                {/* user cards here, 
+                user card state needs to live on app 
+                to be passed to users and friends */}
             </div>
         </section>
     )

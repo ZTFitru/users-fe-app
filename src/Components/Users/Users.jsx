@@ -1,5 +1,7 @@
 import React from 'react';
-import userData from '../../../mockSearch.json'
+
+import userData from '../../../mockSearch.json';
+import searchIcon from '../../assets/search_icon.png';
 import UserCard from '../UserCard/UserCard';
 import './Users.css';
 
@@ -20,6 +22,8 @@ function Users() {
   return (
     <div>
       <h2>Search New Frien-EMIES</h2>
+      <p>Click the + to add a friend</p>
+      <img src={searchIcon} alt="search magnifying glass" />
       {/* <input 
         type="text"
         placeholder='Search User...'
