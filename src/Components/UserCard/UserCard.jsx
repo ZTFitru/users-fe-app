@@ -6,7 +6,7 @@ function UserCard({ user }) {
   return (
     <div>
       <img src={user.avatar} alt="" />
-      <h2>{user.username}</h2>
+      <h3>{user.username}</h3>
     </div>
   )
 }

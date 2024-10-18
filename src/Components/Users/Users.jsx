@@ -19,7 +19,7 @@ function Users() {
 
   return (
     <div>
-      <h2>Users</h2>
+      <h2>Search New Frien-EMIES</h2>
       {/* <input 
         type="text"
         placeholder='Search User...'
@@ -31,6 +31,7 @@ function Users() {
             <UserCard 
               key={user.id}
               user={user}
+              avitar={user.avitar}
             />
           ))}
         </div> */}

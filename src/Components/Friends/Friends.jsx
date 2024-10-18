@@ -6,7 +6,9 @@ import './Friends.css';
 
 function Friends() {
   return (
-    <div>Friends</div>
+    <section>
+        Frien-Emies list here
+    </section>
   )
 }
 

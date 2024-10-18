@@ -54,7 +54,7 @@ function App() {
       <Header />
       <Routes>
         {/* <Route path='/' element={<Login userIsLogedIn={userIsLogedIn} />} /> */}
-        {/* <Route path='/my_games/:username' element={<MyGames />}/> */}
+        {/* <Route path='/:userID/my_games/' element={<MyGames />}/> */}
         <Route path='/' element={<Users />} />
         {/* path='/users/:username' */}
         {/* <Route path='/friends/:username' element={<Friends />} /> */}
