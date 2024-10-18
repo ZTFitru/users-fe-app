@@ -69,42 +69,42 @@ export const getGamesIndex = async (userId) => {
 
 /*-----------------------------------// POST //--------------------------------------*/
 
-export const postLogInUser = async () => {
+export const postLogInUser = async (user) => {
     try {
         const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(user)
         });
 
         if (!res.ok) {
             throw new Error(`There was a problem with the POST for the login: ${res.status}`)
         }
 
-        const resData = await response.json();
+        const resData = await res.json();
         return resData
     } catch (err) {
         console.error('Error in POSTing the user login:', err)
     }
 }
 
-export const postLogOutUser = async (userId) => {
+export const postLogOutUser = async (userId, user) => {
     try {
         const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(user)
         });
 
         if (!res.ok) {
             throw new Error(`There was a problem loging the user out: ${res.status}`)
         }
 
-        const resData = response.json();
+        const resData = res.json();
         return resData
     } catch (err) {
         console.error('Err in POST for Log Out:', err)
@@ -134,7 +134,7 @@ export const postAddFreind = async () => {
 
 /*-----------------------------// Delete //---------------------------------*/
 
-export const deleteFriend = async (userId) => {
+export const deleteFriend = async (userId, user) => {
     try {
         const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}/remove_friend`, {
             method: 'DELETE',
@@ -144,7 +144,7 @@ export const deleteFriend = async (userId) => {
             body: JSON.stringify(user) // need to stringify the user object
         });
 
-        const resData = await response.json();
+        const resData = await res.json();
         return resData
     } catch (err) {
         console.error('Err in DELETE of friend', err)
