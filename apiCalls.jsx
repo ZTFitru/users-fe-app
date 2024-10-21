@@ -30,12 +30,12 @@ export const getUser = async (userId) => {
 
 export const getUsersIndex = async () => {
     try {
-        const res = await fetch('https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users') // url needs to be updated
+        const res = await fetch('https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users') 
         if (!res.ok) {
             throw new Error(`There was an error fetching the users.: ${res.status}`)
         }
-        const data = await res.json();
-        return data
+        const allUsersData = await res.json();
+        return allUsersData
     } catch (err) {
         return console.error('Error in fetching the users:', err)
     }

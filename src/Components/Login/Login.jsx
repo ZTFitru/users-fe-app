@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import chessLogo from '../../assets/chess-with-frienemies-1.svg';
 import eye from '../../assets/eye.png'
 import './Login.css';
+import { postLogInUser } from '../../../apiCalls.jsx'
 
-function Login({ userIsLoggedIn }) {
+function Login({ userIsLoggedIn, handleLogin }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,14 +16,31 @@ function Login({ userIsLoggedIn }) {
     const signInBtn = (e) => {
         e.preventDefault();
 
-        if (email === 'whatever@example.com' && password === 'password') {
-            userIsLoggedIn()
-            // navigate('/:userName/my_games/')
-            navigate('/search/frien-emies')
-        } else {
-            setError('Invalid entry, please try again') // error.message
-        }
+        const userCradentials = { email, password }
+        
+        postLogInUser(userCradentials)
+        .then(userData => {
+            if(userData.ok) {
+                userIsLoggedIn()
+                // navigate('/search/frien-emies')
+            } else {
+                setError('Yup yup')
+            }
+        })
+        .catch(err => {
+            console.error(err)
+        })
+        handleLogin(userCradentials)
+
+        // if (email === 'whatever@example.com' && password === 'password') {
+        //     userIsLoggedIn()
+        //     navigate('/:username/my_games/')
+        //     // navigate('/search/frien-emies')
+        // } else {
+        //     setError('Invalid entry, please try again') // error.message
+        // }
     }
+    
 
     return (
         <section className='login-section'>
