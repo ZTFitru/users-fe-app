@@ -38,15 +38,41 @@
     width: 80%;
     /* border: 2px solid red; */
 }
+
 .login-section input{
     height: 2rem;
+    padding-right: 2.5rem; 
     border-color: var(--color-4);
     border-style: solid;
     border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 0.1ch;
+    /* font-size: 2rem; */
 }
 
-.login-section button {
+.login-section:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px var(--color-5);
+}
+
+.toggel-password-visiblity {
+
+}
+
+.submit-button {
     height: 2.2rem;
+    width: 100%;
+    color: var(--color-1);
+    font-weight: 600;
+    background-color: var(--color-5);
+    padding: 6px;
+    border-color: var(--color-4);
+    border-style: none;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
 .login-email-wrapper {
@@ -64,6 +90,7 @@
 
 .login-password-wrapper {
     display: flex;
+    /* position: absolute; */
     flex-direction: column;
     /* border: 1px solid blue; */
 }

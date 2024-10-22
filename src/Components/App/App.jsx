@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import userData from '../../../mockUsers.json'
 // const Board = lazy(() => import('chess_components/Board'));
 import {
@@ -27,8 +27,9 @@ function App() {
 
   const [userData, setUserData] = useState({});
   const [isLogedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
+
   const handleLogin = async (userCredentials) => {
     try {
       const loginResponse = await postLogInUser(userCredentials);
@@ -53,9 +54,6 @@ function App() {
     const fetchUsers = async () => {
       try {
         const allUsersData = await getUsersIndex();
-
- console.log(allUsersData, 'USERS DATA FROM APP <><><><>')
-
         setUsers(allUsersData.data)
       } catch (err) {
         console.error('Error fetching user data:', err);
@@ -80,16 +78,14 @@ function App() {
   return (
     <>
       {isLogedIn && <Header userLogOut={userLogOut} />}
-      {/* <Header /> */}
       <Routes>
         <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} />
-        <Route path='/:username/my_games/' element={<MyGames />} />
-        <Route path='/search/frien-emies' element={<Users users={users} />} />
-        <Route path='/:username/frien-emies' element={<Friends users={users}/>} />
-        <Route path='/gameId' element={<GamePlay />} />
-        <Route path='/:username/statistics' element={<Stats />} />
+        <Route path='/:username/my_games/' element={isLogedIn ? <MyGames /> : <Navigate to="/" />} />
+        <Route path='/search/frien-emies' element={isLogedIn ? <Users users={users} /> : <Navigate to="/" /> } />
+        <Route path='/:username/frien-emies' element={isLogedIn ? <Friends users={users}/> : <Navigate to="/" />} />
+        <Route path='/gameId' element={isLogedIn ? <GamePlay /> : <Navigate to="/" />} />
+        <Route path='/:username/statistics' element={isLogedIn ? <Stats /> : <Navigate to="/" />} />
       </Routes>
-      {/* <Footer /> */}
       {isLogedIn && <Footer />}
     </>
   );

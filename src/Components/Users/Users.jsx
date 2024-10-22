@@ -10,10 +10,6 @@ function Users({ users }) {
   console.log('-----> ', users)
   const [searchUser, setSearchUser] = useState('')
 
-
-
-
-
   const filterUsers = users.filter(user =>
     user.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
   )
@@ -40,7 +36,7 @@ function Users({ users }) {
   ))
 
   return (
-    <div>
+    <section>
       <h2>Search New Frien-EMIES</h2>
       <p>Click the + to add a friend</p>
       <img src={searchIcon} alt="search magnifying glass" />
@@ -61,7 +57,7 @@ function Users({ users }) {
             </div>
           )
         })}  */}
-    </div>
+    </section>
   )
 }
 
