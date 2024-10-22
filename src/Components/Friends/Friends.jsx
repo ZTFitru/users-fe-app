@@ -1,11 +1,29 @@
 import React from 'react';
-
+import UserCard from '../UserCard/UserCard';
 import searchIcon from '../../assets/search_icon.png';
 import RemoveFriendPopUp from '../RemoveFriendPopUp/RemoveFriendPopUp';
 import StartGamePopUp from '../StartGamePopUp/StartGamePopUp';
+import { useState } from 'react';
 import './Friends.css';
 
-function Friends() {
+function Friends({ isFriends, removeFriend}) {
+
+    const [searchFriend, setSearchFriend] = useState('')
+    // const [alert, setAlert] = useState([])
+
+    const filterFriend = isFriends.filter(friend =>
+        friend.attributes.username.toLowerCase().includes(searchFriend.toLowerCase())
+    )
+
+    const friendList = isFriends.map(friend => (
+        <UserCard
+            user={friend}
+            removeFriend={removeFriend}
+            isFriend={true} 
+            username={friend.attributes.username}
+        />
+    ))
+
     return (
         <section>
             <h2>My Frien-EMIES</h2>
@@ -17,13 +35,34 @@ function Friends() {
                 name='search-frien-emies'
                 spellCheck='true'
                 autoCorrect='on'
-                onChange={(e) => handleSearch(e.target.value)}
+                value={searchFriend}
+                onChange={(e) => setSearchFriend(e.target.value)}
             />
             <div>
-                {/* user cards here, 
-                user card state needs to live on app 
-                to be passed to users and friends */}
+                {filterFriend.length === 0 ? (
+                    <p>You need more frien-emimes</p>
+                ):(
+                    <div>
+                        {friendList}
+                    </div>
+                )}
             </div>
+            {/* <ul>
+                {filterFriend.length > 0 ? (
+                filterFriend.map(friend => (
+                    <li key={friend.id}>
+                        <UserCard
+                            user={friend}
+                            removeFriend={removeFriend}
+                            isFriend={true} 
+                            username={friend.attributes.username}
+                        />
+                    </li>
+                ))
+            ) : (
+                <li>No friends found.</li>
+            )}
+            </ul> */}
         </section>
     )
 }

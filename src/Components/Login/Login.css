@@ -59,7 +59,9 @@
 }
 
 .toggel-password-visiblity {
-
+    position: absolute;
+    right: 1rem;
+    bottom: 0.25rem;
 }
 
 .submit-button {
@@ -90,8 +92,9 @@
 
 .login-password-wrapper {
     display: flex;
-    /* position: absolute; */
+    position: relative;
     flex-direction: column;
+    margin-bottom: 2rem;
     /* border: 1px solid blue; */
 }
 
