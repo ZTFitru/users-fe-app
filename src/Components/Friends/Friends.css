@@ -1,6 +1,5 @@
 .friends-section {
     height: 100vh;
-    /* background-color: var(--color-3); */
     position: relative;
     display: flex;
     flex-direction: column;

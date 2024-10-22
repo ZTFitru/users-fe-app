@@ -16,7 +16,7 @@
 
 .user-card-wrapper img {
     width: 100%;
-    border: 1px solid var(--color-2);
+    border: 2px solid var(--color-4);
 }
 
 .user-name-h3 {

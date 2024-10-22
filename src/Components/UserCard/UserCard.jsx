@@ -53,21 +53,22 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
 
   return (
     <div id={id} className='user-card-wrapper'>
-      <StartGamePopUp isFriend={isFriend} />
+      {/* <StartGamePopUp isFriend={isFriend} /> */}
       <div>
         {!isFriend ? (
           <i onClick={()=> onAddFriend(user)}>
             <FaUserPlus color={iconColor}/>
           </i>
         ) : (
-          <i onClick={()=> removeFriend(user)} >
+        <i onClick={()=> removeFriend(user)} >
             {/* <StartGamePopUp /> */}
             <FaUserMinus color={iconColor} />
           </i>
         )}
       </div>
+      {isFriend && <StartGamePopUp isFriend={isFriend}/>}
       <img src={avatar || avatarPlaceholder} 
-        alt='' 
+        alt={username}
         // onClick={<StartGamePopUp />}
         onLoad={handleImageLoad}        
         onError={event => {

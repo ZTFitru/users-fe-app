@@ -28,7 +28,8 @@ function App() {
   const [userData, setUserData] = useState({});
   const [isLogedIn, setIsLoggedIn] = useState(false);
   const [users, setUsers] = useState([]);
-  const [isFriends, setIsFriends] = useState([])
+  const [isFriends, setIsFriends] = useState([]);
+  const [myGames, setMyGames] = useState([]);
   const navigate = useNavigate();
 
   // const handleLogin = async (userCredentials) => {
@@ -76,9 +77,6 @@ function App() {
     // navigate(`/${loginResponse.data.id}/my_games/`)
   }
 
-  
-  
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -94,6 +92,20 @@ function App() {
       fetchUsers()
     }, [navigate]);
 
+useEffect(() => {
+  const fetchGamesIndex = async (userId) => {
+    try {
+      const userGamesData = await getGamesIndex();
+      setMyGames(userGamesData.data)
+    } catch (err) {
+      console.error('Error fetching user data:', err);
+      navigate(`/error/${err.status || 500}`, {
+        state: { message: err.message || 'An unexpected error occurred.' }
+      })
+    }
+  }
+  fetchGamesIndex()
+}, [])
 
   const userIsLoggedIn = () => {
     setIsLoggedIn(true)
@@ -115,7 +127,7 @@ function App() {
         {/* <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} /> */}
         <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} />
         {/* <Route path='/' element={<GamePlay playerId={1} gameId={1}/>}/> */}
-        <Route path='/:username/my_games/' element={isLogedIn ? <MyGames /> : <Navigate to="/" />} />
+        <Route path='/:username/my_games/' element={isLogedIn ? <MyGames myGames={myGames}/> : <Navigate to="/" />} />
         <Route path='/search/frien-emies' element={isLogedIn ? <Users users={users} isFriends={isFriends} setIsFriends={setIsFriends}/> : <Navigate to="/" /> } />
         <Route path='/:username/frien-emies' element={isLogedIn ? <Friends users={users} isFriends={isFriends} removeFriend={removeFriend}/> : <Navigate to="/" />} />
         <Route path='/gameId' element={isLogedIn ? <GamePlay playerId={1} gameId={1}/> : <Navigate to="/" />} />

@@ -42,6 +42,7 @@
 }
 
 .login-section input{
+    background-color: var(--color-1);
     height: 2rem;
     padding-right: 2.5rem; 
     border-color: var(--color-4);
@@ -49,7 +50,6 @@
     border-radius: 3px;
     width: 100%;
     box-sizing: border-box;
-
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: 0.1ch;
     /* font-size: 2rem; */
