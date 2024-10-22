@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import userData from '../../../mockUsers.json'
-// const Board = lazy(() => import('chess_components/Board'));
+//const Board = lazy(() => import('chess_components/Board'));
 import {
   getUser,
   getUsersIndex,
@@ -114,10 +114,11 @@ function App() {
       <Routes>
         {/* <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} /> */}
         <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} />
+        {/* <Route path='/' element={<GamePlay playerId={1} gameId={1}/>}/> */}
         <Route path='/:username/my_games/' element={isLogedIn ? <MyGames /> : <Navigate to="/" />} />
         <Route path='/search/frien-emies' element={isLogedIn ? <Users users={users} isFriends={isFriends} setIsFriends={setIsFriends}/> : <Navigate to="/" /> } />
         <Route path='/:username/frien-emies' element={isLogedIn ? <Friends users={users} isFriends={isFriends} removeFriend={removeFriend}/> : <Navigate to="/" />} />
-        <Route path='/gameId' element={isLogedIn ? <GamePlay /> : <Navigate to="/" />} />
+        <Route path='/gameId' element={isLogedIn ? <GamePlay playerId={1} gameId={1}/> : <Navigate to="/" />} />
         <Route path='/:username/statistics' element={isLogedIn ? <Stats /> : <Navigate to="/" />} />
       </Routes>
       {isLogedIn && <Footer />}

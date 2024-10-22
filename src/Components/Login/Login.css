@@ -1,4 +1,6 @@
 .login-section {
+    background-color: var(--color-1);
+    /* background-color: white; */
     height: 100vh;
     display: flex;
     flex-direction: column;

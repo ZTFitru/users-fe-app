@@ -29,9 +29,7 @@ function Header({ userLogOut, logedInUsername }) {
                 <ul className={`header-link ${isOpen ? 'open' : ''}`}>
                     <li><Link to='search/frien-emies' onClick={()=> setIsOpen(false)}>Users</Link></li>
                     <li><Link to={`/${logedInUsername}/frien-emies`} onClick={()=> setIsOpen(false)}>Frien-EMIES</Link></li>
-                    {/* <li onClick={()=> setIsOpen(false)}>Frien-EMIES</li> */}
-                    <li><Link to='/:username/my_games/' onClick={()=> setIsOpen(false)}>Games</Link></li>
-                    {/* <li onClick={()=> setIsOpen(false)}>Games</li> */}
+                    <li><Link to='/gameId' onClick={()=> setIsOpen(false)}>Games</Link></li>
                     <li>
                         <button onClick={userLogOut}>Sign Out</button>
                     </li>

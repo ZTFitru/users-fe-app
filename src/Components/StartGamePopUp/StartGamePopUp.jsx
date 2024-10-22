@@ -1,39 +1,32 @@
 import React from "react";
 import Popup from "reactjs-popup";
+// import { useParams } from "react-router-dom";
+import GamePlay from "../GamePlay/GamePlay";
+import { Link } from 'react-router-dom';
+import "./StartGamePopUp.css";
 
-import "./StartGamePopUp";
-
-function StartGamePopUp() {
+function StartGamePopUp({ isFriend }) {
   return (
-    // <div>StartGamePopUp</div>
-    // <Popup trigger={<button> Trigger</button>}>
-    //   <div>Start game with {data.attributes.username}</div>
-    //   <div>
-    //     <button>Ok</button>
-    //     <button>Cancel</button>
-    //   </div>
-    // </Popup>
-    <div>
-      <Popup trigger=
-                {<button> Click to open modal </button>} 
-                modal nested>
-                {
-                    close => (
-                        <div className='modal'>
-                            <div className='content'>
-                              Start game with 
-                            </div>
-                            <div>
-                                <button onClick=
-                                    {() => close()}>
-                                        Close modal
-                                </button>
-                            </div>
-                        </div>
-                    )
-                }
-            </Popup>
-    </div>
+    <Popup
+      trigger={<button className="start-game-popup-click"></button>}
+      modal
+      nested
+    >
+      {(close) => (
+        <div className="modal">
+          <div className="content">
+            Start game with
+            {isFriend}
+          </div>
+          <div className="start-game-button-wrapper">
+            <Link to='/gameId'>
+              <button className="start-game-button" >Ok</button>
+            </Link>
+            <button className="start-game-button" onClick={() => close()}>Cancel</button>
+          </div>
+        </div>
+      )}
+    </Popup>
   );
 }
 
