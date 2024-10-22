@@ -4,7 +4,10 @@ import './ErrorPage.css';
 
 function ErrorPage() {
   return (
-    <div>ErrorPage</div>
+    <section>
+        <h2>We're so sorry, there's been an error:</h2>
+        <p>Error message</p>
+    </section>
   )
 }
 

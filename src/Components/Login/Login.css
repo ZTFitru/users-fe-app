@@ -1,0 +1,103 @@
+.login-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-section h1 {
+    height: 0;
+    color: var(--color-4);
+}
+
+.login-chess-with {
+    font-family: "Oswald", sans-serif;;
+    transform: rotate(-45deg);
+    position: relative;
+    top: 4vw;
+    left: -14vw;
+    font-size: 8vw;
+}
+
+.login-frien-emies {
+    font-family: "Shadows Into Light", cursive;
+    transform: rotate(45deg);
+    position: relative;
+    top: -7vw;
+    left: 14vw;
+    font-size: 8vw;
+}
+
+.login-chess-logo {
+    width: 50vw;
+}
+
+/*------------*/
+.login-sign-in-wrapper {
+    width: 80%;
+    /* border: 2px solid red; */
+}
+
+.login-section input{
+    height: 2rem;
+    padding-right: 2.5rem; 
+    border-color: var(--color-4);
+    border-style: solid;
+    border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 0.1ch;
+    /* font-size: 2rem; */
+}
+
+.login-section:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px var(--color-5);
+}
+
+.toggel-password-visiblity {
+
+}
+
+.submit-button {
+    height: 2.2rem;
+    width: 100%;
+    color: var(--color-1);
+    font-weight: 600;
+    background-color: var(--color-5);
+    padding: 6px;
+    border-color: var(--color-4);
+    border-style: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.login-email-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid green; */
+    margin-bottom: 5vw;
+}
+
+.login-email-label,
+.login-password-label {
+    margin-left: 1vw;
+    margin-bottom: 1vw;
+}
+
+.login-password-wrapper {
+    display: flex;
+    /* position: absolute; */
+    flex-direction: column;
+    /* border: 1px solid blue; */
+}
+
+.login-hide-show-password {
+    width: 2rem;
+    position: relative;
+    top: -6.7vw;
+    right: -69vw;
+}

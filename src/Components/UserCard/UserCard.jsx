@@ -2,9 +2,12 @@ import React from 'react';
 
 import './UserCard.css';
 
-function UserCard() {
+function UserCard({ avatar, id, username }) {
   return (
-    <div>UserCard</div>
+    <div id={id}>
+      <img src={avatar} alt='' />
+      <h3>{username}</h3>
+    </div>
   )
 }
 

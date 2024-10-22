@@ -1,0 +1,63 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "bob",
+            "email": "bob@turing.com",
+            "password": "ihateruby",
+            "avatar": "image1_string_goes_here.jpg"
+        },
+        {
+            "id": 2,
+            "username": "rob",
+            "email": "rob@turing.com",
+            "password": "iloveruby",
+            "avatar": "image2_string_goes_here.jpg"
+        },
+        {
+            "id": 3,
+            "username": "knob",
+            "email": "knob@turing.com",
+            "password": "iworshipruby",
+            "avatar": "image3_string_goes_here.jpg"
+        },
+        {
+            "id": 4,
+            "username": "jan",
+            "email": "jan@turing.com",
+            "password": "imabeast",
+            "avatar": "image4_string_goes_here.jpg"
+        },
+        {
+            "id": 5,
+            "username": "kat",
+            "email": "kat@turing.com",
+            "password": "bestinstructorever",
+            "avatar": "image5_string_goes_here.jpg"
+        },
+        {
+            "id": 6,
+            "username": "abdul",
+            "email": "abdul@turing.com",
+            "password": "kingofmod2",
+            "avatar": "image6_string_goes_here.jpg"
+        },
+        {
+            "id": 7,
+            "username": "jeff",
+            "email": "jeff@turing.com",
+            "password": "iownthisshizz",
+            "avatar": "image7_string_goes_here.jpg"
+            
+            
+        },
+        {
+            "type": "user",
+            "id": 8,
+            "username": "chatgpt",
+            "email": "chatgpt@turing.com",
+            "password": "robotoverlords",
+            "avatar": "image8_string_goes_here.jpg"   
+        }
+    ]
+}
