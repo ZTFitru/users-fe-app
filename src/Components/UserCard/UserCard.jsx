@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { FaUserPlus } from "react-icons/fa";
 import { FaUserMinus } from "react-icons/fa";
 
+import StartGamePopUp from '../StartGamePopUp/StartGamePopUp';
+import RemoveFriendPopUp from '../RemoveFriendPopUp/RemoveFriendPopUp';
 import avatarPlaceholder from '../../assets/avatar_placeholder.png';
 import './UserCard.css';
 
@@ -40,7 +42,6 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
     }
 
     const brightness = colorSum / (data.length / 4);
-console.log(brightness, 'brightness levels')
 
     setIconColor(brightness > 128 ? 'black' : 'white')
   };
@@ -48,6 +49,7 @@ console.log(brightness, 'brightness levels')
   const handleImageLoad = (event) => {
     checkImageBrightnessInIconArea(event.target)
   };
+
 
   return (
     <div id={id} className='user-card-wrapper'>
@@ -57,8 +59,9 @@ console.log(brightness, 'brightness levels')
             <FaUserPlus color={iconColor}/>
           </i>
         ) : (
-          <i onClick={()=> removeFriend(user)}>
-            <FaUserMinus color={iconColor}/>
+          <i onClick={()=> removeFriend(user)} >
+            <StartGamePopUp />
+            <FaUserMinus color={iconColor} />
           </i>
         )}
       </div>
@@ -67,7 +70,10 @@ console.log(brightness, 'brightness levels')
         onError={event => {
           event.target.src = avatarPlaceholder
           event.onerror = null
-        }}/>
+        }}
+        // {isPopupVisible && <StartGamePopUp onClose={closePopup} />}
+        // onClick={handleImageClick} // is this correct??
+        />
       <h3 className='user-name-h3'>{username}</h3>
     </div>
   )

@@ -60,12 +60,14 @@ function Users({ users, isFriends, setIsFriends }) {
       <h2 className='users-h2'>Search New Frien-EMIES</h2>
       <p className='users-instructions'>Click the + to add a friend</p>
       <div className='search-users-wrapper'>
-        <FontAwesomeIcon icon={faSearch} className="search-icon" />
-        {/* <img src={searchIcon} alt="search magnifying glass" /> */}
+        <FontAwesomeIcon icon={faSearch} className="users-search-icon" />
         <input
           className='search-users-input'
           type="text"
           placeholder='Search new frien-EMIES...'
+          name="search-new-frien-emies"
+          spellCheck="true"
+          autoCorrect="on"
           value={searchUser}
           onChange={(e) => setSearchUser(e.target.value)}
         />

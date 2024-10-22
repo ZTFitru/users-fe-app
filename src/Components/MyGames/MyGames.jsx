@@ -6,7 +6,12 @@ import './MyGames.css';
 
 function MyGames() {
   return (
-    <div>MyGames</div>
+    // <div>MyGames</div>
+    <div>
+      {/* <Popup trigger={<button> Trigger</button>} position="right center">
+        <div>Popup content here !!</div>
+      </Popup> */}
+    </div>
   )
 }
 

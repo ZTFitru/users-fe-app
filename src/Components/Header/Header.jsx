@@ -7,13 +7,15 @@ import chessLogo2 from '../../assets/chess-with-frienemies-2.svg';
 
 import './Header.css';
 
-function Header({ userLogOut }) {
+function Header({ userLogOut, logedInUsername }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const displayMenu = () => {
         setIsOpen(!isOpen)
     }
 
+
+    // logedInUsername
     return (
         <header>
             <Link to='/:username/my_games/'>
@@ -26,7 +28,7 @@ function Header({ userLogOut }) {
             <nav>
                 <ul className={`header-link ${isOpen ? 'open' : ''}`}>
                     <li><Link to='search/frien-emies' onClick={()=> setIsOpen(false)}>Users</Link></li>
-                    <li><Link to='/:username/frien-emies' onClick={()=> setIsOpen(false)}>Frien-EMIES</Link></li>
+                    <li><Link to={`/${logedInUsername}/frien-emies`} onClick={()=> setIsOpen(false)}>Frien-EMIES</Link></li>
                     {/* <li onClick={()=> setIsOpen(false)}>Frien-EMIES</li> */}
                     <li><Link to='/:username/my_games/' onClick={()=> setIsOpen(false)}>Games</Link></li>
                     {/* <li onClick={()=> setIsOpen(false)}>Games</li> */}
