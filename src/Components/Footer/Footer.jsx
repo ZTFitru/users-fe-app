@@ -9,15 +9,15 @@ import './Footer.css';
 function Footer() {
     return (
         <footer>
-            <Link className='footer-links'>
+            <Link to='/:username/my_games/' className='footer-links'>
                 <img src={knightIcon} alt="see My Games" className='footer-icons' />
                 <div className='footer-label'>Games</div>
             </Link>
-            <Link className='footer-links'>
+            <Link to='/:username/frien-emies' className='footer-links'>
                 <img src={peopleIcon} alt="see my Frien-emies list" />
                 <div className='footer-label'>Frien-EMIES</div>
             </Link>
-            <Link className='footer-links'>
+            <Link to='/:username/statistics' className='footer-links'>
                 <img src={statIcon} alt="see my game statistics" />
                 <div className='footer-label'>Statistics</div>
             </Link>

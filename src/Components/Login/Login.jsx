@@ -8,13 +8,20 @@ import eye from '../../assets/eye.png'
 import { postLogInUser } from '../../../apiCalls.jsx'
 import './Login.css';
 
-function Login({ userIsLoggedIn, handleLogin }) {
+function Login({ handleLogin }) {
 
     const [email, setEmail] = useState('');
+    // const [userEmailInput, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // const [userPasswordInput, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('')
     const navigate = useNavigate();
+
+    /** "email": "wwhatever@example.com",
+  "password": "password" */
+
+  //
 
     const signInBtn = (e) => {
         e.preventDefault();
@@ -22,11 +29,20 @@ function Login({ userIsLoggedIn, handleLogin }) {
         const userCradentials = { email, password }
 
         postLogInUser(userCradentials)
+
             .then(userData => {
+                console.log(userData)
+                // if(email === userData.email && password === userData.password) {
+                //     handleLogin(userData)
+                //     navigate(`${loginResponse.data.id}/my_games/`)
+                // } else {
+                //     return setError('User name or password is incorrect.')
+                    
+                // }
                 //userData.success
-                if (userData.data && userData.attributes) {
-                    userIsLoggedIn(userData)
-                    navigate('/search/frien-emies')
+                if (userData.data.id && userData.data.attributes) {
+                    handleLogin(userData)
+                    // userIsLoggedIn()
                 } else {
                     setError('User name or password is incorrect.')
                 }
@@ -34,16 +50,10 @@ function Login({ userIsLoggedIn, handleLogin }) {
             .catch(err => {
                 console.error(err)
             })
-        handleLogin(userCradentials)
-
-        // if (email === 'whatever@example.com' && password === 'password') {
-        //     userIsLoggedIn()
-        //     navigate('/:username/my_games/')
-        //     // navigate('/search/frien-emies')
-        // } else {
-        //     setError('Invalid entry, please try again') // error.message
-        // }
+        // handleLogin(userCradentials)
     }
+
+    
     // love this
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -73,8 +83,8 @@ function Login({ userIsLoggedIn, handleLogin }) {
                         <label className='login-password-label'>Password</label>
                         <input
                             placeholder='Enter password'
-                            type='password'
-                            // type={showPassword ? 'text' : 'password'}
+                            // type='password'
+                            type={showPassword ? 'text' : 'password'}
                             value={password}
                             className='login-password-input'
                             onChange={(e) => setPassword(e.target.value)}
@@ -86,7 +96,7 @@ function Login({ userIsLoggedIn, handleLogin }) {
                         {/* <img src={eye} alt='hide or show password' onClick={() => { }} className='login-hide-show-password'/> */}
                     </div>
                     <button type='submit' className='submit-button'>
-                        Sing In
+                        Sign In
                     </button>
                 </form>
             </div>

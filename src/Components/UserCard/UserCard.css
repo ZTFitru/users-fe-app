@@ -1,0 +1,27 @@
+.user-card-wrapper {
+    width: 40%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid red; */
+    margin: 5%;
+}
+
+.user-card-wrapper i {
+    font-size: 2rem;
+    position: absolute;
+    top: 2%;
+    left: 5%;
+}
+
+.user-card-wrapper img {
+    width: 100%;
+    border: 2px solid var(--color-4);
+}
+
+.user-name-h3 {
+    margin: 0;
+    margin-top: 3%;
+    margin-left: 5%;
+    font-size: 1.2rem;
+}

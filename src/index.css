@@ -12,6 +12,7 @@
 body {
   font-family: "Roboto", sans-serif;
   margin: 0;
+  background-color: var(--color-3)
 }
 
 ul {
@@ -23,16 +24,20 @@ a {
   color: var(--color-1)
 }
 
-/* button {
-  width: 100%;
+button {
+  /* width: 100%; */
   color: var(--color-1);
   font-weight: 600;
   background-color: var(--color-5);
   padding: 6px;
-  border-color: var(--color-4);
+  /* border-color: var(--color-4); */
   border-style: none;
   border-radius: 2px;
-} */
+}
+
+input {
+  background-color: var(--color-3);
+}
 
 /* .oswald-<uniquifier> {
   font-family: "Oswald", sans-serif;

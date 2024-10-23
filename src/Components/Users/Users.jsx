@@ -1,14 +1,18 @@
 import React from 'react';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 // import userData from '../../../mockSearch.json';
-import searchIcon from '../../assets/search_icon.png';
+// import searchIcon from '../../assets/search_icon.png';
 import UserCard from '../UserCard/UserCard';
 import './Users.css';
 // import { getUsersIndex } from '../../../apiCalls.jsx'
 
-function Users({ users }) {
-  console.log('-----> ', users)
+function Users({ users, isFriends, setIsFriends }) {
+  // console.log('-----> ', users)
   const [searchUser, setSearchUser] = useState('')
+  const [alert, setAlert] = useState([])
 
   const filterUsers = users.filter(user =>
     user.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
@@ -25,6 +29,21 @@ function Users({ users }) {
   // const addFriend = ()=> {
 
   // }
+  const addFriend = (user)=> {
+    setIsFriends(justFriends => {
+      if(!justFriends.some(friend => friend.id === user.id)) {
+        setAlert(message => [...message, `${user.attributes.username} has been added as a frien-emimes`])
+        setTimeout(() => setAlert(previous => previous.filter(message => message !== `${user.attributes.username} has been added as a frien-emimes`)), 2000);
+        return [...justFriends, user]
+      } else {
+        setAlert(message => [...message, `${user.attributes.username} has already been added as a frien-emimes`])
+        setTimeout(() => setAlert(previous => previous.filter(message => message !== `${user.attributes.username} has already been added as a frien-emimes`)), 2000);
+        return justFriends
+      }
+    })
+  }
+
+
   const userCards = filterUsers.map(user => (
     <UserCard
       key={user.id}
@@ -32,31 +51,33 @@ function Users({ users }) {
       user={user}
       username={user.attributes.username}
       avitar={user.attributes.avatar}
+      onAddFriend={()=> addFriend(user)}
     />
   ))
 
   return (
-    <section>
-      <h2>Search New Frien-EMIES</h2>
-      <p>Click the + to add a friend</p>
-      <img src={searchIcon} alt="search magnifying glass" />
-      <input
-        type="text"
-        placeholder='Search User...'
-        value={searchUser}
-        onChange={(e) => setSearchUser(e.target.value)}
-      />
-      <div>
+    <section className='users-section'>
+      <h2 className='users-h2'>Search New Frien-EMIES</h2>
+      <p className='users-instructions'>Click the + to add a friend</p>
+      <div className='search-users-wrapper'>
+        <FontAwesomeIcon icon={faSearch} className="users-search-icon" />
+        <input
+          className='search-users-input'
+          type="text"
+          placeholder='Search new frien-EMIES...'
+          name="search-new-frien-emies"
+          spellCheck="true"
+          autoCorrect="on"
+          value={searchUser}
+          onChange={(e) => setSearchUser(e.target.value)}
+        />
+      </div>
+      {alert.map((message, index)=> (
+        <div key={index}>{message}</div>
+      ))}
+      <div className='user-cards-container'>
         {userCards}
       </div>
-      {/* {users.map((user, index) => {
-          return (
-            <div key={index}>
-              <img src={user.attributes.avatar} alt="" />
-              <p>{user.attributes.username}</p>
-            </div>
-          )
-        })}  */}
     </section>
   )
 }

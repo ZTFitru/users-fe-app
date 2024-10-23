@@ -1,17 +1,18 @@
-import React from 'react';
-// import { lazy, Suspense } from 'react';
-// const Board = lazy(() => import('chess_components/Board'));
+import React from "react";
+import { lazy, Suspense } from "react";
+const Game = lazy(() => import("chess_components/Game"));
 
-import './GamePlay.css';
+import "./GamePlay.css";
 
-function GamePlay() {
+function GamePlay({ gameId, playerId }) {
   return (
-    <div>GamePlay
-         {/* <Suspense fallback={<div>Loading...</div>}>
-        <Board msg='This guy i tell ya....' />
-      </Suspense> */}
+    <div className="game-area">
+      GamePlay
+      <Suspense fallback={<div>Loading...</div>}>
+        <Game gameId={gameId} playerId={playerId} />
+      </Suspense>
     </div>
-  )
+  );
 }
 
 export default GamePlay;

@@ -1,4 +1,6 @@
 .login-section {
+    background-color: var(--color-1);
+    /* background-color: white; */
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -40,6 +42,7 @@
 }
 
 .login-section input{
+    background-color: var(--color-1);
     height: 2rem;
     padding-right: 2.5rem; 
     border-color: var(--color-4);
@@ -47,7 +50,6 @@
     border-radius: 3px;
     width: 100%;
     box-sizing: border-box;
-
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: 0.1ch;
     /* font-size: 2rem; */
@@ -59,7 +61,9 @@
 }
 
 .toggel-password-visiblity {
-
+    position: absolute;
+    right: 1rem;
+    bottom: 0.25rem;
 }
 
 .submit-button {
@@ -90,8 +94,9 @@
 
 .login-password-wrapper {
     display: flex;
-    /* position: absolute; */
+    position: relative;
     flex-direction: column;
+    margin-bottom: 2rem;
     /* border: 1px solid blue; */
 }
 
