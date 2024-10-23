@@ -82,13 +82,13 @@ function Users({ users, isFriends, setIsFriends, userData, userId }) {
   
   const addFriend = async (user) => {
          try {
-          const response = await postAddFriend(user.id); 
+          const response = await postAddFriend(userId); 
           if (response.success) {
             // use setIsFriends to update the state of friends list 
             //justFriends is then being passed as the previous state
             setIsFriends(justFriends => {
               //it sees if the user isalready in the list
-              if (!justFriends.some(friend => friend.id === user.id)) {
+              if (!justFriends.some(friend => friend.id === userId)) {
                 setAlert(prev => [...prev, `${user.name} has been added as a frien-emime`]);
                 setTimeout(() => setAlert(prev => prev.filter(message => message !== `${user.name} has been added as a frien-emimes`)), 2000);
                 //updates the list with the new user or friend added to the list 

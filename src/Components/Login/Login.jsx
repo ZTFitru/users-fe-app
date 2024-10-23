@@ -8,7 +8,7 @@ import eye from '../../assets/eye.png'
 import { postLogInUser } from '../../../apiCalls.jsx'
 import './Login.css';
 
-function Login({ userIsLoggedIn }) {
+function Login({ userIsLoggedIn, handleUserLogin }) {
 
     const [email, setEmail] = useState('');
     // const [userEmailInput, setEmail] = useState('');
@@ -32,7 +32,8 @@ function Login({ userIsLoggedIn }) {
                 console.log(userData)
                 if (userData.data.id && userData.data.attributes) {
                     // fetchLogedInUser(userData)
-                    userIsLoggedIn()
+                    handleUserLogin(userData.data.id)
+                    userIsLoggedIn(userData.data.id) // pass user ID to the parent here!!!!
                     navigate(`/${userData.data.id}/my_games/`)
                     // navigate(`/${userId}/my_games/`)
                 } else {

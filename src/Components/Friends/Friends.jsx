@@ -68,7 +68,7 @@ const handleRemoveFriend = async (friend) => {
 };
 
 
-  const filterFriend = isFriends.filter((friend) =>
+  const filterFriend = friendList.filter((friend) =>
     friend.attributes.username
       .toLowerCase()
       .includes(searchFriend.toLowerCase())

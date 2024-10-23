@@ -33,6 +33,12 @@ function App() {
   // const [myGames, setMyGames] = useState([]);
   const navigate = useNavigate();
   const { loggedInId } = useParams();
+
+  const handleUserLogin = (id) => {
+    setUserId(id);
+    navigate(`/${id}/my_games/`)
+  };
+
   // console.log('what', loggedInId)
   // const handleLogin = async (userCredentials) => {
   //   try {
@@ -90,7 +96,7 @@ function App() {
             avatar: loginResponse.data.attributes.avatar,
         })
         setIsLoggedIn(true)
-        navigate(`/${loginResponse.data.id}/my_games/`)
+        // navigate(`/${loginResponse.data.id}/my_games/`)
         setUserId(loginResponse.data.id)
         } else {
           setIsLoggedIn(false) 
@@ -100,27 +106,29 @@ function App() {
       }
     }
     fetchLogedInUser();
-  }, [navigate, loggedInId]);  
+  }, [userId]);  
 
   console.log('UserID APP----->', userId)
   // ALL USERS
   useEffect(() => {
     const fetchUsers = async () => {
-      try {
-        const allUsersData = await getUsersIndex(userId);
-        console.log('thisss', allUsersData)
-        setUsers(allUsersData.data)
-        console.log('all Users ->',allUsersData)
-        console.log('Apppp->>>>>',allUsersData.data)
-      } catch (err) {
-        console.error('Error fetching user data:', err);
-        // navigate(`/error/${err.status || 500}`, {
-        //   state: { message: err.message || 'An unexpected error occurred.' }
-        // })
+      if (userId) {
+        try {
+          const allUsersData = await getUsersIndex(userId);
+          console.log('thisss', allUsersData)
+          setUsers(allUsersData.data)
+          console.log('all Users ->',allUsersData)
+          console.log('Apppp->>>>>',allUsersData.data)
+        } catch (err) {
+          console.error('Error fetching user data:', err);
+          // navigate(`/error/${err.status || 500}`, {
+          //   state: { message: err.message || 'An unexpected error occurred.' }
+          // })
+        }
       }
     }
       fetchUsers()
-    }, [navigate, userId]);
+    }, [userId]);
 
 // useEffect(() => {
 //   if(isLogedIn) {
@@ -139,10 +147,6 @@ function App() {
 //   fetchGamesIndex()
 //   } 
 // }, [isLogedIn, navigate])
-
-  const handleUserLogin = (id) => {
-    setUserId(id);
-  };
 
   const userIsLoggedIn = () => {
     setIsLoggedIn(true)
@@ -165,7 +169,7 @@ function App() {
       <Routes>
         {/* <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} /> */}
         {/* <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} /> */}
-        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} userData={userData} />} />
+        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleUserLogin={handleUserLogin} userData={userData} />} />
         {/* <Route path='/' element={<GamePlay playerId={1} gameId={1}/>}/> */}
         <Route path='/:userId/my_games/' element={isLogedIn ? <MyGames userData={userData} isLogedIn={isLogedIn}/> : <Navigate to="/" />} />
         <Route path='/search/frien-emies' element={isLogedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends}/> : <Navigate to="/" /> } />
