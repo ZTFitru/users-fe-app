@@ -9,6 +9,7 @@ import avatarPlaceholder from '../../assets/avatar_placeholder.png';
 import './UserCard.css';
 
 function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFriend }) {
+  
   const [iconColor, setIconColor] = useState('black');
 
   const checkImageBrightnessInIconArea = (imgElement, iconSize = {width: 32, height: 32}) => {
@@ -53,7 +54,6 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
 
   return (
     <div id={id} className='user-card-wrapper'>
-      {/* <StartGamePopUp isFriend={isFriend} /> */}
       <div>
         {!isFriend ? (
           <i onClick={()=> onAddFriend(user)}>
@@ -61,22 +61,19 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
           </i>
         ) : (
         <i onClick={()=> removeFriend(user)} >
-            {/* <StartGamePopUp /> */}
             <FaUserMinus color={iconColor} />
           </i>
         )}
       </div>
-      {isFriend && <StartGamePopUp isFriend={isFriend}/>}
+      {/* {isFriend && <StartGamePopUp isFriend={isFriend} />} */}
       <img src={avatar || avatarPlaceholder} 
         alt={username}
-        // onClick={<StartGamePopUp />}
+        crossOrigin="anonymous"
         onLoad={handleImageLoad}        
         onError={event => {
           event.target.src = avatarPlaceholder
           event.onerror = null
         }}
-        // {isPopupVisible && <StartGamePopUp onClose={closePopup} />}
-        // onClick={handleImageClick} // is this correct??
         />
       <h3 className='user-name-h3'>{username}</h3>
     </div>

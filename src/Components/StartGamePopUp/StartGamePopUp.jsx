@@ -11,6 +11,7 @@ function StartGamePopUp({ isFriend }) {
       trigger={<button className="start-game-popup-click"></button>}
       modal
       nested
+      className="start-game-popup"
     >
       {(close) => (
         <div className="modal">

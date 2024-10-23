@@ -27,9 +27,9 @@ function Header({ userLogOut, logedInUsername }) {
             </div>
             <nav>
                 <ul className={`header-link ${isOpen ? 'open' : ''}`}>
-                    <li><Link to='search/frien-emies' onClick={()=> setIsOpen(false)}>Users</Link></li>
-                    <li><Link to={`/${logedInUsername}/frien-emies`} onClick={()=> setIsOpen(false)}>Frien-EMIES</Link></li>
-                    <li><Link to='/gameId' onClick={()=> setIsOpen(false)}>Games</Link></li>
+                    <li className='nav-link-a'><Link to='search/frien-emies' onClick={()=> setIsOpen(false)}>Users</Link></li>
+                    <li className='nav-link-a'><Link to={`/${logedInUsername}/frien-emies`} onClick={()=> setIsOpen(false)}>Frien-EMIES</Link></li>
+                    <li className='nav-link-a'><Link to='/gameId' onClick={()=> setIsOpen(false)}>Games</Link></li>
                     <li>
                         <button onClick={userLogOut}>Sign Out</button>
                     </li>

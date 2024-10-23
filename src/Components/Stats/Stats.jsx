@@ -5,12 +5,8 @@ import { BsEmojiAngryFill } from "react-icons/bs";
 import './Stats.css';
 
 function Stats() {
-
-  //will need games won
-  //will need user name with the less wins and amount won
-  //will need user name with the most wins
   return (
-    <section>
+    <section className='stat-section'>
       <h2>Your frien-emies will never catch you!</h2>
       <div className='stat-box'>
         <FaTrophy />

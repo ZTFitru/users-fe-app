@@ -1,14 +1,16 @@
-section {
+.stat-section {
     margin: 70px 0;
     padding: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
 }
 
-.stats-box {
+.stat-box {
     background: white;
     padding: 10px;
     flex: 1;
+    margin-bottom: 15px;
     span {
         font-weight: bolder;
     }

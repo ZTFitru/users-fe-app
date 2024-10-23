@@ -1,56 +1,47 @@
-
-// const singleUser = 'https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/1';
-//  export const getUser = async () => {
-//     try {
-//           const res = await fetch(singleUser)
-//           const data = await res.json()
-//           // console.log('my data', data)
-//           setApiData(data.data)
-//     } catch (err) {
-//         return console.log('Error: ', err)
-//     }
-// }
-
-
 /*-----------------------------------// GET //--------------------------------------*/
 
-// Not sure this first one getUser is needed. Can we use the POST res for the user?
 export const getUser = async (userId) => {
     try {
-        const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}`)
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}`)
         if (!res.ok) {
             throw new Error(`There was an error fetching the loggin in user: ${res.status}`)
         }
         const data = await res.json()
         return data
     } catch (err) {
-        return console.error('Error in fetching the loggedIn User:', err)
+        console.log('Error in fetching the loggedIn User:', err)
+        throw err
     }
 }
 
-export const getUsersIndex = async () => {
+export const getUsersIndex = async (userId) => {
     try {
-        const res = await fetch('https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users') 
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/index`) 
         if (!res.ok) {
             throw new Error(`There was an error fetching the users.: ${res.status}`)
         }
         const allUsersData = await res.json();
+
+        console.log('work now ->>>>',allUsersData)
+
         return allUsersData
     } catch (err) {
-        return console.error('Error in fetching the users:', err)
+        console.log('Error in fetching the users:', err)
+        throw err
     }
 }
 
 export const getFriendsIndex = async (userId) => {
     try {
-        const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}/friends`)
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/friends`)
         if (!res.ok) {
             throw new Error(`There was an error fetching friends list: ${res.status}`)
         }
         const data = await res.json()
         return data
     } catch (err) {
-        return console.error('Error in fetching Frien-EMIES list:', err)
+        console.log('Error in fetching Frien-EMIES list:', err)
+        throw err
     }
 }
 
@@ -58,12 +49,13 @@ export const getGamesIndex = async (userId) => {
     try {
         const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}/my_games`)
         if (!res.ok) {
-            throw new Error(`There\'s been an error loading the games list: ${res.status}`)
+            throw new Error(`There's been an error loading the games list: ${res.status}`)
         }
         const data = await res.json()
         return data
     } catch (err) {
-        return console.error('Error in fetching games list:', err)
+        console.log('Error in fetching games list:', err)
+        throw err
     }
 }
 
@@ -71,7 +63,7 @@ export const getGamesIndex = async (userId) => {
 
 export const postLogInUser = async (user) => {
     try {
-        const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/login`, {
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/sessions`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -87,17 +79,46 @@ export const postLogInUser = async (user) => {
         return resData
     } catch (err) {
         console.error('Error in POSTing the user login:', err)
+        throw err
     }
 }
 
-export const postLogOutUser = async (userId, user) => {
+export const postAddFriend = async (userId, friendId) => {
     try {
-        const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}/logout`, {
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/add_friend`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify({ friend_id: friendId })
+        });
+
+        if (!res.ok) {
+            const errorResponse = await res.text();
+            throw new Error(`There was a problem adding friend to freind's list: ${res.status} ${res.statusText}. Details: ${errorResponse}`)
+        }
+
+        const resData = await res.json();
+
+        console.log('API response data POST friend:', resData);
+
+        return resData
+    } catch (err) {
+        console.error('Err in POST for adding a freind:', err)
+        throw err
+    }
+}
+
+/*-----------------------------// Delete //---------------------------------*/
+
+export const deleteLogOutUser = async (userId) => {
+    try {
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/sessions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userId)
         });
 
         if (!res.ok) {
@@ -108,45 +129,24 @@ export const postLogOutUser = async (userId, user) => {
         return resData
     } catch (err) {
         console.error('Err in POST for Log Out:', err)
+        throw err
     }
 }
 
-export const postAddFriend = async (user) => {
-    try {
-        const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/add_friend`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        });
-
-        if (!res.ok) {
-            throw new Error(`There was a problem adding friend to freind's list: ${res.status}`)
-        }
-
-        const resData = response.json();
-        return resData
-    } catch (err) {
-        console.error('Err in POST for adding a freind:', err)
-    }
-}
-
-/*-----------------------------// Delete //---------------------------------*/
-
-export const deleteFriend = async (userId, user) => {
+export const deleteFriend = async (userId, friendId) => {
     try {
         const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}/remove_friend`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(user) // need to stringify the user object
+            body: JSON.stringify(friendId) 
         });
 
         const resData = await res.json();
         return resData
     } catch (err) {
         console.error('Err in DELETE of friend', err)
+        throw err
     }
 }

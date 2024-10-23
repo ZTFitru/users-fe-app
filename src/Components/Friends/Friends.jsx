@@ -1,20 +1,72 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useParams, useNavigate } from "react-router-dom";
 
 // import searchIcon from "../../assets/search_icon.png";
+import { getFriendsIndex, postAddFriend, deleteFriend } from "../../../apiCalls";
 import UserCard from "../UserCard/UserCard";
 import RemoveFriendPopUp from "../RemoveFriendPopUp/RemoveFriendPopUp";
 import StartGamePopUp from "../StartGamePopUp/StartGamePopUp";
-import { useParams } from "react-router-dom";
 import "./Friends.css";
 
-function Friends({ isFriends, removeFriend }) {
+function Friends({ isFriends }) {
   const [searchFriend, setSearchFriend] = useState("");
+  const [friendsList, setFriendsList] = useState([]);
   const { logedInUsername } = useParams();
+  const { userId } = useParams();
+  const navigate = useNavigate();
   //   console.log(logedInUsername)
   // const [alert, setAlert] = useState([])
+
+  useEffect(() => {
+    const fetchFriends = async () => {
+      try {
+        const friendsData = await getFriendsIndex(userId);
+        setFriendsList(friendsData);
+
+        console.log("Friends DATA->>>>>", friendsData);
+      } catch (err) {
+        console.error("Error fetching friends data:", err);
+        // navigate(`/error/${err.status || 500}`, {
+        //   state: { message: err.message || "An unexpected error occurred." },
+        // });
+      }
+    };
+    fetchFriends();
+  }, [navigate, userId]);
+
+
+  /* replaced by the function handleRemoveFriend
+  const removeFriend = (user)=> {
+    setIsFriends(allFriends => allFriends.filter(friend => friend.id !== user.id))
+  }
+const removeFriend = async (friendId) => {
+  try {
+    const resData = await deleteFriend(userId, friendId);
+    setFriendsList(friendsList.filter(friend => friend.id !== friendId));
+
+    console.log("Friend removed:", resData);
+    
+  } catch (err) {
+    console.error('Error removing friend:', err);
+  }
+};
+*/
+
+const handleRemoveFriend = async (friend) => {
+  const friendId = friend.id; 
+  try {
+    const resData = await deleteFriend(userId, friendId);
+    console.log("Friend removed:", resData);
+
+    setFriendsList(friendsList.filter((aFriend) => aFriend.id !== friendId));
+  } catch (err) {
+    console.error("Error removing friend:", err);
+  }
+};
+
 
   const filterFriend = isFriends.filter((friend) =>
     friend.attributes.username
@@ -22,12 +74,15 @@ function Friends({ isFriends, removeFriend }) {
       .includes(searchFriend.toLowerCase())
   );
 
-  const friendList = isFriends.map((friend) => (
+  const friendList = filterFriend.map((friend) => (
     <UserCard
+      key={friend.id}
+      id={friend.id}
       user={friend}
-      removeFriend={removeFriend}
+      removeFriend={handleRemoveFriend}
       isFriend={true}
       username={friend.attributes.username}
+      avatar={friend.attributes.avatar}
     />
   ));
 
@@ -52,6 +107,7 @@ function Friends({ isFriends, removeFriend }) {
         {filterFriend.length === 0 ? (
           <p>You need more frien-emimes</p>
         ) : (
+          
           <div className="friends-list-container">{friendList}</div>
         )}
       </div>

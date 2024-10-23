@@ -13,7 +13,7 @@ function MyGameCard({ gameId, gameImage }) {
           event.onerror = null
         }}
       />
-      <h3 className='my-games-card-h3'>{gameId}</h3> 
+      <h3>{gameId}</h3> 
       {/* we need to write in game with a friends name, what does this look like on the BE? */}
     </div>
   )

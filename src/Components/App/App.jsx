@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
-import userData from '../../../mockUsers.json'
+import { Routes, Route, useNavigate, Navigate, useParams } from 'react-router-dom';
+// import userData from '../../../mockUsers.json'
 //const Board = lazy(() => import('chess_components/Board'));
 import {
   getUser,
@@ -8,7 +8,7 @@ import {
   getFriendsIndex,
   getGamesIndex,
   postLogInUser,
-  postLogOutUser,
+  deleteLogOutUser,
   postAddFriend,
   deleteFriend
 } from '../../../apiCalls';
@@ -29,9 +29,11 @@ function App() {
   const [isLogedIn, setIsLoggedIn] = useState(false);
   const [users, setUsers] = useState([]);
   const [isFriends, setIsFriends] = useState([]);
-  const [myGames, setMyGames] = useState([]);
+  const [userId, setUserId] =  useState(null);
+  // const [myGames, setMyGames] = useState([]);
   const navigate = useNavigate();
-
+  const { loggedInId } = useParams();
+  // console.log('what', loggedInId)
   // const handleLogin = async (userCredentials) => {
   //   try {
   //     const loginResponse = await postLogInUser(userCredentials);
@@ -59,53 +61,88 @@ function App() {
   // }
 
   
-  const handleLogin = (loginResponse)=> {
-    if(loginResponse) {
-      setUserData({
-        email: loginResponse.data.attributes.email,
-      // username: loginResponse.data.attributes.username,
-        avatar: loginResponse.data.attributes.avatar,
-      // password: loginResponse.data.attributes.password
-    })
-    setIsLoggedIn(true)
-    navigate(`${loginResponse.data.username}/my_games/`)
-    } else {
-      setIsLoggedIn(false) 
-    }
-    
-    
-    // navigate(`/${loginResponse.data.id}/my_games/`)
-  }
+  // const handleLogin = (loginResponse)=> {
+  //   if(loginResponse) {
+  //     setUserData({
+  //       email: loginResponse.data.attributes.email,
+  //     // username: loginResponse.data.attributes.username,
+  //       avatar: loginResponse.data.attributes.avatar,
+  //     // password: loginResponse.data.attributes.password
+  //   })
+  //   setIsLoggedIn(true)
+  //   navigate(`/${loginResponse.data.id}/my_games/`)
+  //   setUserId(loginResponse.data.id)
+  //   } else {
+  //     setIsLoggedIn(false) 
+  //   }
+  // }
 
+  useEffect(() => {
+    const fetchLogedInUser = async () => {
+      try {
+        const loginResponse = await getUser(userId);
+        console.log('login response ->>>>>>',loginResponse)
+        if(loginResponse) {
+          setUserData({
+            id: loginResponse.data.id,
+            email: loginResponse.data.attributes.email,
+            username: loginResponse.data.attributes.username,
+            avatar: loginResponse.data.attributes.avatar,
+        })
+        setIsLoggedIn(true)
+        navigate(`/${loginResponse.data.id}/my_games/`)
+        setUserId(loginResponse.data.id)
+        } else {
+          setIsLoggedIn(false) 
+        }
+      } catch (err) {
+        console.error('Error fetching loged in User')
+      }
+    }
+    fetchLogedInUser();
+  }, [navigate, loggedInId]);  
+
+  console.log('UserID APP----->', userId)
+  // ALL USERS
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const allUsersData = await getUsersIndex();
+        const allUsersData = await getUsersIndex(userId);
+        console.log('thisss', allUsersData)
         setUsers(allUsersData.data)
+        console.log('all Users ->',allUsersData)
+        console.log('Apppp->>>>>',allUsersData.data)
       } catch (err) {
         console.error('Error fetching user data:', err);
-        navigate(`/error/${err.status || 500}`, {
-          state: { message: err.message || 'An unexpected error occurred.' }
-        })
+        // navigate(`/error/${err.status || 500}`, {
+        //   state: { message: err.message || 'An unexpected error occurred.' }
+        // })
       }
     }
       fetchUsers()
-    }, [navigate]);
+    }, [navigate, userId]);
 
-useEffect(() => {
-  const fetchGamesIndex = async (userId) => {
-    try {
-      const userGamesData = await getGamesIndex();
-      setMyGames(userGamesData.data)
-    } catch (err) {
-      console.error('Error fetching user data:', err);
-      navigate(`/error/${err.status || 500}`, {
-        state: { message: err.message || 'An unexpected error occurred.' }
-      })
-    }
-  }
-  fetchGamesIndex()
-}, [])
+// useEffect(() => {
+//   if(isLogedIn) {
+//     const fetchGamesIndex = async () => {
+//       try {
+//       const userId = 1
+//       const userGamesData = await getGamesIndex(userId);
+//       setMyGames(userGamesData.data)
+//     } catch {
+//       console.error('Error fetching user data:', err);
+//       navigate(`/error/${err.status || 500}`, {
+//         state: { message: err.message || 'An unexpected error occurred.' }
+//       })
+//     }
+//   }
+//   fetchGamesIndex()
+//   } 
+// }, [isLogedIn, navigate])
+
+  const handleUserLogin = (id) => {
+    setUserId(id);
+  };
 
   const userIsLoggedIn = () => {
     setIsLoggedIn(true)
@@ -116,24 +153,27 @@ useEffect(() => {
     setUserData({});
   }
 
-  const removeFriend = (user)=> {
-    setIsFriends(allFriends => allFriends.filter(friend => friend.id !== user.id))
-  }
+  // moved to Friends and combined with the other function
+  // const removeFriend = (user)=> {
+  //   setIsFriends(allFriends => allFriends.filter(friend => friend.id !== user.id))
+  // }
 
+  // console.log(userData)
   return (
     <>
       {isLogedIn && <Header userLogOut={userLogOut} />}
       <Routes>
         {/* <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} /> */}
-        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} />
+        {/* <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} /> */}
+        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} userData={userData} />} />
         {/* <Route path='/' element={<GamePlay playerId={1} gameId={1}/>}/> */}
-        <Route path='/:username/my_games/' element={isLogedIn ? <MyGames myGames={myGames}/> : <Navigate to="/" />} />
-        <Route path='/search/frien-emies' element={isLogedIn ? <Users users={users} isFriends={isFriends} setIsFriends={setIsFriends}/> : <Navigate to="/" /> } />
-        <Route path='/:username/frien-emies' element={isLogedIn ? <Friends users={users} isFriends={isFriends} removeFriend={removeFriend}/> : <Navigate to="/" />} />
-        <Route path='/gameId' element={isLogedIn ? <GamePlay playerId={1} gameId={1}/> : <Navigate to="/" />} />
-        <Route path='/:username/statistics' element={isLogedIn ? <Stats /> : <Navigate to="/" />} />
+        <Route path='/:userId/my_games/' element={isLogedIn ? <MyGames userData={userData} isLogedIn={isLogedIn}/> : <Navigate to="/" />} />
+        <Route path='/search/frien-emies' element={isLogedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends}/> : <Navigate to="/" /> } />
+        <Route path='/:userId/frien-emies' element={isLogedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} /> : <Navigate to="/" />} />
+        <Route path='/gameId' element={isLogedIn ? <GamePlay userData={userData} playerId={1} gameId={1}/> : <Navigate to="/" />} />
+        <Route path='/:userId/statistics' element={isLogedIn ? <Stats userData={userData}/> : <Navigate to="/" />} />
       </Routes>
-      {isLogedIn && <Footer />}
+      {isLogedIn && <Footer userId={userId}/>}
     </>
   );
 }

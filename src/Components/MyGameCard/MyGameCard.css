@@ -8,16 +8,16 @@
     position: absolute;
     top: 2%;
     left: 5%;
-}
 
-.my-games-card-wrapper img {
-    width: 100%;
-    border: 2px solid var(--color-4);
-}
+    img {
+        width: 100%;
+        border: 2px solid var(--color-4);
+    }
 
-.my-games-card-h3 {
-    margin: 0;
-    margin-top: 3%;
-    margin-left: 5%;
-    font-size: 1.2rem;
+    h3 {
+        margin: 0;
+        margin-top: 3%;
+        margin-left: 5%;
+        font-size: 1.2rem;
+    }
 }
