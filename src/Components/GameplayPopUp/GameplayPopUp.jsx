@@ -13,17 +13,17 @@ function GameplayPopUp({username}) {
       {(close) => (
         <div className="gameplay-modal">
           <div className="gameplay-content-wrapper">
-            <div className="gameplay-content">Game with {username}</div>
+            <div className="gameplay-content">Game with ....</div>
             {/* the following still needs props. we need the actaul data */}
-            <div className="gameplay-content">Started on: {date}</div>
-            <div className="gameplay-content">Last move on: {date}</div>
-            <div className="gameplay-content">Whose turn: {username}</div>
-            <div className="gameplay-content">Time remaining for next move: {time}</div>
+            <div className="gameplay-content">Started on: ....</div>
+            <div className="gameplay-content">Last move on: ....</div>
+            <div className="gameplay-content">Whose turn: ....</div>
+            <div className="gameplay-content">Time remaining for next move: ....</div>
           </div>
           <div className="gameplay-button-wrapper">
-            <Link to="/gameId">
+            {/* <Link to="/gameId"> */}
               <button className="gameplay-button">Ok</button>
-            </Link>
+            {/* </Link> */}
             <button className="gameplay-button" onClick={() => close()}>
               Cancel
             </button>

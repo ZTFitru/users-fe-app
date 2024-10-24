@@ -1,14 +1,22 @@
-import React from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import './ErrorPage.css';
+import "./ErrorPage.css";
 
 function ErrorPage() {
-  return (
-    <section>
-        <h2>We're so sorry, there's been an error:</h2>
-        <p>Error message</p>
-    </section>
-  )
+    const navigate = useNavigate();
+
+    const handleGoBack = () => {
+      navigate("/");
+    };
+
+    return (
+      <section className="error-page-section">
+        <h2>404 - Page Not Found</h2>
+        <p>Sorry, the page you are looking for does not exist.</p>
+        <button onClick={handleGoBack}>Back to login</button>
+      </section>
+    );
 }
 
 export default ErrorPage;

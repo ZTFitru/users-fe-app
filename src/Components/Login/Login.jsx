@@ -18,7 +18,7 @@ function Login({ userIsLoggedIn, defineUserId }) {
     const [error, setError] = useState('')
     const navigate = useNavigate();
     // const { userId } = useParams()
-    console.log('Log in id --->',defineUserId)
+    // console.log('Log in id --->',defineUserId)
 
     const signInBtn = async (e) => {
         e.preventDefault();

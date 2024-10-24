@@ -7,7 +7,7 @@ import MyGameCard from "../MyGameCard/MyGameCard";
 import GameplayPopUp from "../GameplayPopUp/GameplayPopUp";
 import "./MyGames.css";
 
-function MyGames({ isLogedIn, userData }) {
+function MyGames({ isLogedIn, userData, friendsList }) {
   const userId = userData.id
 
   console.log('My game user id------> ',userId)
@@ -15,6 +15,7 @@ function MyGames({ isLogedIn, userData }) {
   // const { userId } = useParams();
   const navigate = useNavigate();
   // const [gamesList, setGameList] = useState([])
+  // const [selectedGame, setSelectedGame] = useState(null)
 
   useEffect(() => {
     if(isLogedIn && userId) {
@@ -39,23 +40,52 @@ function MyGames({ isLogedIn, userData }) {
   // const userIsLoggedIn = () => {
   //   setIsLoggedIn(true)
   // };
-  const gamesList = myGames.map(game => (
-    <MyGameCard
-      key={game.attributes.game_id}
-      gameId={game.attributes.game_id}
-      gameImage={game.attributes.avatar}
-    />
-  ));
+
+  // const gameSlected = (gameId) => {
+  //   setSelectedGame(gameId)
+  // }
+
+  // const closePopUp = () => {
+  //   setSelectedGame(null)
+  // }
+
+  // const friendIdGameId = friendsList.find(friend => friend.id === game.id)
+
+  const gamesList = myGames.map(game => {
+    if (game.attributes.status === 'active') {
+      return (
+        <MyGameCard
+          key={game.id}
+          gameId={game.id}
+          gameStatus={game.attributes.status}
+          gameImage={game.attributes.avatar}
+          // onImageClick={()=> gameSlected(game.id) }
+        />
+      )
+    }
+});
   // useEffect(() => {}, [myGames])
 
-  console.log('game list', gamesList)
+  // console.log('game list', gamesList)
 
-  
+  // const gameSlected = (gameId) => {
+  //   setSelectedGame(gameId)
+  // }
+
+  // const closePopUp = () => {
+  //   setSelectedGame(null)
+  // }
 
   return (
     <section className="my-games-section">
       <h2 className="my-games-h2">My Games</h2>
-      <div>{gamesList}</div>
+      <div className="gmaes-list-wrapper">{gamesList}</div>
+      {/* {selectedGame && (
+        <GameplayPopUp 
+          gameId={selectedGame}
+          onClose={closePopUp}
+        />
+      )} */}
       {/* <GameplayPopUp /> */}
     </section>
   );
