@@ -4,17 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useParams, useNavigate } from "react-router-dom";
 
-import {
-  getFriendsIndex,
-  postAddFriend,
-  deleteFriend,
-} from "../../../apiCalls";
+import { getFriendsIndex, deleteFriend } from "../../../apiCalls";
 import UserCard from "../UserCard/UserCard";
-import RemoveFriendPopUp from "../RemoveFriendPopUp/RemoveFriendPopUp";
-import StartGamePopUp from "../StartGamePopUp/StartGamePopUp";
+// import RemoveFriendPopUp from "../RemoveFriendPopUp/RemoveFriendPopUp";
+// import StartGamePopUp from "../StartGamePopUp/StartGamePopUp";
 import "./Friends.css";
 
-function Friends({ isFriends, userId }) {
+function Friends({ isFriends, userData }) {
   const [searchFriend, setSearchFriend] = useState("");
   const [friendsList, setFriendsList] = useState([]);
   const { logedInUsername } = useParams();
@@ -23,39 +19,7 @@ function Friends({ isFriends, userId }) {
   //   console.log(logedInUsername)
   // const [alert, setAlert] = useState([])
 
-  // useEffect(() => {
-  //   const fetchFriends = async () => {
-  //     try {
-  //       const friendsData = await getFriendsIndex(userId);
-  //       setFriendsList(friendsData);
-
-  //       console.log("Friends DATA->>>>>", friendsData);
-  //     } catch (err) {
-  //       console.error("Error fetching friends data:", err);
-  //       // navigate(`/error/${err.status || 500}`, {
-  //       //   state: { message: err.message || "An unexpected error occurred." },
-  //       // });
-  //     }
-  //   };
-  //   fetchFriends();
-  // }, [userId]);
-
-  /* replaced by the function handleRemoveFriend
-  const removeFriend = (user)=> {
-    setIsFriends(allFriends => allFriends.filter(friend => friend.id !== user.id))
-  }
-const removeFriend = async (friendId) => {
-  try {
-    const resData = await deleteFriend(userId, friendId);
-    setFriendsList(friendsList.filter(friend => friend.id !== friendId));
-
-    console.log("Friend removed:", resData);
-    
-  } catch (err) {
-    console.error('Error removing friend:', err);
-  }
-};
-*/
+  const userId = userData.id;
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -105,6 +69,7 @@ const removeFriend = async (friendId) => {
     <section className="friends-section">
       <h2 className="friends-h2">{logedInUsername} Frien-EMIES</h2>
       <p className="friends-instructions">Click the - to remove a friend</p>
+      <p className='challege-to-game-instructions'>Select a frien-emie to challenge them to a game.</p>
       <div className="search-friends-wrapper">
         <FontAwesomeIcon icon={faSearch} className="friends-search-icon" />
         <input

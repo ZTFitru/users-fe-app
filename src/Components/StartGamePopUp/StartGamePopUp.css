@@ -1,41 +1,41 @@
-.start-game-popup {
-    button.start-game-popup-click {
-        position: absolute;
-        top: 0;
-        left: 25px;
-        right: 0;
-        bottom: 0;
-        background-color: transparent;
-        border: none;
-    }
+button.start-game-popup-click {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    border: none;
+    /* border: 2px solid red; */
+}
 
-    .modal {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 25%;
-        color: var(--color-4);
-        background-color: var(--color-1);
-        border: 2px solid var(--color-4);
-    }
+.start-game-modal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25%;
+    color: var(--color-4);
+    background-color: var(--color-1);
+    border: 2px solid var(--color-4);
+}
 
-    .start-game-button-wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .content {
-        width: 100%;
-        margin-bottom: 30%;
-    }
-    
-    .start-game-button {
-        width: 4rem;
-    
-    }
+.start-game-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.start-game-content {
+    width: 100%;
+    margin-bottom: 30%;
+}
+
+.start-game-button {
+    width: 4rem;
 }
 
 

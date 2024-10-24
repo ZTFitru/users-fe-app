@@ -22,7 +22,7 @@ export const getUsersIndex = async (userId) => {
         }
         const allUsersData = await res.json();
 
-        console.log('work now ->>>>',allUsersData)
+        // console.log('work now ->>>>',allUsersData)
 
         return allUsersData
     } catch (err) {
@@ -47,11 +47,14 @@ export const getFriendsIndex = async (userId) => {
 
 export const getGamesIndex = async (userId) => {
     try {
-        const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}/my_games`)
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/my_games`)
         if (!res.ok) {
             throw new Error(`There's been an error loading the games list: ${res.status}`)
         }
-        const data = await res.json()
+        const data = await res.json();
+
+        console.log('Fetched games data:', data);
+
         return data
     } catch (err) {
         console.log('Error in fetching games list:', err)
@@ -83,14 +86,15 @@ export const postLogInUser = async (user) => {
     }
 }
 
-export const postAddFriend = async (userId, friendId) => {
+export const postAddFriend = async (userId, user_id) => {
+    console.log('api call ->>>', user_id)
     try {
         const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/add_friend`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ friendId })
+            body: JSON.stringify({ user_id })
         });
 
         if (!res.ok) {

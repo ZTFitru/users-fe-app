@@ -11,6 +11,7 @@ import './UserCard.css';
 function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFriend }) {
   
   const [iconColor, setIconColor] = useState('black');
+  const [popUp, setPopUp] = useState(false)
 
   const checkImageBrightnessInIconArea = (imgElement, iconSize = {width: 32, height: 32}) => {
     const canvas = document.createElement('canvas');
@@ -51,7 +52,28 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
     checkImageBrightnessInIconArea(event.target)
   };
 
+  // const removieFriendFunction =()=> {
+  //   setPopUp('remove friend')
+  // }
 
+  // const closePopUp = () => {
+  //   setPopUp(null)
+  // }
+
+  // const imageClickFunction = () => {
+  //   setPopUp('game play')
+    // }
+
+    const removeFriendClick = () => {
+      setPopUp(true)
+    }
+
+    const closeRemovePopUp = () => {
+      setPopUp(false)
+    }
+
+  
+  
   return (
     <div id={id} className='user-card-wrapper'>
       <div>
@@ -60,22 +82,49 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
             <FaUserPlus color={iconColor}/>
           </i>
         ) : (
-        <i onClick={()=> removeFriend(user)} >
+        // <i onClick={()=> removeFriend(user)} >
+        // <i onClick={()=> removeFriend(user)} >
+         <i onClick={removeFriendClick} >
             <FaUserMinus color={iconColor} />
           </i>
+          // {isFriend && <RemoveFriendPopUp username={username} />}
         )}
       </div>
-      {/* {isFriend && <StartGamePopUp isFriend={isFriend} />} */}
+      {isFriend && <StartGamePopUp isFriend={isFriend} username={username}/>}
+      {/* {isFriend && <RemoveFriendPopUp username={username} />} */}
       <img src={avatar || avatarPlaceholder} 
         alt={username}
         crossOrigin="anonymous"
-        onLoad={handleImageLoad}        
+        onLoad={handleImageLoad}  
+        // onClick={imageClickFunction}   //test   
         onError={event => {
           event.target.src = avatarPlaceholder
           event.onerror = null
         }}
         />
       <h3 className='user-name-h3'>{username}</h3>
+      {/* {closeRemoveFriendPopUp && <RemoveFriendPopUp />} */}
+      {popUp &&  (<RemoveFriendPopUp 
+        username={username}
+        onClose={closeRemovePopUp}  
+        removeFriend={()=> {
+          removeFriend(user) 
+          closeRemovePopUp()
+        }}
+        />
+        )}
+      {/* {popUp === 'game play' ? (
+        <StartGamePopUp isFriend={isFriend} username={username} onClose={closePopUp} />
+      ) : popUp === 'remove friend' ? (
+        <RemoveFriendPopUp
+          username={username}
+          onClose={closePopUp}
+          removeFriend={() => {
+            removeFriend(user);
+            closePopUp();
+          }}
+        />
+      ) : null}  */}
     </div>
   )
 }

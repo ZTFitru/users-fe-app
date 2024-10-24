@@ -83,13 +83,23 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
   //     console.log("Error adding friend: ", err);
   //   }
   // };
-
-const addFriend = async (user) => {
-  console.log('User to add:', user);
-  try {
-      const response = await postAddFriend(userId, user.id);
+  
+  const addFriend = async (friend ) => {
+    console.log('Friend to add:', friend);
+    console.log('userId:', userId);
+    
+    if (!friend || !friend.id) {
+      console.error("Invalid friend data", friend);
+      setAlert(prev => [...prev, "Friend data is invalid or missing."]);
+      setTimeout(() => setAlert(prev => prev.filter(msg => msg !== "Friend data is invalid or missing.")), 2000);
+      return;
+    }
+    
+    try {
+      const response = await postAddFriend(userId, friend.id);
       console.log('add a freind api ---->', response)
-
+      // console.log('user id', userId) // this doesn't show up in the console
+      console.log(`Sending POST request to add friend with userId: ${userId} and friendId: ${friend.id}`);
       if (response && response.success) {
           // use setIsFriends to update the state of friends list 
           //justFriends is then being passed as the previous state

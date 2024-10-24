@@ -18,7 +18,7 @@ function Login({ userIsLoggedIn, defineUserId }) {
     const [error, setError] = useState('')
     const navigate = useNavigate();
     // const { userId } = useParams()
-    // console.log(userId)
+    console.log('Log in id --->',defineUserId)
 
     const signInBtn = async (e) => {
         e.preventDefault();
@@ -30,8 +30,8 @@ function Login({ userIsLoggedIn, defineUserId }) {
           if (userData.data.id && userData.data.attributes) {
             defineUserId(userData.data.id);
             userIsLoggedIn(userData.data.id);
-            // navigate(`/${userData.data.id}/my_games/`)
-            navigate(`/search/frien-emies`)
+            navigate(`/${userData.data.id}/my_games/`)
+            // navigate(`/search/frien-emies`)
           } else {
             setError('Username or password is incorrect.');
           }
