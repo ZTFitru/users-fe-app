@@ -13,6 +13,7 @@ import "./Friends.css";
 function Friends({ isFriends, userData }) {
   const [searchFriend, setSearchFriend] = useState("");
   const [friendsList, setFriendsList] = useState([]);
+  const [startNewGame, setStartNewGame] = useState([]);
   const { logedInUsername } = useParams();
   // const { userId } = useParams();
   const navigate = useNavigate();
@@ -46,6 +47,43 @@ function Friends({ isFriends, userData }) {
       console.error("Error removing friend:", err);
     }
   };
+  
+  const handleStartNewGame = async (freind) => {
+    const friendId = friend.id;
+    try {
+      const resData = await postStartGame(userId, friendId)
+      setStartNewGame(resData)
+    } catch (err) {
+      console.error("Error starting a game", err)
+    }
+  }
+  
+    /*
+  
+    {
+      "data": {
+          "type": "game_creation",
+          "game_id": 17,
+          "attributes": {
+              "game": {
+                  "game": "Chess",
+                  "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/chess_dab.jpg",
+                  "status": "active"
+              },
+              "user": {
+                  "id": 1,
+                  "username": "bob",
+                  "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/baby.jpg"
+              },
+              "friend": {
+                  "friend_id": 2,
+                  "username": "rob",
+                  "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/queen.jpg"
+              }
+          }
+      }
+  }
+    */
 
   const filterFriend = friendsList.filter((friend) =>
     friend.attributes.username
@@ -62,6 +100,7 @@ function Friends({ isFriends, userData }) {
       isFriend={true}
       username={friend.attributes.username}
       avatar={friend.attributes.avatar}
+      handleStartNewGame={handleStartNewGame}
     />
   ));
 

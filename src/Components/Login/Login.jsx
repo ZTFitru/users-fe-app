@@ -48,7 +48,7 @@ function Login({ userIsLoggedIn, defineUserId }) {
 
     return (
         <section className='login-section'>
-            <h1><div className='login-chess-with'>Chess with </div><div className='login-frien-emies'>Frien-EMIMES</div></h1>
+            <h1><div className='login-chess-with'>Chess with </div><div className='login-frien-emies'>Frien-EMIES</div></h1>
             <img src={chessLogo} alt='chess pieces' className='login-chess-logo' />
             <div className='login-sign-in-wrapper'>
                 <h2>Sign In</h2>

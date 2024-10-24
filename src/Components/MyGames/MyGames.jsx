@@ -30,24 +30,7 @@ function MyGames({ isLogedIn, userData, friendsList }) {
        }
       fetchGamesIndex()
     }
-    
-    console.log(myGames)
-  //   setGameList(myGames.map((game) => {
-  //     console.log('hello',game)
-  // }))
   }, [isLogedIn, userId]);
-
-  // const userIsLoggedIn = () => {
-  //   setIsLoggedIn(true)
-  // };
-
-  // const gameSlected = (gameId) => {
-  //   setSelectedGame(gameId)
-  // }
-
-  // const closePopUp = () => {
-  //   setSelectedGame(null)
-  // }
 
   // const friendIdGameId = friendsList.find(friend => friend.id === game.id)
 
@@ -64,29 +47,14 @@ function MyGames({ isLogedIn, userData, friendsList }) {
       )
     }
 });
-  // useEffect(() => {}, [myGames])
+  
 
-  // console.log('game list', gamesList)
 
-  // const gameSlected = (gameId) => {
-  //   setSelectedGame(gameId)
-  // }
-
-  // const closePopUp = () => {
-  //   setSelectedGame(null)
-  // }
 
   return (
     <section className="my-games-section">
       <h2 className="my-games-h2">My Games</h2>
       <div className="gmaes-list-wrapper">{gamesList}</div>
-      {/* {selectedGame && (
-        <GameplayPopUp 
-          gameId={selectedGame}
-          onClose={closePopUp}
-        />
-      )} */}
-      {/* <GameplayPopUp /> */}
     </section>
   );
 }

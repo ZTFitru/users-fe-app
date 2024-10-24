@@ -1,20 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 import "./ErrorPage.css";
 
 function ErrorPage() {
-    const navigate = useNavigate();
-
-    const handleGoBack = () => {
-      navigate("/");
-    };
 
     return (
       <section className="error-page-section">
         <h2>404 - Page Not Found</h2>
-        <p>Sorry, the page you are looking for does not exist.</p>
-        <button onClick={handleGoBack}>Back to login</button>
+        <h3>Sorry, the page you are looking for does not exist.</h3>
+        <p>Click the logo to naviage to My Games.</p>
       </section>
     );
 }

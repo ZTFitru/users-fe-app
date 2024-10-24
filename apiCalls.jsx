@@ -113,6 +113,30 @@ export const postAddFriend = async (userId, user_id) => {
     }
 }
 
+// https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/1/start_game
+
+export const postStartGame = async (userId, friendId) => {
+    try {
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/start_game`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ friendId })
+        });
+
+        if (!res.ok) {
+            throw new Error(`There was a problem with the POST for the login: ${res.status}`)
+        }
+
+        const resData = await res.json();
+        return resData
+    } catch (err) {
+        console.error('Error in POSTing the user login:', err)
+        throw err
+    }
+}
+
 /*-----------------------------// Delete //---------------------------------*/
 
 export const deleteLogOutUser = async (userId) => {

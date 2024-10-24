@@ -13,10 +13,12 @@
   /* min-height: 365px; */
   /* align-items: center; */
   /* min-width: 100%; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15vh;
+  /* width: 100vw; */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-top: 55%;
+  width: 100%;
+  align-content: center;
   border: 2px solid red;
-  /* width: 100%; */
 }

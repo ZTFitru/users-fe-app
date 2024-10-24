@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, Navigate, useParams } from 'react-router-dom';
-// import userData from '../../../mockUsers.json'
-//const Board = lazy(() => import('chess_components/Board'));
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUser, getUsersIndex } from '../../../apiCalls';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
-// import MyGameCard from '../MyGameCard/MyGameCard';
 import Users from '../Users/Users';
 import Friends from '../Friends/Friends';
-import './App.css';
 import MyGames from '../MyGames/MyGames';
 import GamePlay from '../GamePlay/GamePlay';
 import Stats from '../Stats/Stats';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import './App.css';
 
 function App() {
 
@@ -24,11 +21,8 @@ function App() {
   const [isFriends, setIsFriends] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
   const [myGames, setMyGames] = useState([]);
-  // const navigate = useNavigate();
-  // const { loggedInId } = useParams();
 
   const defineUserId = (id) => {
-    console.log('defining user id..... ', id)
     setUserId(id);
   };
 
@@ -36,7 +30,6 @@ function App() {
     const fetchLogedInUser = async () => {
       try {
         const loginResponse = await getUser(userId);
-        //console.log('login response ->>>>>>',loginResponse)
         if(loginResponse) {
           setUserData({
             id: loginResponse.data.id,
@@ -56,22 +49,15 @@ function App() {
     fetchLogedInUser();
   }, [userId]);  
 
-  // console.log('UserID APP----->', userId)
   // ALL USERS
   useEffect(() => {
     const fetchUsers = async () => {
       if (userId) {
         try {
           const allUsersData = await getUsersIndex(userId);
-          //console.log('thisss', allUsersData)
           setUsers(allUsersData.data)
-          //console.log('all Users ->',allUsersData)
-          //console.log('Apppp->>>>>',allUsersData.data)
         } catch (err) {
           console.error('Error fetching user data:', err);
-          // navigate(`/error/${err.status || 500}`, {
-          //   state: { message: err.message || 'An unexpected error occurred.' }
-          // })
         }
       }
     }
@@ -97,7 +83,7 @@ function App() {
         <Route path='/:userId/frien-emies' element={isLogedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} friendsList={friendsList} setIsFriends={setIsFriends} /> : <Navigate to="/" />} />
         <Route path='/gameId' element={isLogedIn ? <GamePlay userId={userId} userData={userData} playerId={1} gameId={1}/> : <Navigate to="/" />} />
         <Route path='/:userId/statistics' element={isLogedIn ? <Stats userData={userData}/> : <Navigate to="/" />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={isLogedIn ? <ErrorPage /> : <Navigate to="/" />} />
       </Routes>
       {isLogedIn && <Footer userId={userId}/>}
     </>

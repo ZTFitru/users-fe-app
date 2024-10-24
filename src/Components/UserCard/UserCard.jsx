@@ -8,7 +8,7 @@ import RemoveFriendPopUp from '../RemoveFriendPopUp/RemoveFriendPopUp';
 import avatarPlaceholder from '../../assets/avatar_placeholder.png';
 import './UserCard.css';
 
-function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFriend }) {
+function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFriend, handleStartNewGame }) {
   
   const [iconColor, setIconColor] = useState('black');
   const [popUp, setPopUp] = useState(false)
@@ -82,21 +82,16 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
             <FaUserPlus color={iconColor}/>
           </i>
         ) : (
-        // <i onClick={()=> removeFriend(user)} >
-        // <i onClick={()=> removeFriend(user)} >
          <i onClick={removeFriendClick} >
             <FaUserMinus color={iconColor} />
           </i>
-          // {isFriend && <RemoveFriendPopUp username={username} />}
         )}
       </div>
-      {isFriend && <StartGamePopUp isFriend={isFriend} username={username}/>}
-      {/* {isFriend && <RemoveFriendPopUp username={username} />} */}
+      {isFriend && <StartGamePopUp isFriend={isFriend} username={username} handleStartNewGame={handleStartNewGame}/>}
       <img src={avatar || avatarPlaceholder} 
         alt={username}
         crossOrigin="anonymous"
-        onLoad={handleImageLoad}  
-        // onClick={imageClickFunction}   //test   
+        onLoad={handleImageLoad}    
         onError={event => {
           event.target.src = avatarPlaceholder
           event.onerror = null
@@ -113,18 +108,6 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
         }}
         />
         )}
-      {/* {popUp === 'game play' ? (
-        <StartGamePopUp isFriend={isFriend} username={username} onClose={closePopUp} />
-      ) : popUp === 'remove friend' ? (
-        <RemoveFriendPopUp
-          username={username}
-          onClose={closePopUp}
-          removeFriend={() => {
-            removeFriend(user);
-            closePopUp();
-          }}
-        />
-      ) : null}  */}
     </div>
   )
 }

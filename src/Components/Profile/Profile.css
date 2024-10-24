@@ -1,0 +1,24 @@
+.settings-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 55%;
+}
+
+.setting-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.icon {
+    width: 2rem;
+    height: auto;
+}
+
+.main-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
