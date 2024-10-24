@@ -23,22 +23,22 @@ function Friends({ isFriends, userId }) {
   //   console.log(logedInUsername)
   // const [alert, setAlert] = useState([])
 
-  useEffect(() => {
-    const fetchFriends = async () => {
-      try {
-        const friendsData = await getFriendsIndex(userId);
-        setFriendsList(friendsData);
+  // useEffect(() => {
+  //   const fetchFriends = async () => {
+  //     try {
+  //       const friendsData = await getFriendsIndex(userId);
+  //       setFriendsList(friendsData);
 
-        console.log("Friends DATA->>>>>", friendsData);
-      } catch (err) {
-        console.error("Error fetching friends data:", err);
-        // navigate(`/error/${err.status || 500}`, {
-        //   state: { message: err.message || "An unexpected error occurred." },
-        // });
-      }
-    };
-    fetchFriends();
-  }, [userId]);
+  //       console.log("Friends DATA->>>>>", friendsData);
+  //     } catch (err) {
+  //       console.error("Error fetching friends data:", err);
+  //       // navigate(`/error/${err.status || 500}`, {
+  //       //   state: { message: err.message || "An unexpected error occurred." },
+  //       // });
+  //     }
+  //   };
+  //   fetchFriends();
+  // }, [userId]);
 
   /* replaced by the function handleRemoveFriend
   const removeFriend = (user)=> {
@@ -57,8 +57,22 @@ const removeFriend = async (friendId) => {
 };
 */
 
+  useEffect(() => {
+    const fetchFriends = async () => {
+      try {
+        const friendsData = await getFriendsIndex(userId);
+        setFriendsList(friendsData.data);
+        console.log("Friends DATA->>>>>", friendsData);
+      } catch (err) {
+        console.error("Error fetching friends data:", err);
+      }
+    };
+    fetchFriends();
+  }, [userId, setFriendsList]);
+
   const handleRemoveFriend = async (friend) => {
     const friendId = friend.id;
+    console.log(friendId);
     try {
       const resData = await deleteFriend(userId, friendId);
       console.log("Friend removed:", resData);
@@ -69,7 +83,7 @@ const removeFriend = async (friendId) => {
     }
   };
 
-  const filterFriend = isFriends.filter((friend) =>
+  const filterFriend = friendsList.filter((friend) =>
     friend.attributes.username
       .toLowerCase()
       .includes(searchFriend.toLowerCase())

@@ -30,13 +30,13 @@ function App() {
   const [users, setUsers] = useState([]);
   const [isFriends, setIsFriends] = useState([]);
   const [userId, setUserId] =  useState(null);
+  const [friendsList, setFriendsList] = useState([]);
   // const [myGames, setMyGames] = useState([]);
   const navigate = useNavigate();
   const { loggedInId } = useParams();
 
-  const handleUserLogin = (id) => {
+  const defineUserId = (id) => {
     setUserId(id);
-    // navigate(`/${id}/my_games/`)
   };
 
   // console.log('what', loggedInId)
@@ -130,6 +130,23 @@ function App() {
       fetchUsers()
     }, [userId]);
 
+    useEffect(() => {
+      const fetchFriends = async () => {
+        try {
+          const friendsData = await getFriendsIndex(userId);
+          setFriendsList(friendsData);
+  
+          console.log("Friends DATA->>>>>", friendsData);
+        } catch (err) {
+          console.error("Error fetching friends data:", err);
+          // navigate(`/error/${err.status || 500}`, {
+          //   state: { message: err.message || "An unexpected error occurred." },
+          // });
+        }
+      };
+      fetchFriends();
+    }, [userId]);
+
 // useEffect(() => {
 //   if(isLogedIn) {
 //     const fetchGamesIndex = async () => {
@@ -169,11 +186,11 @@ function App() {
       <Routes>
         {/* <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} /> */}
         {/* <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleLogin={handleLogin} />} /> */}
-        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleUserLogin={handleUserLogin} userData={userData} />} />
+        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} defineUserId={defineUserId} userData={userData} />} />
         {/* <Route path='/' element={<GamePlay playerId={1} gameId={1}/>}/> */}
         <Route path='/:userId/my_games/' element={isLogedIn ? <MyGames userData={userData} isLogedIn={isLogedIn}/> : <Navigate to="/" />} />
-        <Route path='/search/frien-emies' element={isLogedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends} handleUserLogin={handleUserLogin} /> : <Navigate to="/" /> } />
-        <Route path='/:userId/frien-emies' element={isLogedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} /> : <Navigate to="/" />} />
+        <Route path='/search/frien-emies' element={isLogedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends} setUserId={setUserId} friendsList={friendsList}  /> : <Navigate to="/" /> } />
+        <Route path='/:userId/frien-emies' element={isLogedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} friendsList={friendsList} setIsFriends={setIsFriends} /> : <Navigate to="/" />} />
         <Route path='/gameId' element={isLogedIn ? <GamePlay userData={userData} playerId={1} gameId={1}/> : <Navigate to="/" />} />
         <Route path='/:userId/statistics' element={isLogedIn ? <Stats userData={userData}/> : <Navigate to="/" />} />
       </Routes>

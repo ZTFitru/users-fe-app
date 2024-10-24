@@ -142,7 +142,7 @@ export const deleteFriend = async (userId, friendId) => {
             },
             body: JSON.stringify(friendId) 
         });
-
+        
         const resData = await res.json();
         return resData
     } catch (err) {

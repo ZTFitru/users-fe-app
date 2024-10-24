@@ -5,13 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 // import userData from '../../../mockSearch.json';
-// import searchIcon from '../../assets/search_icon.png';
 import { postAddFriend } from "../../../apiCalls";
 import UserCard from "../UserCard/UserCard";
 import "./Users.css";
 // import { getUsersIndex } from '../../../apiCalls.jsx'
 
-function Users({ users, isFriends, setIsFriends, userData, userId, handleUserLogin }) {
+
+
+
+function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }) {
   // console.log('-----> ', users)
   const [searchUser, setSearchUser] = useState("");
   const [alert, setAlert] = useState([]);
@@ -82,38 +84,41 @@ function Users({ users, isFriends, setIsFriends, userData, userId, handleUserLog
   //   }
   // };
 
-  
-  const addFriend = async (user) => {
-         try {
-          const response = await postAddFriend(userId, user.id); 
-          console.log('add my friend --->',response.data)
-          if (response.success) {
-            // use setIsFriends to update the state of friends list 
-            //justFriends is then being passed as the previous state
-            setIsFriends(justFriends => {
-              //it sees if the user isalready in the list
+const addFriend = async (user) => {
+  console.log('User to add:', user);
+  try {
+      const response = await postAddFriend(userId, user.id);
+      console.log('add a freind api ---->', response)
+
+      if (response && response.success) {
+          // use setIsFriends to update the state of friends list 
+          //justFriends is then being passed as the previous state
+          setIsFriends(justFriends => {
+            //it sees if the user isalready in the list
               if (!justFriends.some(friend => friend.id === user.id)) {
-                setAlert(prev => [...prev, `${user.name} has been added as a frien-emime`]);
-                setTimeout(() => setAlert(prev => prev.filter(message => message !== `${user.name} has been added as a frien-emime`)), 2000);
-                //updates the list with the new user or friend added to the list 
-                return [...justFriends, user];
+                  const message = `${user.name} has been added as a frien-emime`;
+                  setAlert(prev => [...prev, message]);
+                  setTimeout(() => setAlert(prev => prev.filter(msg => msg !== message)), 2000);
+                  return [...justFriends, user];
               } else {
-                setAlert(prev => [...prev, `${user.name} is already your friend.`]);
-                 setTimeout(() => setAlert(prev => prev.filter(message => message !== `${user.name} has been added as a frien-emime`)), 2000);
-                 //if  the user is already a friend then it returns the list
-                 return justFriends; 
+                  const message = `${user.name} is already your friend.`;
+                  setAlert(prev => [...prev, message]);
+                  setTimeout(() => setAlert(prev => prev.filter(msg => msg !== message)), 2000);
+                  //if  the user is already a friend then it returns the list
+                  return justFriends; 
               }
-             });
-          } else {
-            setAlert(prev => [...prev, `Error adding friend: ${response.message}`]);
-            setTimeout(() => setAlert(prev => prev.filter(message => message !== `Error adding friend: ${response.message}`)), 2000);
-           }
-        } catch (error) {
-          console.error("Error adding friend:", error);
-           setAlert(prev => [...prev, "An error occurred while adding the friend."]);
-          setTimeout(() => setAlert(prev => prev.filter(message => message !== "An error occurred while adding the frien-emimes")), 2000);
-        }
-     };
+          });
+      } else {
+          const errorMessage = `Error adding friend: ${response.message || 'Unknown error'}`;
+          setAlert(prev => [...prev, errorMessage]);
+          setTimeout(() => setAlert(prev => prev.filter(msg => msg !== errorMessage)), 2000);
+      }
+  } catch (error) {
+      console.error("Error adding friend:", error);
+      setAlert(prev => [...prev, "An error occurred while adding the friend."]);
+      setTimeout(() => setAlert(prev => prev.filter(msg => msg !== "An error occurred while adding the friend.")), 2000);
+  }
+};
 
   const userCards = filterUsers.map((user) => (
     <UserCard
@@ -122,7 +127,11 @@ function Users({ users, isFriends, setIsFriends, userData, userId, handleUserLog
       user={user}
       username={user.attributes.username}
       avatar={user.attributes.avatar}
-      onAddFriend={() => addFriend(user)} // issue here maybe?
+      onAddFriend={()=> {
+        console.log('Please add me:', user)
+        addFriend(user)
+      }}
+      // onAddFriend={() => addFriend(user)} // issue here maybe?
     />
   ));
 

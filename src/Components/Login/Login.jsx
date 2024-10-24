@@ -8,7 +8,7 @@ import chessLogo from '../../assets/chess-with-frienemies-1.svg';
 import { postLogInUser } from '../../../apiCalls.jsx'
 import './Login.css';
 
-function Login({ userIsLoggedIn, handleUserLogin }) {
+function Login({ userIsLoggedIn, defineUserId }) {
 
     const [email, setEmail] = useState('');
     // const [userEmailInput, setEmail] = useState('');
@@ -28,9 +28,10 @@ function Login({ userIsLoggedIn, handleUserLogin }) {
         try {
           const userData = await postLogInUser(userCredentials);
           if (userData.data.id && userData.data.attributes) {
-            handleUserLogin(userData.data.id);
+            defineUserId(userData.data.id);
             userIsLoggedIn(userData.data.id);
-            navigate(`/${userData.data.id}/my_games/`)
+            // navigate(`/${userData.data.id}/my_games/`)
+            navigate(`/search/frien-emies`)
           } else {
             setError('Username or password is incorrect.');
           }
