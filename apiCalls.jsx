@@ -90,7 +90,7 @@ export const postAddFriend = async (userId, friendId) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ friend_id: friendId })
+            body: JSON.stringify({ friendId })
         });
 
         if (!res.ok) {

@@ -11,11 +11,12 @@ import UserCard from "../UserCard/UserCard";
 import "./Users.css";
 // import { getUsersIndex } from '../../../apiCalls.jsx'
 
-function Users({ users, isFriends, setIsFriends, userData, userId }) {
+function Users({ users, isFriends, setIsFriends, userData, userId, handleUserLogin }) {
   // console.log('-----> ', users)
   const [searchUser, setSearchUser] = useState("");
   const [alert, setAlert] = useState([]);
-  console.log(users)
+  // console.log(userId)
+  // handleUserLogin={handleUserLogin}
 
   /**
      const addFriendWithPost = async (friendId) => {
@@ -28,6 +29,8 @@ function Users({ users, isFriends, setIsFriends, userData, userId }) {
   }
 };
    */
+
+
 
   const filterUsers = users.filter((user) =>
     user.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
@@ -82,26 +85,27 @@ function Users({ users, isFriends, setIsFriends, userData, userId }) {
   
   const addFriend = async (user) => {
          try {
-          const response = await postAddFriend(userId); 
+          const response = await postAddFriend(userId, user.id); 
+          console.log('add my friend --->',response.data)
           if (response.success) {
             // use setIsFriends to update the state of friends list 
             //justFriends is then being passed as the previous state
             setIsFriends(justFriends => {
               //it sees if the user isalready in the list
-              if (!justFriends.some(friend => friend.id === userId)) {
+              if (!justFriends.some(friend => friend.id === user.id)) {
                 setAlert(prev => [...prev, `${user.name} has been added as a frien-emime`]);
-                setTimeout(() => setAlert(prev => prev.filter(message => message !== `${user.name} has been added as a frien-emimes`)), 2000);
+                setTimeout(() => setAlert(prev => prev.filter(message => message !== `${user.name} has been added as a frien-emime`)), 2000);
                 //updates the list with the new user or friend added to the list 
                 return [...justFriends, user];
               } else {
                 setAlert(prev => [...prev, `${user.name} is already your friend.`]);
-                 setTimeout(() => setAlert(prev => prev.filter(message => message !== `${user.name} has been added as a frien-emimes`)), 2000);
+                 setTimeout(() => setAlert(prev => prev.filter(message => message !== `${user.name} has been added as a frien-emime`)), 2000);
                  //if  the user is already a friend then it returns the list
                  return justFriends; 
               }
              });
           } else {
-             setAlert(prev => [...prev, `Error adding friend: ${response.message}`]);
+            setAlert(prev => [...prev, `Error adding friend: ${response.message}`]);
             setTimeout(() => setAlert(prev => prev.filter(message => message !== `Error adding friend: ${response.message}`)), 2000);
            }
         } catch (error) {
@@ -110,8 +114,6 @@ function Users({ users, isFriends, setIsFriends, userData, userId }) {
           setTimeout(() => setAlert(prev => prev.filter(message => message !== "An error occurred while adding the frien-emimes")), 2000);
         }
      };
-
-  
 
   const userCards = filterUsers.map((user) => (
     <UserCard

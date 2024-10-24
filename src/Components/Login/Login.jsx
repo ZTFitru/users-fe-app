@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import chessLogo from '../../assets/chess-with-frienemies-1.svg';
-import eye from '../../assets/eye.png'
+// import eye from '../../assets/eye.png'
 import { postLogInUser } from '../../../apiCalls.jsx'
 import './Login.css';
 
@@ -20,39 +20,30 @@ function Login({ userIsLoggedIn, handleUserLogin }) {
     // const { userId } = useParams()
     // console.log(userId)
 
-
-    const signInBtn = (e) => {
+    const signInBtn = async (e) => {
         e.preventDefault();
+      
+        const userCredentials = { email, password };
+      
+        try {
+          const userData = await postLogInUser(userCredentials);
+          if (userData.data.id && userData.data.attributes) {
+            handleUserLogin(userData.data.id);
+            userIsLoggedIn(userData.data.id);
+            navigate(`/${userData.data.id}/my_games/`)
+          } else {
+            setError('Username or password is incorrect.');
+          }
+        } catch (err) {
+          setError('Login failed. Please try again.');
+          console.error(err);
+        }
+      };
 
-        const userCredentials = { email, password }
-
-        postLogInUser(userCredentials)
-
-            .then(userData => {
-                console.log(userData)
-                if (userData.data.id && userData.data.attributes) {
-                    // fetchLogedInUser(userData)
-                    handleUserLogin(userData.data.id)
-                    userIsLoggedIn(userData.data.id) // pass user ID to the parent here!!!!
-                    navigate(`/${userData.data.id}/my_games/`)
-                    // navigate(`/${userId}/my_games/`)
-                } else {
-                    setError('User name or password is incorrect.')
-                }
-            })
-            .catch(err => {
-                setError('Login failed. Please try again.');
-                console.error(err)
-            })
-        // handleLogin(userCradentials)
-    }
-
-    
     // love this
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
       };
-
 
     return (
         <section className='login-section'>

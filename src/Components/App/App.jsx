@@ -36,7 +36,7 @@ function App() {
 
   const handleUserLogin = (id) => {
     setUserId(id);
-    navigate(`/${id}/my_games/`)
+    // navigate(`/${id}/my_games/`)
   };
 
   // console.log('what', loggedInId)
@@ -172,7 +172,7 @@ function App() {
         <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} handleUserLogin={handleUserLogin} userData={userData} />} />
         {/* <Route path='/' element={<GamePlay playerId={1} gameId={1}/>}/> */}
         <Route path='/:userId/my_games/' element={isLogedIn ? <MyGames userData={userData} isLogedIn={isLogedIn}/> : <Navigate to="/" />} />
-        <Route path='/search/frien-emies' element={isLogedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends}/> : <Navigate to="/" /> } />
+        <Route path='/search/frien-emies' element={isLogedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends} handleUserLogin={handleUserLogin} /> : <Navigate to="/" /> } />
         <Route path='/:userId/frien-emies' element={isLogedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} /> : <Navigate to="/" />} />
         <Route path='/gameId' element={isLogedIn ? <GamePlay userData={userData} playerId={1} gameId={1}/> : <Navigate to="/" />} />
         <Route path='/:userId/statistics' element={isLogedIn ? <Stats userData={userData}/> : <Navigate to="/" />} />

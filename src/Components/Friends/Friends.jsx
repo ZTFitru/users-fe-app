@@ -4,18 +4,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useParams, useNavigate } from "react-router-dom";
 
-// import searchIcon from "../../assets/search_icon.png";
-import { getFriendsIndex, postAddFriend, deleteFriend } from "../../../apiCalls";
+import {
+  getFriendsIndex,
+  postAddFriend,
+  deleteFriend,
+} from "../../../apiCalls";
 import UserCard from "../UserCard/UserCard";
 import RemoveFriendPopUp from "../RemoveFriendPopUp/RemoveFriendPopUp";
 import StartGamePopUp from "../StartGamePopUp/StartGamePopUp";
 import "./Friends.css";
 
-function Friends({ isFriends }) {
+function Friends({ isFriends, userId }) {
   const [searchFriend, setSearchFriend] = useState("");
   const [friendsList, setFriendsList] = useState([]);
   const { logedInUsername } = useParams();
-  const { userId } = useParams();
+  // const { userId } = useParams();
   const navigate = useNavigate();
   //   console.log(logedInUsername)
   // const [alert, setAlert] = useState([])
@@ -35,8 +38,7 @@ function Friends({ isFriends }) {
       }
     };
     fetchFriends();
-  }, [navigate, userId]);
-
+  }, [userId]);
 
   /* replaced by the function handleRemoveFriend
   const removeFriend = (user)=> {
@@ -55,20 +57,19 @@ const removeFriend = async (friendId) => {
 };
 */
 
-const handleRemoveFriend = async (friend) => {
-  const friendId = friend.id; 
-  try {
-    const resData = await deleteFriend(userId, friendId);
-    console.log("Friend removed:", resData);
+  const handleRemoveFriend = async (friend) => {
+    const friendId = friend.id;
+    try {
+      const resData = await deleteFriend(userId, friendId);
+      console.log("Friend removed:", resData);
 
-    setFriendsList(friendsList.filter((aFriend) => aFriend.id !== friendId));
-  } catch (err) {
-    console.error("Error removing friend:", err);
-  }
-};
+      setFriendsList(friendsList.filter((aFriend) => aFriend.id !== friendId));
+    } catch (err) {
+      console.error("Error removing friend:", err);
+    }
+  };
 
-
-  const filterFriend = friendList.filter((friend) =>
+  const filterFriend = isFriends.filter((friend) =>
     friend.attributes.username
       .toLowerCase()
       .includes(searchFriend.toLowerCase())
@@ -107,7 +108,6 @@ const handleRemoveFriend = async (friend) => {
         {filterFriend.length === 0 ? (
           <p>You need more frien-emimes</p>
         ) : (
-          
           <div className="friends-list-container">{friendList}</div>
         )}
       </div>
