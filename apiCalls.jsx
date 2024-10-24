@@ -53,7 +53,7 @@ export const getGamesIndex = async (userId) => {
         }
         const data = await res.json();
 
-        console.log('Fetched games data:', data);
+        // console.log('Fetched games data:', data);
 
         return data
     } catch (err) {

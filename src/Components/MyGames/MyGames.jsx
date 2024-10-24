@@ -10,7 +10,7 @@ import "./MyGames.css";
 function MyGames({ isLogedIn, userData, friendsList }) {
   const userId = userData.id
 
-  console.log('My game user id------> ',userId)
+  // console.log('My game user id------> ',userId)
   const [myGames, setMyGames] = useState([]);
   // const { userId } = useParams();
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ function MyGames({ isLogedIn, userData, friendsList }) {
       const fetchGamesIndex = async () => {
        try {
          const userGamesData = await getGamesIndex(userId);
-         console.log('this my games ----->', userGamesData)
+        //  console.log('this my games ----->', userGamesData)
          setMyGames(userGamesData.data)
         } catch (err) {
          console.error("Error fetching games data:", err)

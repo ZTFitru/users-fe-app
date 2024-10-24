@@ -40,7 +40,7 @@ function Profile({ userData }) {
         <p>Settings</p>
       </div>
     </section>
-  );
+  )
 }
 
 export default Profile;
