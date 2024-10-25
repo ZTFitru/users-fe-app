@@ -16,32 +16,34 @@ function Login({ userIsLoggedIn, defineUserId }) {
 
     const signInBtn = async (e) => {
         e.preventDefault();
-      
+
         const userCredentials = { email, password };
-      
+
         try {
-          const userData = await postLogInUser(userCredentials);
-          if (userData.data.id && userData.data.attributes) {
-            defineUserId(userData.data.id);
-            userIsLoggedIn(userData.data.id);
-            navigate(`/${userData.data.id}/my_games/`)
-          } else {
-            setError('Username or password is incorrect.');
-          }
+            const userData = await postLogInUser(userCredentials);
+            if (userData.data.id && userData.data.attributes) {
+                defineUserId(userData.data.id);
+                userIsLoggedIn(userData.data.id);
+                navigate(`/${userData.data.id}/my_games/`)
+            } else {
+                setError('Username or password is incorrect.');
+            }
         } catch (err) {
-          setError('Login failed. Please try again.');
-          console.error(err);
+            setError('Login failed. Please try again.');
+            console.error(err);
         }
-      };
+    };
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
-      };
+    };
 
     return (
         <section className='login-section'>
-            <h1><div className='login-chess-with'>Chess with </div><div className='login-frien-emies'>Frien-EMIES</div></h1>
-            <img src={chessLogo} alt='chess pieces' className='login-chess-logo' />
+            <div className='logo-wrapper'>
+                <h1><div className='login-chess-with'>Chess with </div><div className='login-frien-emies'>Frien-EMIES</div></h1>
+                <img src={chessLogo} alt='chess pieces' className='login-chess-logo' />
+            </div>
             <div className='login-sign-in-wrapper'>
                 <h2>Sign In</h2>
                 <form onSubmit={signInBtn}>
