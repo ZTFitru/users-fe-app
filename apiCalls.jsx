@@ -139,7 +139,7 @@ export const postStartGame = async (userId, friendId) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ friendId })
+            body: JSON.stringify({ 'friend_id': friendId })
         });
 
         if (!res.ok) {
