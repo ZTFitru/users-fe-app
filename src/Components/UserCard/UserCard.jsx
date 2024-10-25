@@ -8,7 +8,7 @@ import RemoveFriendPopUp from '../RemoveFriendPopUp/RemoveFriendPopUp';
 import avatarPlaceholder from '../../assets/avatar_placeholder.png';
 import './UserCard.css';
 
-function UserCard({ user, avatar, id, username, onAddFriend, isFriend, handleStartNewGame, handleRemoveFriend }) {
+function UserCard({ user, avatar, id, username, onAddFriend, isFriend, handleStartNewGame, handleRemoveFriend, friendId }) {
 
   const [iconColor, setIconColor] = useState('black');
   const [popUp, setPopUp] = useState(false)
@@ -89,6 +89,7 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, handleSta
         username={username}
         onClose={closeRemovePopUp}
         handleRemoveFriend={handleRemoveFriend}
+        friendId={friendId}
       />
       )}
     </div>

@@ -16,7 +16,6 @@ function Friends({ isFriends, userData }) {
   const navigate = useNavigate();
 
   const userId = userData.id;
-  console.log('user data name maybe', userData)
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -31,11 +30,11 @@ function Friends({ isFriends, userData }) {
 
   //Remove friend
   const handleRemoveFriend = async (friendId) => {
+    console.log('WHAT IS THISSS --->',friendId)
     // const friendId = friend;
     try {
       const resData = await deleteFriend(userId, friendId);
-     
-      setFriendsList(friendsList.filter((aFriend) => aFriend.user_id !== friendId));
+      setFriendsList(friendsList.filter((aFriend) => aFriend.id !== friendId));
     } catch (err) {
       console.error("Error removing friend:", err);
     }
@@ -50,7 +49,6 @@ function findFriend(id){
   const handleStartNewGame = async (friendId, friendName) => {
     try {
       const resData = await postStartGame(userId, friendId, userData.username, friendName)
-      console.log('resData response',resData)
       setStartNewGame(resData.data)
       navigate(`../../${resData.data.game_id}`)
     } catch (err) {
@@ -70,7 +68,7 @@ function findFriend(id){
   const friendList = filterFriend.map((friend) => (
     <UserCard
       key={friend.id}
-      id={friend.id}
+      friendId={friend.id}
       user={friend}
     //   removeFriend={handleRemoveFriend}
       isFriend={true}

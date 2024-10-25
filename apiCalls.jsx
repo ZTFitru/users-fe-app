@@ -178,12 +178,12 @@ export const deleteLogOutUser = async (userId) => {
 
 export const deleteFriend = async (userId, friendId) => {
     try {
-        const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}/remove_friend`, {
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/remove_friend`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(friendId) 
+            body: JSON.stringify({"user_id": friendId}) 
         });
         
         const resData = await res.json();

@@ -7,16 +7,16 @@ import { postAddFriend } from "../../../apiCalls";
 import UserCard from "../UserCard/UserCard";
 import "./Users.css";
 
-function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }) {
+function Users({ users, isFriends, setIsFriends, userData, friendsList }) {
   const [searchUser, setSearchUser] = useState("");
   const [alert, setAlert] = useState([]);
+  const userId = userData.id
 
   const filterUsers = users.filter((user) =>
     user.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
   );
   
   const addFriend = async (friend ) => {
-    console.log('start--->', friend)
     if (!friend || !friend.id) {
       console.error("Invalid friend data", friend);
       setAlert(prev => [...prev, "Friend data is invalid or missing."]);
@@ -25,8 +25,6 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
     
     try {
       const response = await postAddFriend(userId, friend.id);
-      console.log('response------>', response)
-      console.log('friend.id', userId) // this doesn't show up in the console
       if (response && response.success) {
           // use setIsFriends to update the state of friends list 
           //justFriends is then being passed as the previous state
@@ -34,13 +32,11 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
             //it sees if the user isalready in the list
               if (!justFriends.some(aFriend => aFriend.id === friend.id)) {
                   const message = `${friend.name} has been added as a frien-emime`;
-                  console.log('add friend message ----->',message)
                   setAlert(prev => [...prev, message]);
                   setTimeout(() => setAlert(prev => prev.filter(msg => msg !== message)), 2000);
                   return [...justFriends, friend];
               } else {
                   const message = `${friend.name} is already your friend.`;
-                  console.log('else message ---->', message)
                   setAlert(prev => [...prev, message]);
                   setTimeout(() => setAlert(prev => prev.filter(msg => msg !== message)), 2000);
                   //if  the user is already a friend then it returns the list

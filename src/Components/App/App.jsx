@@ -78,7 +78,7 @@ function App() {
       {isLoggedIn && <Header userLogOut={userLogOut} userData={userData} />}
       <Routes>
         <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} defineUserId={defineUserId} />} />
-        <Route path='/:userId/my_games/' element={isLoggedIn ? <MyGames userData={userData} isLoggedIn={isLoggedIn} myGames={myGames} userID={userId} userIsLoggedIn={userIsLoggedIn} friendsList={friendsList} /> : <Navigate to="/" />} />
+        <Route path='/:userId/my_games/' element={isLoggedIn ? <MyGames isLoggedIn={isLoggedIn} userData={userData} /> : <Navigate to="/" />} />
         <Route path='/search/frien-emies' element={isLoggedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends} setUserId={setUserId} friendsList={friendsList}  /> : <Navigate to="/" /> } />
         <Route path='/:userId/frien-emies' element={isLoggedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} friendsList={friendsList} setIsFriends={setIsFriends} /> : <Navigate to="/" />} />
         <Route path='/:gameId' element={isLoggedIn ? <GamePlay playerId={userId} /> : <Navigate to="/" />} />

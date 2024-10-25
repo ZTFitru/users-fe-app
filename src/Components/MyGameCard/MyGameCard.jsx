@@ -7,7 +7,6 @@ function MyGameCard({ gameId, gameImage, attributes, onImageClick, userData }) {
   const [selectedGame, setSelectedGame] = useState(null);
 
   const gameSelected = (gameId) => {
-    console.log('gameId from MyGameCard', gameId)
     setSelectedGame(gameId)
   }
 
