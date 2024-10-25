@@ -59,9 +59,11 @@ console.log(friendId, '<><><><><> friend')
 console.log('PLEASE WORK< TRYINGGGG')
       const resData = await postStartGame(userId, friendId)
 console.log(resData.data, 'res DATA from Friends')
+console.log(resData.data.game_id, 'res DATA from Friends')
       
 
       setStartNewGame(resData.data)
+      navigate(`../../${resData.data.game_id}`)
     } catch (err) {
       console.error("Error starting a game", err)
     }

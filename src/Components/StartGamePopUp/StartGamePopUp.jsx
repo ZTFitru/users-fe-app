@@ -19,9 +19,9 @@ function StartGamePopUp({ isFriend, username, handleStartNewGame, id }) {
             Start game with {username}
           </div>
           <div className="start-game-button-wrapper">
-            <Link to='/gameId'>
+            {/* <Link to='/gameId'> */}
               <button className="start-game-button" onClick={() => handleStartNewGame(id)}>Ok</button>
-            </Link>
+            {/* </Link> */}
             <button className="start-game-button" onClick={() => close()}>Cancel</button>
           </div>
         </div>
