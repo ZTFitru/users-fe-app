@@ -6,6 +6,7 @@ export const getUser = async (userId) => {
         if (!res.ok) {
             throw new Error(`There was an error fetching the loggin in user: ${res.status}`)
         }
+
         const data = await res.json()
         return data
     } catch (err) {
@@ -20,10 +21,8 @@ export const getUsersIndex = async (userId) => {
         if (!res.ok) {
             throw new Error(`There was an error fetching the users.: ${res.status}`)
         }
+
         const allUsersData = await res.json();
-
-        // console.log('work now ->>>>',allUsersData)
-
         return allUsersData
     } catch (err) {
         console.log('Error in fetching the users:', err)
@@ -37,6 +36,7 @@ export const getFriendsIndex = async (userId) => {
         if (!res.ok) {
             throw new Error(`There was an error fetching friends list: ${res.status}`)
         }
+
         const data = await res.json()
         return data
     } catch (err) {
@@ -51,16 +51,37 @@ export const getGamesIndex = async (userId) => {
         if (!res.ok) {
             throw new Error(`There's been an error loading the games list: ${res.status}`)
         }
+
         const data = await res.json();
-
-        // console.log('Fetched games data:', data);
-
         return data
     } catch (err) {
         console.log('Error in fetching games list:', err)
         throw err
     }
 }
+
+export const getGameStats = async (gameId) => {
+    try {
+        const res = await fetch(`https://chess-game-be-fmpc.onrender.com/api/v1/games/${gameId}`)
+        if (!res.ok) {
+            throw new Error(`There's been an error loading the game stats: ${res.status}`)
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (err) {
+        console.log('Error in fetching game stats', err)
+    }
+}
+
+export const getAllGameStats = async (gameIds) => {
+    try {
+        const allGameStats = await Promise.all(gameIds.map(id => getGameStats(id)));
+        return allGameStats;
+    } catch (err) {
+        console.log('Error in fetching your game stats.')
+    }
+} 
 
 /*-----------------------------------// POST //--------------------------------------*/
 
@@ -103,17 +124,12 @@ export const postAddFriend = async (userId, user_id) => {
         }
 
         const resData = await res.json();
-
-        console.log('API response data POST friend:', resData);
-
         return resData
     } catch (err) {
         console.error('Err in POST for adding a freind:', err)
         throw err
     }
 }
-
-// https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/1/start_game
 
 export const postStartGame = async (userId, friendId) => {
     try {
