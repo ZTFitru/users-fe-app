@@ -87,7 +87,7 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
           </i>
         )}
       </div>
-      {isFriend && <StartGamePopUp isFriend={isFriend} username={username} handleStartNewGame={handleStartNewGame}/>}
+      {isFriend && <StartGamePopUp isFriend={isFriend} username={username} handleStartNewGame={handleStartNewGame} id={id}/>}
       <img src={avatar || avatarPlaceholder} 
         alt={username}
         crossOrigin="anonymous"

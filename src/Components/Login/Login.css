@@ -8,29 +8,37 @@
 
     .logo-wrapper {
         position: relative;
+        /* border: 2px solid red; */
     }
 
     h1 {
         height: 0;
         color: var(--color-4);
+        position: relative;
     }
 
     .login-chess-with {
         font-family: "Oswald", sans-serif;
         transform: rotate(-45deg);
-        position: relative;
-        top: 2vw;
-        left: -11vw;
+        position: absolute;
+        top: 3vw;
+        left: -9vw;
         font-size: 8vw;
     }
 
     .login-frien-emies {
         font-family: "Shadows Into Light", cursive;
         transform: rotate(45deg);
-        position: relative;
-        top: -5vw;
-        left: 17vw;
+        position: absolute;
+        text-wrap: nowrap;
+        top: -1vw;
+        left: 18vw;
         font-size: 9vw;
+    }
+
+    .login-chess-logo {
+        width: 50vw;
+        position: relative;
     }
 
     input {
@@ -51,10 +59,6 @@
         box-shadow: 0 0 0 3px var(--color-5);
     }
 
-    .login-chess-logo {
-        width: 50vw;
-        position: relative;
-    }
 
     .login-sign-in-wrapper {
         width: 80%;

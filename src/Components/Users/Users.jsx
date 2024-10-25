@@ -38,6 +38,8 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
     user.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
   );
 
+  
+
   // const addFriend = async (friendId) => {
   //   try {
   //     const newFriend = await postAddFriend(userId, friendId);
@@ -125,8 +127,10 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
       }
   } catch (error) {
       console.error("Error adding friend:", error);
-      setAlert(prev => [...prev, "An error occurred while adding the friend."]);
-      setTimeout(() => setAlert(prev => prev.filter(msg => msg !== "An error occurred while adding the friend.")), 2000);
+      // setAlert(prev => [...prev, "An error occurred while adding the friend."]);
+      setAlert(prev => [...prev, "Already a friend."]);
+      // setTimeout(() => setAlert(prev => prev.filter(msg => msg !== "An error occurred while adding the friend.")), 2000);
+      setTimeout(() => setAlert(prev => prev.filter(msg => msg !== "Already a friend.")), 2000);
   }
 };
 

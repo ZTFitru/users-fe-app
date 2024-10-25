@@ -132,6 +132,7 @@ export const postAddFriend = async (userId, user_id) => {
 }
 
 export const postStartGame = async (userId, friendId) => {
+    console.log('post params', userId, friendId)
     try {
         const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/start_game`, {
             method: 'POST',
@@ -146,6 +147,8 @@ export const postStartGame = async (userId, friendId) => {
         }
 
         const resData = await res.json();
+console.log(resData, 'resData postStartGame')
+
         return resData
     } catch (err) {
         console.error('Error in POSTing the user login:', err)

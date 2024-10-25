@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { getFriendsIndex, deleteFriend } from "../../../apiCalls";
+import { getFriendsIndex, deleteFriend, postStartGame } from "../../../apiCalls";
 import UserCard from "../UserCard/UserCard";
 // import RemoveFriendPopUp from "../RemoveFriendPopUp/RemoveFriendPopUp";
 // import StartGamePopUp from "../StartGamePopUp/StartGamePopUp";
@@ -36,7 +36,7 @@ function Friends({ isFriends, userData }) {
   }, [userId, setFriendsList]);
 
   const handleRemoveFriend = async (friend) => {
-    const friendId = friend.id;
+    const friendId = friend;
     console.log(friendId);
     try {
       const resData = await deleteFriend(userId, friendId);
@@ -47,49 +47,33 @@ function Friends({ isFriends, userData }) {
       console.error("Error removing friend:", err);
     }
   };
-  
-  const handleStartNewGame = async (freind) => {
-    const friendId = friend.id;
+
+function findFriend(id){
+  const friendsCopy = [...friendsList]
+  return friendsCopy.find((friend) => id === friend.id)
+}
+
+  const handleStartNewGame = async (friendId) => {
+console.log(friendId, '<><><><><> friend')
     try {
+console.log('PLEASE WORK< TRYINGGGG')
       const resData = await postStartGame(userId, friendId)
-      setStartNewGame(resData)
+console.log(resData.data, 'res DATA from Friends')
+
+      setStartNewGame(resData.data)
     } catch (err) {
       console.error("Error starting a game", err)
     }
   }
   
-    /*
-  
-    {
-      "data": {
-          "type": "game_creation",
-          "game_id": 17,
-          "attributes": {
-              "game": {
-                  "game": "Chess",
-                  "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/chess_dab.jpg",
-                  "status": "active"
-              },
-              "user": {
-                  "id": 1,
-                  "username": "bob",
-                  "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/baby.jpg"
-              },
-              "friend": {
-                  "friend_id": 2,
-                  "username": "rob",
-                  "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/queen.jpg"
-              }
-          }
-      }
-  }
-    */
 
   const filterFriend = friendsList.filter((friend) =>
     friend.attributes.username
       .toLowerCase()
       .includes(searchFriend.toLowerCase())
   );
+
+ 
 
   const friendList = filterFriend.map((friend) => (
     <UserCard
@@ -103,6 +87,36 @@ function Friends({ isFriends, userData }) {
       handleStartNewGame={handleStartNewGame}
     />
   ));
+
+  /*
+
+  {
+    "data": {
+        "type": "game_creation",
+        "game_id": 17,
+        "attributes": {
+            "game": {
+                "game": "Chess",
+                "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/chess_dab.jpg",
+                "status": "active"
+            },
+            "user": {
+                "id": 1,
+                "username": "bob",
+                "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/baby.jpg"
+            },
+            "friend": {
+                "friend_id": 2,
+                "username": "rob",
+                "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/queen.jpg"
+            }
+        }
+    }
+}
+
+
+
+  */
 
   return (
     <section className="friends-section">
