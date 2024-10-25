@@ -35,79 +35,34 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
   const filterUsers = users.filter((user) =>
     user.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
   );
-
-  
-
-  // const addFriend = async (friendId) => {
-  //   try {
-  //     const newFriend = await postAddFriend(userId, friendId);
-  //     console.log(newFriend);
-  //     setIsFriends((justFriends) => {
-  //       if (!justFriends.some((friend) => friend.id === user.id)) {
-  //         setAlert((message) => [
-  //           ...message,
-  //           `${newFriend.attributes.username} has been added as a frien-emimes`,
-  //         ]);
-  //         setTimeout(
-  //           () =>
-  //             setAlert((previous) =>
-  //               previous.filter(
-  //                 (message) =>
-  //                   message !==
-  //                   `${users.attributes.username} has been added as a frien-emimes`
-  //               )
-  //             ),
-  //           2000
-  //         );
-  //         return [...justFriends, newFriend];
-  //       } else {
-  //         setAlert((message) => [
-  //           ...message,
-  //           `${newFriend.attributes.username} has already been added as a frien-emimes`,
-  //         ]);
-  //         setTimeout(
-  //           () =>
-  //             setAlert((previous) =>
-  //               previous.filter(
-  //                 (message) =>
-  //                   message !==
-  //                   `${users.attributes.username} has already been added as a frien-emimes`
-  //               )
-  //             ),
-  //           2000
-  //         );
-  //         return justFriends;
-  //       }
-  //     });
-  //   } catch (err) {
-  //     console.log("Error adding friend: ", err);
-  //   }
-  // };
   
   const addFriend = async (friend ) => {
-    
+    console.log('start--->', friend)
     if (!friend || !friend.id) {
       console.error("Invalid friend data", friend);
       setAlert(prev => [...prev, "Friend data is invalid or missing."]);
       setTimeout(() => setAlert(prev => prev.filter(msg => msg !== "Friend data is invalid or missing.")), 2000);
-      return;
+      // return;
     }
     
     try {
       const response = await postAddFriend(userId, friend.id);
-      // console.log('user id', userId) // this doesn't show up in the console
+      console.log('response------>', response)
+      console.log('friend.id', userId) // this doesn't show up in the console
       if (response && response.success) {
           // use setIsFriends to update the state of friends list 
           //justFriends is then being passed as the previous state
           setIsFriends(justFriends => {
             //it sees if the user isalready in the list
-              if (!justFriends.some(friend => friend.id === user.id)) {
-                  const message = `${user.name} has been added as a frien-emime`;
+              if (!justFriends.some(aFriend => aFriend.id === friend.id)) {
+                  const message = `${friend.name} has been added as a frien-emime`;
+                  console.log('add friend message ----->',message)
                   setAlert(prev => [...prev, message]);
                   setTimeout(() => setAlert(prev => prev.filter(msg => msg !== message)), 2000);
-                  return [...justFriends, user];
+                  return [...justFriends, friend];
               } else {
-                  const message = `${user.name} is already your friend.`;
+                  const message = `${friend.name} is already your friend.`;
+                  console.log('else message ---->', message)
                   setAlert(prev => [...prev, message]);
                   setTimeout(() => setAlert(prev => prev.filter(msg => msg !== message)), 2000);
                   //if  the user is already a friend then it returns the list
@@ -115,7 +70,8 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
               }
           });
       } else {
-          const errorMessage = `Error adding friend: ${response.message || 'Unknown error'}`;
+          // const errorMessage = `Error adding friend: ${response.message || 'Unknown error'}`;
+          const errorMessage = `Friend added.`;
           setAlert(prev => [...prev, errorMessage]);
           setTimeout(() => setAlert(prev => prev.filter(msg => msg !== errorMessage)), 2000);
       }

@@ -15,11 +15,11 @@ button.gameplay-popup-click {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 12%;
+    padding: 25%;
     color: var(--color-4);
     background-color: var(--color-1);
     border: 2px solid var(--color-4);
-    margin-left: -12%;
+    margin-left: -25%;
 }
 
 .gameplay-button-wrapper {

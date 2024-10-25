@@ -32,6 +32,7 @@ function Friends({ isFriends, userData }) {
     fetchFriends();
   }, [userId, setFriendsList]);
 
+  //Remove friend
   const handleRemoveFriend = async (friendId) => {
     // const friendId = friend;
     try {
@@ -48,6 +49,7 @@ function findFriend(id){
   return friendsCopy.find((friend) => id === friend.id)
 }
 
+//Start New Game
   const handleStartNewGame = async (friendId) => {
     try {
       const resData = await postStartGame(userId, friendId)
