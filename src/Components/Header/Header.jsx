@@ -7,7 +7,7 @@ import chessLogo2 from '../../assets/chess-with-frienemies-2.svg';
 
 import './Header.css';
 
-function Header({ userLogOut, logedInUsername, userData }) {
+function Header({ userLogOut, userData }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const userId = userData.id;
@@ -17,7 +17,7 @@ function Header({ userLogOut, logedInUsername, userData }) {
     }
 
 
-    // logedInUsername
+    // loggedInUsername
     return (
         <header>
             <Link to='/:username/my_games/'>

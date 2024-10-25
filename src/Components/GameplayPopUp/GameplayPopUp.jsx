@@ -18,7 +18,7 @@ function GameplayPopUp({attributes, gameId, gameSelected}) {
         <div className="gameplay-modal">
           <div className="gameplay-content-wrapper">
             <div className="gameplay-content">{`Game with ${opponentName}`}</div>
-            {/* the following still needs props. we need the actaul data */}
+            {/* the following still needs props. we need the actual data */}
             {/* <div className="gameplay-content">Started on: ....</div>
             <div className="gameplay-content">Last move on: ....</div> */}
             <div className="gameplay-content">{`Whose turn: ${nextToMove}`}</div>

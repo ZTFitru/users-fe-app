@@ -1,7 +1,6 @@
 import React from 'react';
 import Popup from "reactjs-popup";
 import './RemoveFriendPopUp.css';
-import { Link } from 'react-router-dom';
 
 function RemoveFriendPopUp({username, onClose, handleRemoveFriend}) {
   return (
@@ -23,12 +22,7 @@ function RemoveFriendPopUp({username, onClose, handleRemoveFriend}) {
                 close()
                 onClose()
               }}
-            >
-              Ok
-            </button>
-            {/* <Link to='/gameId'>
-              <button  >Ok</button>
-            </Link> */}
+            >Ok</button>
             <button className="remove-friend-button" onClick={() => close()}>Cancel</button>
           </div>
         </div>

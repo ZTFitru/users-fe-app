@@ -16,7 +16,7 @@ function App() {
 
   const [userId, setUserId] =  useState(null);
   const [userData, setUserData] = useState({});
-  const [isLogedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [users, setUsers] = useState([]);
   const [isFriends, setIsFriends] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
@@ -27,7 +27,7 @@ function App() {
   };
 
   useEffect(() => {
-    const fetchLogedInUser = async () => {
+    const fetchLoggedInUser = async () => {
       try {
         const loginResponse = await getUser(userId);
         if(loginResponse) {
@@ -43,10 +43,10 @@ function App() {
           setIsLoggedIn(false) 
         }
       } catch (err) {
-        console.error('Error fetching loged in User')
+        console.error('Error fetching logged in User')
       }
     }
-    fetchLogedInUser();
+    fetchLoggedInUser();
   }, [userId]);  
 
   // ALL USERS
@@ -75,17 +75,17 @@ function App() {
 
   return (
     <>
-      {isLogedIn && <Header userLogOut={userLogOut} userData={userData} />}
+      {isLoggedIn && <Header userLogOut={userLogOut} userData={userData} />}
       <Routes>
-        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} defineUserId={defineUserId} userData={userData} />} />
-        <Route path='/:userId/my_games/' element={isLogedIn ? <MyGames userData={userData} isLogedIn={isLogedIn} myGames={myGames} userID={userId} userIsLoggedIn={userIsLoggedIn} friendsList={friendsList} /> : <Navigate to="/" />} />
-        <Route path='/search/frien-emies' element={isLogedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends} setUserId={setUserId} friendsList={friendsList}  /> : <Navigate to="/" /> } />
-        <Route path='/:userId/frien-emies' element={isLogedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} friendsList={friendsList} setIsFriends={setIsFriends} /> : <Navigate to="/" />} />
-        <Route path='/:gameId' element={isLogedIn ? <GamePlay playerId={userId} /> : <Navigate to="/" />} />
-        <Route path='/:userId/statistics' element={isLogedIn ? <Stats userData={userData}/> : <Navigate to="/" />} />
-        <Route path="*" element={isLogedIn ? <ErrorPage /> : <Navigate to="/" />} />
+        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} defineUserId={defineUserId} />} />
+        <Route path='/:userId/my_games/' element={isLoggedIn ? <MyGames userData={userData} isLoggedIn={isLoggedIn} myGames={myGames} userID={userId} userIsLoggedIn={userIsLoggedIn} friendsList={friendsList} /> : <Navigate to="/" />} />
+        <Route path='/search/frien-emies' element={isLoggedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends} setUserId={setUserId} friendsList={friendsList}  /> : <Navigate to="/" /> } />
+        <Route path='/:userId/frien-emies' element={isLoggedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} friendsList={friendsList} setIsFriends={setIsFriends} /> : <Navigate to="/" />} />
+        <Route path='/:gameId' element={isLoggedIn ? <GamePlay playerId={userId} /> : <Navigate to="/" />} />
+        <Route path='/:userId/statistics' element={isLoggedIn ? <Stats userData={userData}/> : <Navigate to="/" />} />
+        <Route path="*" element={isLoggedIn ? <ErrorPage /> : <Navigate to="/" />} />
       </Routes>
-      {isLogedIn && <Footer userId={userId}/>}
+      {isLoggedIn && <Footer userId={userId}/>}
     </>
   );
 }

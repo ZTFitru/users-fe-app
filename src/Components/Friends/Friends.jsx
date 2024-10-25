@@ -6,20 +6,17 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { getFriendsIndex, deleteFriend, postStartGame } from "../../../apiCalls";
 import UserCard from "../UserCard/UserCard";
-// import RemoveFriendPopUp from "../RemoveFriendPopUp/RemoveFriendPopUp";
-// import StartGamePopUp from "../StartGamePopUp/StartGamePopUp";
 import "./Friends.css";
 
 function Friends({ isFriends, userData }) {
   const [searchFriend, setSearchFriend] = useState("");
   const [friendsList, setFriendsList] = useState([]);
   const [startNewGame, setStartNewGame] = useState([]);
-  const { logedInUsername } = useParams();
-  // const { userId } = useParams();
+  const { loggedInUsername } = useParams();
   const navigate = useNavigate();
-  // const [alert, setAlert] = useState([])
 
   const userId = userData.id;
+  console.log('user data name maybe', userData)
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -37,7 +34,7 @@ function Friends({ isFriends, userData }) {
     // const friendId = friend;
     try {
       const resData = await deleteFriend(userId, friendId);
-
+     
       setFriendsList(friendsList.filter((aFriend) => aFriend.user_id !== friendId));
     } catch (err) {
       console.error("Error removing friend:", err);
@@ -50,9 +47,9 @@ function findFriend(id){
 }
 
 //Start New Game
-  const handleStartNewGame = async (friendId) => {
+  const handleStartNewGame = async (friendId, friendName) => {
     try {
-      const resData = await postStartGame(userId, friendId)
+      const resData = await postStartGame(userId, friendId, userData.username, friendName)
       console.log('resData response',resData)
       setStartNewGame(resData.data)
       navigate(`../../${resData.data.game_id}`)
@@ -116,9 +113,9 @@ function findFriend(id){
 
   return (
     <section className="friends-section">
-      <h2 className="friends-h2">{logedInUsername} Frien-EMIES</h2>
+      <h2 className="friends-h2">{loggedInUsername} Frien-EMIES</h2>
       <p className="friends-instructions">Click the - to remove a friend</p>
-      <p className='challege-to-game-instructions'>Select a frien-emie to challenge them to a game.</p>
+      <p className='challenge-to-game-instructions'>Select a frien-emie to challenge them to a game.</p>
       <div className="search-friends-wrapper">
         <FontAwesomeIcon icon={faSearch} className="friends-search-icon" />
         <input

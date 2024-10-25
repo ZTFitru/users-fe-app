@@ -12,7 +12,7 @@ const { gameId } = useParams()
     <div className="main-game-area">
       <div className="game-area-user">
         <Suspense fallback={<div>Loading...</div>}>
-          <Game gameId={gameId} playerId={playerId} />
+          <Game gameId={gameId} playerId={Number(playerId)} />
         </Suspense>
       </div>
     </div>

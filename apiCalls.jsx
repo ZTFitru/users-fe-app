@@ -58,7 +58,7 @@ export const getGamesIndex = async (userId) => {
 
 export const getGameStats = async (gameId) => {
     try {
-        const res = await fetch(`https://chess-game-be-fmpc.onrender.com/api/v1/games/${gameId}`)
+        const res = await fetch(`https://chess-game-be-fmpc.onrender.com/games/${gameId}`)
         if (!res.ok) {
             throw new Error(`There's been an error loading the game stats: ${res.status}`)
         }
@@ -124,14 +124,19 @@ export const postAddFriend = async (userId, user_id) => {
     }
 }
 
-export const postStartGame = async (userId, friendId) => {
+export const postStartGame = async (userId, friendId, userName, friendName) => {
     try {
         const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/start_game`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ 'friend_id': friendId })
+            body: JSON.stringify({ 
+                'white_player_id': userId,
+                'black_player_id': friendId, 
+                'white_player_user_name' : userName,
+                'black_player_user_name': friendName
+            })
         });
 
         if (!res.ok) {

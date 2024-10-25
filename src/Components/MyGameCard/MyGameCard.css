@@ -3,12 +3,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap; */
     margin: 5%;
     font-size: 2rem;
-    /* position: absolute; */
-    /* top: 2%;
-    left: 5%; */
 
     img {
         width: 100%;

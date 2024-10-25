@@ -1,36 +1,15 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-// import userData from '../../../mockSearch.json';
 import { postAddFriend } from "../../../apiCalls";
 import UserCard from "../UserCard/UserCard";
 import "./Users.css";
-// import { getUsersIndex } from '../../../apiCalls.jsx'
-
-
-
 
 function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }) {
   const [searchUser, setSearchUser] = useState("");
   const [alert, setAlert] = useState([]);
-  // handleUserLogin={handleUserLogin}
-
-  /**
-     const addFriendWithPost = async (friendId) => {
-  try {
-    const newFriend = await postAddFriend(userId, friendId);
-    setFriendsList([...friendsList, newFriend]);
-
-  } catch (err) {
-    console.error('Error adding friend:', err);
-  }
-};
-   */
-
-
 
   const filterUsers = users.filter((user) =>
     user.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
@@ -42,7 +21,6 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
       console.error("Invalid friend data", friend);
       setAlert(prev => [...prev, "Friend data is invalid or missing."]);
       setTimeout(() => setAlert(prev => prev.filter(msg => msg !== "Friend data is invalid or missing.")), 2000);
-      // return;
     }
     
     try {
@@ -94,11 +72,8 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
       onAddFriend={()=> {
         addFriend(user)
       }}
-      // onAddFriend={() => addFriend(user)} // issue here maybe?
     />
   ));
-
-  // console.log(userCards)
 
   return (
     <section className="users-section">
