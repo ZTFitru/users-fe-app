@@ -51,6 +51,7 @@ function findFriend(id){
   const handleStartNewGame = async (friendId) => {
     try {
       const resData = await postStartGame(userId, friendId)
+      console.log('resData response',resData)
       setStartNewGame(resData.data)
       navigate(`../../${resData.data.game_id}`)
     } catch (err) {

@@ -67,9 +67,6 @@ function MyGames({ isLogedIn, userData, friendsList }) {
     }
 });
   
-
-
-
   return (
     <section className="my-games-section">
       <h2 className="my-games-h2">My Games</h2>

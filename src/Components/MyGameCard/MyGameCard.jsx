@@ -4,9 +4,10 @@ import defaultChessImage from '../../assets/chess-with-frienemies-1.svg';
 import './MyGameCard.css';
 
 function MyGameCard({ gameId, gameImage, attributes, onImageClick, userData }) {
-  const [selectedGame, setSelectedGame] = useState(null)
+  const [selectedGame, setSelectedGame] = useState(null);
 
-  const gameSlected = (gameId) => {
+  const gameSelected = (gameId) => {
+    console.log('gameId from MyGameCard', gameId)
     setSelectedGame(gameId)
   }
 
@@ -27,25 +28,26 @@ function MyGameCard({ gameId, gameImage, attributes, onImageClick, userData }) {
   attributes.opponentName = attributes[`${attributes.opponentColor}_player_user_name`];
   attributes.nextToMove = attributes.playerColor === turn_color ? attributes.playerName : attributes.opponentName;
 
-  
+
 
   return (
     <div id={gameId} className='my-games-card-wrapper'>
-      <img src={gameImage || defaultChessImage} 
-        onClick={gameSlected}
+      <img src={gameImage || defaultChessImage}
+        onClick={gameSelected}
         alt={gameId}
         onError={event => {
           event.target.src = avatarPlaceholder
           event.onerror = null
         }}
       />{selectedGame && (
-          <GameplayPopUp
+        <GameplayPopUp
           attributes={attributes}
-          gameId={selectedGame}
+          gameId={gameId}
           onClose={closePopUp}
+          gameSelected={gameSelected}
         />
       )}
-      <h3>{gameId}: Game with {attributes.opponentName}</h3> 
+      <h3>{gameId}: Game with {attributes.opponentName}</h3>
     </div>
   )
 }
