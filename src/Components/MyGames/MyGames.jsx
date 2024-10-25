@@ -10,7 +10,7 @@ import "./MyGames.css";
 function MyGames({ isLogedIn, userData, friendsList }) {
   const userId = userData.id
 
-  // console.log('My game user id------> ',userId)
+ 
   const [myGames, setMyGames] = useState([]);
   // const { userId } = useParams();
   const navigate = useNavigate();
@@ -18,12 +18,10 @@ function MyGames({ isLogedIn, userData, friendsList }) {
   // const [selectedGame, setSelectedGame] = useState(null)
 
   useEffect(() => {
-    console.log('user data', userData)
     if(isLogedIn && userId) {
       const fetchGamesIndex = async () => {
        try {
          const userGamesData = await getGamesIndex(userId);
-        console.log('this my games ----->', userGamesData)
         const gameIds = userGamesData.data.map(game => game.id);
         //// --> will want to use gameIds to get game stats
         // const gameStats = await getAllGameStats(gameIds)

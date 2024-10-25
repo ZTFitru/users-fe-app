@@ -75,7 +75,7 @@ function App() {
 
   return (
     <>
-      {isLogedIn && <Header userLogOut={userLogOut} />}
+      {isLogedIn && <Header userLogOut={userLogOut} userData={userData} />}
       <Routes>
         <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} defineUserId={defineUserId} userData={userData} />} />
         <Route path='/:userId/my_games/' element={isLogedIn ? <MyGames userData={userData} isLogedIn={isLogedIn} myGames={myGames} userID={userId} userIsLoggedIn={userIsLoggedIn} friendsList={friendsList} /> : <Navigate to="/" />} />

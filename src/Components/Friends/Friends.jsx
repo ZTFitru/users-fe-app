@@ -17,7 +17,6 @@ function Friends({ isFriends, userData }) {
   const { logedInUsername } = useParams();
   // const { userId } = useParams();
   const navigate = useNavigate();
-  //   console.log(logedInUsername)
   // const [alert, setAlert] = useState([])
 
   const userId = userData.id;
@@ -27,22 +26,18 @@ function Friends({ isFriends, userData }) {
       try {
         const friendsData = await getFriendsIndex(userId);
         setFriendsList(friendsData.data);
-        console.log("Friends DATA->>>>>", friendsData);
       } catch (err) {
-        console.error("Error fetching friends data:", err);
       }
     };
     fetchFriends();
   }, [userId, setFriendsList]);
 
-  const handleRemoveFriend = async (friend) => {
-    const friendId = friend;
-    console.log(friendId);
+  const handleRemoveFriend = async (friendId) => {
+    // const friendId = friend;
     try {
       const resData = await deleteFriend(userId, friendId);
-      console.log("Friend removed:", resData);
 
-      setFriendsList(friendsList.filter((aFriend) => aFriend.id !== friendId));
+      setFriendsList(friendsList.filter((aFriend) => aFriend.user_id !== friendId));
     } catch (err) {
       console.error("Error removing friend:", err);
     }
@@ -54,14 +49,8 @@ function findFriend(id){
 }
 
   const handleStartNewGame = async (friendId) => {
-console.log(friendId, '<><><><><> friend')
     try {
-console.log('PLEASE WORK< TRYINGGGG')
       const resData = await postStartGame(userId, friendId)
-console.log(resData.data, 'res DATA from Friends')
-console.log(resData.data.game_id, 'res DATA from Friends')
-      
-
       setStartNewGame(resData.data)
       navigate(`../../${resData.data.game_id}`)
     } catch (err) {
@@ -83,11 +72,12 @@ console.log(resData.data.game_id, 'res DATA from Friends')
       key={friend.id}
       id={friend.id}
       user={friend}
-      removeFriend={handleRemoveFriend}
+    //   removeFriend={handleRemoveFriend}
       isFriend={true}
       username={friend.attributes.username}
       avatar={friend.attributes.avatar}
       handleStartNewGame={handleStartNewGame}
+      handleRemoveFriend={handleRemoveFriend}
     />
   ));
 

@@ -21,14 +21,12 @@ function MyGameCard({ gameId, gameImage, attributes, onImageClick, userData }) {
     turn_color
   } = attributes;
   const id = userData?.id;
-  console.log('user id', id);
-  console.log('white player id', white_player_id);
   attributes.playerColor = Number(id) == Number(white_player_id) ? 'white' : 'black';
   attributes.playerName = userData.username
   attributes.opponentColor = Number(id) === Number(white_player_id) ? 'black' : 'white';
   attributes.opponentName = attributes[`${attributes.opponentColor}_player_user_name`];
   attributes.nextToMove = attributes.playerColor === turn_color ? attributes.playerName : attributes.opponentName;
-  // console.log('userdata', attributes);
+
   
 
   return (

@@ -10,7 +10,6 @@ export const getUser = async (userId) => {
         const data = await res.json()
         return data
     } catch (err) {
-        console.log('Error in fetching the loggedIn User:', err)
         throw err
     }
 }
@@ -25,7 +24,6 @@ export const getUsersIndex = async (userId) => {
         const allUsersData = await res.json();
         return allUsersData
     } catch (err) {
-        console.log('Error in fetching the users:', err)
         throw err
     }
 }
@@ -40,7 +38,6 @@ export const getFriendsIndex = async (userId) => {
         const data = await res.json()
         return data
     } catch (err) {
-        console.log('Error in fetching Frien-EMIES list:', err)
         throw err
     }
 }
@@ -55,7 +52,6 @@ export const getGamesIndex = async (userId) => {
         const data = await res.json();
         return data
     } catch (err) {
-        console.log('Error in fetching games list:', err)
         throw err
     }
 }
@@ -70,7 +66,6 @@ export const getGameStats = async (gameId) => {
         const data = await res.json();
         return data;
     } catch (err) {
-        console.log('Error in fetching game stats', err)
     }
 }
 
@@ -79,7 +74,6 @@ export const getAllGameStats = async (gameIds) => {
         const allGameStats = await Promise.all(gameIds.map(id => getGameStats(id)));
         return allGameStats;
     } catch (err) {
-        console.log('Error in fetching your game stats.')
     }
 } 
 
@@ -108,7 +102,6 @@ export const postLogInUser = async (user) => {
 }
 
 export const postAddFriend = async (userId, user_id) => {
-    console.log('api call ->>>', user_id)
     try {
         const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/add_friend`, {
             method: 'POST',
@@ -132,7 +125,6 @@ export const postAddFriend = async (userId, user_id) => {
 }
 
 export const postStartGame = async (userId, friendId) => {
-    console.log('post params', userId, friendId)
     try {
         const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/start_game`, {
             method: 'POST',
@@ -147,7 +139,6 @@ export const postStartGame = async (userId, friendId) => {
         }
 
         const resData = await res.json();
-console.log(resData, 'resData postStartGame')
 
         return resData
     } catch (err) {

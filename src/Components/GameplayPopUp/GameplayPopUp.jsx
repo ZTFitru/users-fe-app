@@ -4,7 +4,6 @@ import "./GameplayPopUp.css";
 
 function GameplayPopUp({attributes}) {
   const {nextToMove, opponentName} = attributes;
-  console.log('attributes::::::', attributes);
   return (
     <Popup
       trigger={<button className="gameplay-popup-click"></button>}

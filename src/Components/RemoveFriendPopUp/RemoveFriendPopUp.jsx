@@ -3,7 +3,7 @@ import Popup from "reactjs-popup";
 import './RemoveFriendPopUp.css';
 import { Link } from 'react-router-dom';
 
-function RemoveFriendPopUp({username, removeFriend, onClose}) {
+function RemoveFriendPopUp({username, onClose, handleRemoveFriend}) {
   return (
     <Popup
       trigger={<button className="remove-friend-popup-click"></button>}
@@ -19,7 +19,7 @@ function RemoveFriendPopUp({username, removeFriend, onClose}) {
           <div className="remove-friend-button-wrapper">
             <button className="remove-friend-button"
               onClick={()=> {
-                removeFriend()
+                handleRemoveFriend(friendId)
                 close()
                 onClose()
               }}

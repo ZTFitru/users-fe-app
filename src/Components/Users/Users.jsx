@@ -14,10 +14,8 @@ import "./Users.css";
 
 
 function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }) {
-  // console.log('-----> ', users)
   const [searchUser, setSearchUser] = useState("");
   const [alert, setAlert] = useState([]);
-  // console.log(userId)
   // handleUserLogin={handleUserLogin}
 
   /**
@@ -87,8 +85,6 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
   // };
   
   const addFriend = async (friend ) => {
-    console.log('Friend to add:', friend);
-    console.log('userId:', userId);
     
     if (!friend || !friend.id) {
       console.error("Invalid friend data", friend);
@@ -99,9 +95,7 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
     
     try {
       const response = await postAddFriend(userId, friend.id);
-      console.log('add a freind api ---->', response)
       // console.log('user id', userId) // this doesn't show up in the console
-      console.log(`Sending POST request to add friend with userId: ${userId} and friendId: ${friend.id}`);
       if (response && response.success) {
           // use setIsFriends to update the state of friends list 
           //justFriends is then being passed as the previous state
@@ -142,7 +136,6 @@ function Users({ users, isFriends, setIsFriends, userData, userId, friendsList }
       username={user.attributes.username}
       avatar={user.attributes.avatar}
       onAddFriend={()=> {
-        console.log('Please add me:', user)
         addFriend(user)
       }}
       // onAddFriend={() => addFriend(user)} // issue here maybe?
