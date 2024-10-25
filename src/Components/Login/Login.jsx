@@ -1,24 +1,18 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-import chessLogo from '../../assets/chess-with-frienemies-1.svg';
-// import eye from '../../assets/eye.png'
+import chessLogo from '../../assets/chess-with-frienemies-1.svg'
 import { postLogInUser } from '../../../apiCalls.jsx'
 import './Login.css';
 
 function Login({ userIsLoggedIn, defineUserId }) {
-
     const [email, setEmail] = useState('');
-    // const [userEmailInput, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const [userPasswordInput, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('')
     const navigate = useNavigate();
-    // const { userId } = useParams()
-    // console.log('Log in id --->',defineUserId)
 
     const signInBtn = async (e) => {
         e.preventDefault();
@@ -31,7 +25,6 @@ function Login({ userIsLoggedIn, defineUserId }) {
             defineUserId(userData.data.id);
             userIsLoggedIn(userData.data.id);
             navigate(`/${userData.data.id}/my_games/`)
-            // navigate(`/search/frien-emies`)
           } else {
             setError('Username or password is incorrect.');
           }
@@ -41,7 +34,6 @@ function Login({ userIsLoggedIn, defineUserId }) {
         }
       };
 
-    // love this
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
       };
@@ -69,7 +61,6 @@ function Login({ userIsLoggedIn, defineUserId }) {
                         <label className='login-password-label'>Password</label>
                         <input
                             placeholder='Enter password'
-                            // type='password'
                             type={showPassword ? 'text' : 'password'}
                             value={password}
                             className='login-password-input'
