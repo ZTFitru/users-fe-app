@@ -1,8 +1,10 @@
 import React from 'react';
 import Popup from "reactjs-popup";
+
 import './RemoveFriendPopUp.css';
 
 function RemoveFriendPopUp({username, onClose, handleRemoveFriend, friendId}) {
+
   return (
     <Popup
       trigger={<button className="remove-friend-popup-click"></button>}

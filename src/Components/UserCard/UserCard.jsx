@@ -73,7 +73,7 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, handleSta
           </i>
         )}
       </div>
-      {isFriend && <StartGamePopUp isFriend={isFriend} username={username} handleStartNewGame={handleStartNewGame} id={id} />}
+      {isFriend && <StartGamePopUp username={username} handleStartNewGame={handleStartNewGame} id={id} />}
       <img src={avatar || avatarPlaceholder}
         alt={username}
         crossOrigin="anonymous"
@@ -84,7 +84,6 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, handleSta
         }}
       />
       <h3 className='user-name-h3'>{username}</h3>
-      {/* {closeRemoveFriendPopUp && <RemoveFriendPopUp />} */}
       {popUp && (<RemoveFriendPopUp
         username={username}
         onClose={closeRemovePopUp}

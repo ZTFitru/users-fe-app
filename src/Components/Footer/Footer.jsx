@@ -6,7 +6,10 @@ import peopleIcon from '../../assets/user-account.png';
 import statIcon from '../../assets/trophy.png';
 import './Footer.css';
 
-function Footer({userId}) {
+function Footer({userData}) {
+
+    const userId = userData.id
+
     return (
         <footer>
             <Link to={`/${userId}/my_games/`} className='footer-links'>

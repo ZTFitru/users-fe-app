@@ -144,7 +144,7 @@ export const postStartGame = async (userId, friendId, userName, friendName) => {
         }
 
         const resData = await res.json();
-
+        console.log('whats the matter ----->', resData)
         return resData
     } catch (err) {
         console.error('Error in POSTing the user login:', err)

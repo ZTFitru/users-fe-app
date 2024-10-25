@@ -7,7 +7,8 @@ import { postAddFriend } from "../../../apiCalls";
 import UserCard from "../UserCard/UserCard";
 import "./Users.css";
 
-function Users({ users, isFriends, setIsFriends, userData, friendsList }) {
+function Users({ userData, users, setIsFriends}) {
+  
   const [searchUser, setSearchUser] = useState("");
   const [alert, setAlert] = useState([]);
   const userId = userData.id
@@ -26,10 +27,7 @@ function Users({ users, isFriends, setIsFriends, userData, friendsList }) {
     try {
       const response = await postAddFriend(userId, friend.id);
       if (response && response.success) {
-          // use setIsFriends to update the state of friends list 
-          //justFriends is then being passed as the previous state
           setIsFriends(justFriends => {
-            //it sees if the user isalready in the list
               if (!justFriends.some(aFriend => aFriend.id === friend.id)) {
                   const message = `${friend.name} has been added as a frien-emime`;
                   setAlert(prev => [...prev, message]);
@@ -39,21 +37,17 @@ function Users({ users, isFriends, setIsFriends, userData, friendsList }) {
                   const message = `${friend.name} is already your friend.`;
                   setAlert(prev => [...prev, message]);
                   setTimeout(() => setAlert(prev => prev.filter(msg => msg !== message)), 2000);
-                  //if  the user is already a friend then it returns the list
                   return justFriends; 
               }
           });
       } else {
-          // const errorMessage = `Error adding friend: ${response.message || 'Unknown error'}`;
           const errorMessage = `Friend added.`;
           setAlert(prev => [...prev, errorMessage]);
           setTimeout(() => setAlert(prev => prev.filter(msg => msg !== errorMessage)), 2000);
       }
   } catch (error) {
       console.error("Error adding friend:", error);
-      // setAlert(prev => [...prev, "An error occurred while adding the friend."]);
       setAlert(prev => [...prev, "Already a friend."]);
-      // setTimeout(() => setAlert(prev => prev.filter(msg => msg !== "An error occurred while adding the friend.")), 2000);
       setTimeout(() => setAlert(prev => prev.filter(msg => msg !== "Already a friend.")), 2000);
   }
 };
@@ -94,6 +88,6 @@ function Users({ users, isFriends, setIsFriends, userData, friendsList }) {
       <div className="user-cards-container">{userCards}</div>
     </section>
   );
-}
+};
 
 export default Users;

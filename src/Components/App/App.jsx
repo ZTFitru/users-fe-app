@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUser, getUsersIndex } from '../../../apiCalls';
+
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -49,7 +50,7 @@ function App() {
     fetchLoggedInUser();
   }, [userId]);  
 
-  // ALL USERS
+  
   useEffect(() => {
     const fetchUsers = async () => {
       if (userId) {
@@ -65,8 +66,8 @@ function App() {
     }, [userId]);
 
   const userIsLoggedIn = () => {
-    setIsLoggedIn(true)
-  }
+    setIsLoggedIn(true);
+  };
 
   const userLogOut = () => {
     setIsLoggedIn(false);
@@ -79,13 +80,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} defineUserId={defineUserId} />} />
         <Route path='/:userId/my_games/' element={isLoggedIn ? <MyGames isLoggedIn={isLoggedIn} userData={userData} /> : <Navigate to="/" />} />
-        <Route path='/search/frien-emies' element={isLoggedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends} setUserId={setUserId} friendsList={friendsList}  /> : <Navigate to="/" /> } />
-        <Route path='/:userId/frien-emies' element={isLoggedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} friendsList={friendsList} setIsFriends={setIsFriends} /> : <Navigate to="/" />} />
+        <Route path='/search/frien-emies' element={isLoggedIn ? <Users userData={userData} users={users} setIsFriends={setIsFriends} /> : <Navigate to="/" /> } />
+        <Route path='/:userId/frien-emies' element={isLoggedIn ? <Friends userData={userData} /> : <Navigate to="/" />} />
         <Route path='/:gameId' element={isLoggedIn ? <GamePlay playerId={userId} /> : <Navigate to="/" />} />
         <Route path='/:userId/statistics' element={isLoggedIn ? <Stats userData={userData}/> : <Navigate to="/" />} />
         <Route path="*" element={isLoggedIn ? <ErrorPage /> : <Navigate to="/" />} />
       </Routes>
-      {isLoggedIn && <Footer userId={userId}/>}
+      {isLoggedIn && <Footer userData={userData}/>}
     </>
   );
 }

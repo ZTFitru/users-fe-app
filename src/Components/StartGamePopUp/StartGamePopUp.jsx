@@ -1,10 +1,10 @@
 import React from "react";
 import Popup from "reactjs-popup";
-import GamePlay from "../GamePlay/GamePlay";
-import { Link } from 'react-router-dom';
+
 import "./StartGamePopUp.css";
 
-function StartGamePopUp({ isFriend, username, handleStartNewGame, id }) {
+function StartGamePopUp({ username, handleStartNewGame, id }) {
+
   return (
     <Popup
       trigger={<button className="start-game-popup-click"></button>}

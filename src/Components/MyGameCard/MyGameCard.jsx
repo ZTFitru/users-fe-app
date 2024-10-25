@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import GameplayPopUp from '../GameplayPopUp/GameplayPopUp';
+
 import defaultChessImage from '../../assets/chess-with-frienemies-1.svg';
 import './MyGameCard.css';
 
-function MyGameCard({ gameId, gameImage, attributes, onImageClick, userData }) {
+function MyGameCard({ gameId, gameImage, attributes, userData }) {
+
   const [selectedGame, setSelectedGame] = useState(null);
 
   const gameSelected = (gameId) => {
@@ -27,8 +29,6 @@ function MyGameCard({ gameId, gameImage, attributes, onImageClick, userData }) {
   attributes.opponentName = attributes[`${attributes.opponentColor}_player_user_name`];
   attributes.nextToMove = attributes.playerColor === turn_color ? attributes.playerName : attributes.opponentName;
 
-
-
   return (
     <div id={gameId} className='my-games-card-wrapper'>
       <img src={gameImage || defaultChessImage}
@@ -43,12 +43,11 @@ function MyGameCard({ gameId, gameImage, attributes, onImageClick, userData }) {
           attributes={attributes}
           gameId={gameId}
           onClose={closePopUp}
-          gameSelected={gameSelected}
         />
       )}
       <h3>{gameId}: Game with {attributes.opponentName}</h3>
     </div>
   )
-}
+};
 
 export default MyGameCard;

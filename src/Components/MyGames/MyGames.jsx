@@ -6,8 +6,9 @@ import MyGameCard from "../MyGameCard/MyGameCard";
 import "./MyGames.css";
 
 function MyGames({ isLoggedIn, userData }) {
+  
   const [myGames, setMyGames] = useState([]);
-  const userId = userData.id
+  const userId = userData.id;
 
   useEffect(() => {
     if (isLoggedIn && userId) {
@@ -30,7 +31,7 @@ function MyGames({ isLoggedIn, userData }) {
           console.error("Error fetching games data:", err)
         }
       }
-      fetchGamesIndex()
+      fetchGamesIndex();
     }
   }, [isLoggedIn, userId]);
 
@@ -47,14 +48,14 @@ function MyGames({ isLoggedIn, userData }) {
         />
       )
     }
-  });
+  })
 
   return (
     <section className="my-games-section">
       <h2 className="my-games-h2">My Games</h2>
       <div className="games-list-wrapper">{gamesList}</div>
     </section>
-  );
-}
+  )
+};
 
 export default MyGames;

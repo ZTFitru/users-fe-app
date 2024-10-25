@@ -8,7 +8,8 @@ import { getFriendsIndex, deleteFriend, postStartGame } from "../../../apiCalls"
 import UserCard from "../UserCard/UserCard";
 import "./Friends.css";
 
-function Friends({ isFriends, userData }) {
+function Friends({ userData }) {
+  
   const [searchFriend, setSearchFriend] = useState("");
   const [friendsList, setFriendsList] = useState([]);
   const [startNewGame, setStartNewGame] = useState([]);
@@ -28,10 +29,7 @@ function Friends({ isFriends, userData }) {
     fetchFriends();
   }, [userId, setFriendsList]);
 
-  //Remove friend
   const handleRemoveFriend = async (friendId) => {
-    console.log('WHAT IS THISSS --->',friendId)
-    // const friendId = friend;
     try {
       const resData = await deleteFriend(userId, friendId);
       setFriendsList(friendsList.filter((aFriend) => aFriend.id !== friendId));
@@ -40,37 +38,29 @@ function Friends({ isFriends, userData }) {
     }
   };
 
-function findFriend(id){
-  const friendsCopy = [...friendsList]
-  return friendsCopy.find((friend) => id === friend.id)
-}
-
-//Start New Game
   const handleStartNewGame = async (friendId, friendName) => {
+    console.log('friend id and friend name', friendId, friendName)
     try {
       const resData = await postStartGame(userId, friendId, userData.username, friendName)
+      console.log('resdata in friends ---->', resData.data)
       setStartNewGame(resData.data)
       navigate(`../../${resData.data.game_id}`)
     } catch (err) {
       console.error("Error starting a game", err)
     }
-  }
+  };
   
-
   const filterFriend = friendsList.filter((friend) =>
     friend.attributes.username
       .toLowerCase()
       .includes(searchFriend.toLowerCase())
   );
 
- 
-
   const friendList = filterFriend.map((friend) => (
     <UserCard
       key={friend.id}
       friendId={friend.id}
       user={friend}
-    //   removeFriend={handleRemoveFriend}
       isFriend={true}
       username={friend.attributes.username}
       avatar={friend.attributes.avatar}
@@ -78,36 +68,6 @@ function findFriend(id){
       handleRemoveFriend={handleRemoveFriend}
     />
   ));
-
-  /*
-
-  {
-    "data": {
-        "type": "game_creation",
-        "game_id": 17,
-        "attributes": {
-            "game": {
-                "game": "Chess",
-                "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/chess_dab.jpg",
-                "status": "active"
-            },
-            "user": {
-                "id": 1,
-                "username": "bob",
-                "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/baby.jpg"
-            },
-            "friend": {
-                "friend_id": 2,
-                "username": "rob",
-                "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/queen.jpg"
-            }
-        }
-    }
-}
-
-
-
-  */
 
   return (
     <section className="friends-section">

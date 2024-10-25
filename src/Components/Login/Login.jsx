@@ -3,15 +3,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-import chessLogo from '../../assets/chess-with-frienemies-1.svg'
-import { postLogInUser } from '../../../apiCalls.jsx'
+import chessLogo from '../../assets/chess-with-frienemies-1.svg';
+import { postLogInUser } from '../../../apiCalls.jsx';
 import './Login.css';
 
 function Login({ userIsLoggedIn, defineUserId }) {
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const signInBtn = async (e) => {
@@ -80,6 +81,6 @@ function Login({ userIsLoggedIn, defineUserId }) {
             </div>
         </section >
     )
-}
+};
 
 export default Login;

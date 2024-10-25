@@ -4,20 +4,17 @@ import { FaTimes } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import chessLogo2 from '../../assets/chess-with-frienemies-2.svg';
-
 import './Header.css';
 
 function Header({ userLogOut, userData }) {
-    const [isOpen, setIsOpen] = useState(false);
 
+    const [isOpen, setIsOpen] = useState(false);
     const userId = userData.id;
 
     const displayMenu = () => {
-        setIsOpen(!isOpen)
-    }
+        setIsOpen(!isOpen);
+    };
 
-
-    // loggedInUsername
     return (
         <header>
             <Link to='/:username/my_games/'>
