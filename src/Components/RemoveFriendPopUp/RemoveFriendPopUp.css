@@ -1,0 +1,39 @@
+button.remove-friend-popup-click {
+    position: absolute;
+    width: 40%;
+    height: 25%;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    border: none;
+    /* border: 2px solid red; */
+}
+
+.remove-friend-modal {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+    color: var(--color-4);
+    background-color: var(--color-1);
+    border: 2px solid var(--color-4);
+    margin-left: 15%;
+}
+
+.remove-friend-button-wrapper {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remove-friend-content {
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.remove-friend-button {
+    width: 4rem;
+}

@@ -10,27 +10,37 @@
 }
 
 body {
+  color: var(--color-4);
   font-family: "Roboto", sans-serif;
   margin: 0;
-  background-color: var(--color-3)
+  background-color: var(--color-3);
 }
 
 ul {
   list-style-type: none;
 }
 
+a:active { color: var(--color-1);}
+a:visited { color: var(--color-1);}
+a:hover { color: var(--color-1); } 
+
 a {
   text-decoration: none;
-  color: var(--color-1)
+  color: var(--color-4)
+  
+}
+
+.nav-link-a {
+  a {
+    color: var(--color-4);
+  }
 }
 
 button {
-  /* width: 100%; */
   color: var(--color-1);
   font-weight: 600;
   background-color: var(--color-5);
   padding: 6px;
-  /* border-color: var(--color-4); */
   border-style: none;
   border-radius: 2px;
 }
@@ -39,21 +49,58 @@ input {
   background-color: var(--color-3);
 }
 
-/* .oswald-<uniquifier> {
-  font-family: "Oswald", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-} */
+/*GAME SIDE BELOW*/
 
-/* .shadows-into-light-regular {
-  font-family: "Shadows Into Light", cursive;
-  font-weight: 400;
-  font-style: normal;
-} */
+/* #root {
+  max-width: 1280px; 
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  width: 100%;
+}
 
-/* .roboto-regular {
-  font-family: "Roboto", sans-serif;
+.game-area {
+  min-height: 500px;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  .active {
+    color: var(--color-5);
+  }
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
   font-weight: 400;
-  font-style: normal;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--color-1);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--color-1);
 } */

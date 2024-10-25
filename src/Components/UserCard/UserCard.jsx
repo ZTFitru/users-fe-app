@@ -8,8 +8,10 @@ import RemoveFriendPopUp from '../RemoveFriendPopUp/RemoveFriendPopUp';
 import avatarPlaceholder from '../../assets/avatar_placeholder.png';
 import './UserCard.css';
 
-function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFriend }) {
+function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFriend, handleStartNewGame }) {
+  
   const [iconColor, setIconColor] = useState('black');
+  const [popUp, setPopUp] = useState(false)
 
   const checkImageBrightnessInIconArea = (imgElement, iconSize = {width: 32, height: 32}) => {
     const canvas = document.createElement('canvas');
@@ -50,35 +52,62 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, removeFri
     checkImageBrightnessInIconArea(event.target)
   };
 
+  // const removieFriendFunction =()=> {
+  //   setPopUp('remove friend')
+  // }
 
+  // const closePopUp = () => {
+  //   setPopUp(null)
+  // }
+
+  // const imageClickFunction = () => {
+  //   setPopUp('game play')
+    // }
+
+    const removeFriendClick = () => {
+      setPopUp(true)
+    }
+
+    const closeRemovePopUp = () => {
+      setPopUp(false)
+    }
+
+  
+  
   return (
     <div id={id} className='user-card-wrapper'>
-      {/* <StartGamePopUp isFriend={isFriend} /> */}
       <div>
         {!isFriend ? (
           <i onClick={()=> onAddFriend(user)}>
             <FaUserPlus color={iconColor}/>
           </i>
         ) : (
-        <i onClick={()=> removeFriend(user)} >
-            {/* <StartGamePopUp /> */}
+         <i onClick={removeFriendClick} >
             <FaUserMinus color={iconColor} />
           </i>
         )}
       </div>
-      {isFriend && <StartGamePopUp isFriend={isFriend}/>}
+      {isFriend && <StartGamePopUp isFriend={isFriend} username={username} handleStartNewGame={handleStartNewGame}/>}
       <img src={avatar || avatarPlaceholder} 
         alt={username}
-        // onClick={<StartGamePopUp />}
-        onLoad={handleImageLoad}        
+        crossOrigin="anonymous"
+        onLoad={handleImageLoad}    
         onError={event => {
           event.target.src = avatarPlaceholder
           event.onerror = null
         }}
-        // {isPopupVisible && <StartGamePopUp onClose={closePopup} />}
-        // onClick={handleImageClick} // is this correct??
         />
       <h3 className='user-name-h3'>{username}</h3>
+      {/* {closeRemoveFriendPopUp && <RemoveFriendPopUp />} */}
+      {popUp &&  (<RemoveFriendPopUp 
+        username={username}
+        onClose={closeRemovePopUp}  
+        removeFriend={()=> {
+          removeFriend(user) 
+          closeRemovePopUp()
+        }}
+        />
+        )}
     </div>
   )
 }

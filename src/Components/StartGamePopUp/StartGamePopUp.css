@@ -1,14 +1,17 @@
 button.start-game-popup-click {
     position: absolute;
-    top: 0;
+    width: 100%;
+    height: auto;
+    top: 2rem;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: transparent;
     border: none;
+    /* border: 2px solid red; */
 }
 
-.modal {
+.start-game-modal {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -26,12 +29,13 @@ button.start-game-popup-click {
     align-items: center;
 }
 
-.content {
+.start-game-content {
     width: 100%;
     margin-bottom: 30%;
 }
 
 .start-game-button {
     width: 4rem;
-
 }
+
+

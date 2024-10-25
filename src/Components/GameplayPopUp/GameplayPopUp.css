@@ -1,0 +1,42 @@
+button.gameplay-popup-click {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.gameplay-modal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12%;
+    color: var(--color-4);
+    background-color: var(--color-1);
+    border: 2px solid var(--color-4);
+    margin-left: -12%;
+}
+
+.gameplay-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8%
+}
+
+.gameplay-content-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gameplay-button {
+    width: 4rem;
+}

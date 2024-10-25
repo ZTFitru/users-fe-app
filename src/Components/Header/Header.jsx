@@ -21,15 +21,15 @@ function Header({ userLogOut, logedInUsername }) {
             <Link to='/:username/my_games/'>
                 <img src={chessLogo2} alt='chess pieces' className='header-logo'/> 
             </Link>
-            <h1 className='header-h1'><span className='header-chess-with'>Chess with </span><span className='header-frien-emies'>Frien-EMIMES</span></h1>
+            <h1 className='header-h1'><span className='header-chess-with'>Chess with </span><span className='header-frien-emies'>Frien-EMIES</span></h1>
             <div onClick={displayMenu} className='hamburger-menu'>
                 {isOpen ? <FaTimes /> : <GiHamburgerMenu />}
             </div>
             <nav>
                 <ul className={`header-link ${isOpen ? 'open' : ''}`}>
-                    <li><Link to='search/frien-emies' onClick={()=> setIsOpen(false)}>Users</Link></li>
-                    <li><Link to={`/${logedInUsername}/frien-emies`} onClick={()=> setIsOpen(false)}>Frien-EMIES</Link></li>
-                    <li><Link to='/gameId' onClick={()=> setIsOpen(false)}>Games</Link></li>
+                    <li className='nav-link-a'><Link to='search/frien-emies' onClick={()=> setIsOpen(false)}>Users</Link></li>
+                    <li className='nav-link-a'><Link to={`/${logedInUsername}/frien-emies`} onClick={()=> setIsOpen(false)}>Frien-EMIES</Link></li>
+                    <li className='nav-link-a'><Link to='/gameId' onClick={()=> setIsOpen(false)}>Games</Link></li>
                     <li>
                         <button onClick={userLogOut}>Sign Out</button>
                     </li>

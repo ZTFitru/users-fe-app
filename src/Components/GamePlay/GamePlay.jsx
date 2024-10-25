@@ -6,8 +6,7 @@ import "./GamePlay.css";
 
 function GamePlay({ gameId, playerId }) {
   return (
-    <div className="game-area">
-      GamePlay
+    <div className="game-area-user">
       <Suspense fallback={<div>Loading...</div>}>
         <Game gameId={gameId} playerId={playerId} />
       </Suspense>

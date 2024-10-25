@@ -1,14 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import chessLogo from '../../assets/chess-with-frienemies-1.svg';
-import eye from '../../assets/eye.png'
+// import eye from '../../assets/eye.png'
 import { postLogInUser } from '../../../apiCalls.jsx'
 import './Login.css';
 
-function Login({ handleLogin }) {
+function Login({ userIsLoggedIn, defineUserId }) {
 
     const [email, setEmail] = useState('');
     // const [userEmailInput, setEmail] = useState('');
@@ -17,52 +17,38 @@ function Login({ handleLogin }) {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('')
     const navigate = useNavigate();
+    // const { userId } = useParams()
+    // console.log('Log in id --->',defineUserId)
 
-    /** "email": "wwhatever@example.com",
-  "password": "password" */
-
-  //
-
-    const signInBtn = (e) => {
+    const signInBtn = async (e) => {
         e.preventDefault();
+      
+        const userCredentials = { email, password };
+      
+        try {
+          const userData = await postLogInUser(userCredentials);
+          if (userData.data.id && userData.data.attributes) {
+            defineUserId(userData.data.id);
+            userIsLoggedIn(userData.data.id);
+            navigate(`/${userData.data.id}/my_games/`)
+            // navigate(`/search/frien-emies`)
+          } else {
+            setError('Username or password is incorrect.');
+          }
+        } catch (err) {
+          setError('Login failed. Please try again.');
+          console.error(err);
+        }
+      };
 
-        const userCradentials = { email, password }
-
-        postLogInUser(userCradentials)
-
-            .then(userData => {
-                console.log(userData)
-                // if(email === userData.email && password === userData.password) {
-                //     handleLogin(userData)
-                //     navigate(`${loginResponse.data.id}/my_games/`)
-                // } else {
-                //     return setError('User name or password is incorrect.')
-                    
-                // }
-                //userData.success
-                if (userData.data.id && userData.data.attributes) {
-                    handleLogin(userData)
-                    // userIsLoggedIn()
-                } else {
-                    setError('User name or password is incorrect.')
-                }
-            })
-            .catch(err => {
-                console.error(err)
-            })
-        // handleLogin(userCradentials)
-    }
-
-    
     // love this
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
       };
 
-
     return (
         <section className='login-section'>
-            <h1><div className='login-chess-with'>Chess with </div><div className='login-frien-emies'>Frien-EMIMES</div></h1>
+            <h1><div className='login-chess-with'>Chess with </div><div className='login-frien-emies'>Frien-EMIES</div></h1>
             <img src={chessLogo} alt='chess pieces' className='login-chess-logo' />
             <div className='login-sign-in-wrapper'>
                 <h2>Sign In</h2>
@@ -93,7 +79,6 @@ function Login({ handleLogin }) {
                         <i onClick={togglePasswordVisibility} className='toggel-password-visiblity'>
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </i>
-                        {/* <img src={eye} alt='hide or show password' onClick={() => { }} className='login-hide-show-password'/> */}
                     </div>
                     <button type='submit' className='submit-button'>
                         Sign In

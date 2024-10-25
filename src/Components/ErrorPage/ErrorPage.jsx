@@ -1,14 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import './ErrorPage.css';
+import "./ErrorPage.css";
 
 function ErrorPage() {
-  return (
-    <section>
-        <h2>We're so sorry, there's been an error:</h2>
-        <p>Error message</p>
-    </section>
-  )
+
+    return (
+      <section className="error-page-section">
+        <h2>404 - Page Not Found</h2>
+        <h3>Sorry, the page you are looking for does not exist.</h3>
+        <p>Click the logo to naviage to My Games.</p>
+      </section>
+    );
 }
 
 export default ErrorPage;
