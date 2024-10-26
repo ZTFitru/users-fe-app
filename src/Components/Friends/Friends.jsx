@@ -93,7 +93,7 @@ function Friends({ userData }) {
       </div>
       <div>
         {filterFriend.length === 0 ? (
-          <p>You need more frien-emimes</p>
+          <p>You need more frien-emies</p>
         ) : (
           <div className="friends-list-container">{friendList}</div>
         )}
