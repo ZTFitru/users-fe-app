@@ -6,7 +6,6 @@ export const getUser = async (userId) => {
         if (!res.ok) {
             throw new Error(`There was an error fetching the loggin in user: ${res.status}`)
         }
-
         const data = await res.json()
         return data
     } catch (err) {
@@ -22,6 +21,7 @@ export const getUsersIndex = async (userId) => {
         }
 
         const allUsersData = await res.json();
+        
         return allUsersData
     } catch (err) {
         throw err
@@ -50,6 +50,7 @@ export const getGamesIndex = async (userId) => {
         }
 
         const data = await res.json();
+        console.log('user game index <><>', data)
         return data
     } catch (err) {
         throw err
@@ -124,19 +125,22 @@ export const postAddFriend = async (userId, user_id) => {
     }
 }
 
-export const postStartGame = async (userId, friendId, userName, friendName) => {
+export const postStartGame = async (userId, friendId) => {
+    console.log('api call user--->', userId)
+    console.log('api call friend---->', friendId)
     try {
         const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/start_game`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ 
-                'white_player_id': userId,
-                'black_player_id': friendId, 
-                'white_player_user_name' : userName,
-                'black_player_user_name': friendName
+            body: JSON.stringify({ "user_id": friendId
+                // 'white_player_id': userId,
+                // 'black_player_id': friendId, 
+                // 'white_player_user_name' : userName,
+                // 'black_player_user_name': friendName
             })
+            // { “user_id”: 2 }
         });
 
         if (!res.ok) {

@@ -9,9 +9,10 @@ import avatarPlaceholder from '../../assets/avatar_placeholder.png';
 import './UserCard.css';
 
 function UserCard({ user, avatar, id, username, onAddFriend, isFriend, handleStartNewGame, handleRemoveFriend, friendId }) {
-
+  
   const [iconColor, setIconColor] = useState('black');
   const [popUp, setPopUp] = useState(false)
+  // console.log(handleStartNewGame)
 
   const checkImageBrightnessInIconArea = (imgElement, iconSize = { width: 32, height: 32 }) => {
     const canvas = document.createElement('canvas');
@@ -73,7 +74,8 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, handleSta
           </i>
         )}
       </div>
-      {isFriend && <StartGamePopUp username={username} handleStartNewGame={handleStartNewGame} id={id} />}
+      {isFriend && <StartGamePopUp username={username} handleStartNewGame={handleStartNewGame} id={friendId} />} {/* id={id} before  */}
+      {/*  */}
       <img src={avatar || avatarPlaceholder}
         alt={username}
         crossOrigin="anonymous"

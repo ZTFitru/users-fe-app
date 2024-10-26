@@ -4,6 +4,7 @@ import Popup from "reactjs-popup";
 import "./StartGamePopUp.css";
 
 function StartGamePopUp({ username, handleStartNewGame, id }) {
+  
 
   return (
     <Popup

@@ -17,11 +17,12 @@ function Friends({ userData }) {
   const navigate = useNavigate();
 
   const userId = userData.id;
-
+  // console.log('FRIENDS LIST ---->',friendsList)
   useEffect(() => {
     const fetchFriends = async () => {
       try {
         const friendsData = await getFriendsIndex(userId);
+        // console.log('WHAT ARE YOUUUU----->',friendsData)
         setFriendsList(friendsData.data);
       } catch (err) {
       }
@@ -30,6 +31,7 @@ function Friends({ userData }) {
   }, [userId, setFriendsList]);
 
   const handleRemoveFriend = async (friendId) => {
+    // console.log('remove friend id', friendId)
     try {
       const resData = await deleteFriend(userId, friendId);
       setFriendsList(friendsList.filter((aFriend) => aFriend.id !== friendId));
@@ -39,9 +41,11 @@ function Friends({ userData }) {
   };
 
   const handleStartNewGame = async (friendId, friendName) => {
-    console.log('friend id and friend name', friendId, friendName)
+    console.log('friend id ----->', friendId)
+    console.log('friend name ----->', friendName)
     try {
-      const resData = await postStartGame(userId, friendId, userData.username, friendName)
+      // const resData = await postStartGame(userId, friendId, userData.username, friendName)
+      const resData = await postStartGame(userId, friendId)
       console.log('resdata in friends ---->', resData.data)
       setStartNewGame(resData.data)
       navigate(`../../${resData.data.game_id}`)
