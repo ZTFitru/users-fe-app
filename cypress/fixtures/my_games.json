@@ -1,0 +1,22 @@
+{
+    "data": [
+      {
+        "type": "game",
+        "id": 1,
+        "attributes": {
+          "game": "chess",
+          "status": "active",
+          "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/chess_dab.jpg"
+        }
+      },
+      {
+        "type": "game",
+        "id": 2,
+        "attributes": {
+          "game": "chess",
+          "status": "active",
+          "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/chessfight.jpg"
+        }
+      }
+    ]
+  }

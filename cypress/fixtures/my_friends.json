@@ -1,0 +1,20 @@
+{
+    "data": [
+      {
+        "type": "friend",
+        "id": 3,
+        "attributes": {
+          "username": "mike",
+          "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/queen.jpg"
+        }
+      },
+      {
+        "type": "friend",
+        "id": 4,
+        "attributes": {
+          "username": "joe",
+          "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/elephant.jpg"
+        }
+      }
+    ]
+  }

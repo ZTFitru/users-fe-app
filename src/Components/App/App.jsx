@@ -47,7 +47,7 @@ function App() {
         console.error('Error fetching logged in User')
       }
     }
-    fetchLoggedInUser();
+    if (userId) fetchLoggedInUser();
   }, [userId]);  
 
   

@@ -1,0 +1,31 @@
+{
+    "data": [
+      {
+        "id": "3",
+        "type": "user",
+        "attributes": {
+          "username": "mike",
+          "email": "mike@turing.com",
+          "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/queen.jpg"
+        }
+      },
+      {
+        "id": "4",
+        "type": "user",
+        "attributes": {
+          "username": "joe",
+          "email": "joe@turing.com",
+          "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/elephant.jpg"
+        }
+      },
+      {
+        "id": "5",
+        "type": "user",
+        "attributes": {
+          "username": "beth",
+          "email": "beth@turing.com",
+          "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/elephant.jpg"
+        }
+      }
+    ]
+  }

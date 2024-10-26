@@ -71,7 +71,7 @@ function Login({ userIsLoggedIn, defineUserId }) {
                             required
                         />
                         <i onClick={togglePasswordVisibility} className='toggel-password-visiblity'>
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            {showPassword ? <FaEyeSlash className='eyeball-visiblity' /> : <FaEye className='eyeball-hidden' />}
                         </i>
                     </div>
                     <button type='submit' className='submit-button'>

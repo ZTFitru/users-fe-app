@@ -1,0 +1,11 @@
+{
+    "data": {
+      "id": "1",
+      "type": "user",
+      "attributes": {
+        "username": "seth",
+        "email": "seth@turing.com",
+        "avatar": "https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/images/baby.jpg"
+    }
+  }
+}
