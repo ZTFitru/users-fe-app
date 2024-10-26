@@ -22,7 +22,7 @@ function Header({ userLogOut, userData }) {
             </Link>
             <h1 className='header-h1'><span className='header-chess-with'>Chess with </span><span className='header-frien-emies'>Frien-EMIES</span></h1>
             <div onClick={displayMenu} className='hamburger-menu'>
-                {isOpen ? <FaTimes /> : <GiHamburgerMenu />}
+                {isOpen ? <FaTimes /> : <GiHamburgerMenu className='open-hamburger-m' />}
             </div>
             <nav>
                 <ul className={`header-link ${isOpen ? 'open' : ''}`}>
