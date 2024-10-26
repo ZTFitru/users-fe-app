@@ -1,4 +1,4 @@
-describe('login spec', () => {
+describe('my games test', () => {
   beforeEach(()=> {
     cy.intercept('POST', 'https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/sessions', {
       statusCode: 200,
@@ -38,9 +38,15 @@ describe('login spec', () => {
     cy.visit('http://localhost:5173/')
   })
 
-  it('should be able to display a list of games for a user', () => {
+  it('should be able to display a list of games for a user, and it should be the same games if the user navigates away and back to the page.', () => {
     cy.get('h2').contains('Sign In')
     cy.get('.login-email-input').type('seth@turing.com')
     cy.get('.login-password-input').type('zrocks')
+    cy.get('.submit-button').click()
+    cy.get('#\\31  > h3').contains('1: Game with mike')
+    cy.get('footer > [href="#/1/frien-emies"]').click()
+    .get('footer > [href="#/1/my_games/"]')
+    .click()
+    cy.get('#\\31  > h3').contains('1: Game with mike')
   })
 })
