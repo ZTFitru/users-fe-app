@@ -48,7 +48,8 @@ describe('my games test', () => {
     cy.get('footer > [href="#/1/frien-emies"]').click()
     .get('footer > [href="#/1/my_games/"]')
     .click()
-    cy.get('#\\31  > h3').contains('1: Game with mike')
+    cy.get('.my-games-card-wrapper').first().contains('1: Game with mike')
+    cy.get('.my-games-card-wrapper').last().contains('2: Game with joe')
   })
 
   it('Should display no games if the server is down.', ()=>{
