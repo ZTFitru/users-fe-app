@@ -49,4 +49,15 @@ describe('my games test', () => {
     .click()
     cy.get('#\\31  > h3').contains('1: Game with mike')
   })
+
+  it('Should display no games if the server is down.', ()=>{
+    cy.intercept('GET', 'https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/1/my_games', {
+      statusCode: 404,
+    }).as('FAILED TO GET GAMES')
+    cy.get('h2').contains('Sign In')
+    cy.get('.login-email-input').type('seth@turing.com')
+    cy.get('.login-password-input').type('zrocks')
+    cy.get('.submit-button').click()
+    cy.get('#\\31  > h3').should('not.exist')
+  })
 })
