@@ -12,7 +12,6 @@ function UserCard({ user, avatar, id, username, onAddFriend, isFriend, handleSta
   
   const [iconColor, setIconColor] = useState('black');
   const [popUp, setPopUp] = useState(false)
-  // console.log(handleStartNewGame)
 
   const checkImageBrightnessInIconArea = (imgElement, iconSize = { width: 32, height: 32 }) => {
     const canvas = document.createElement('canvas');
