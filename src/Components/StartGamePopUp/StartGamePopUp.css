@@ -8,7 +8,6 @@ button.start-game-popup-click {
     bottom: 0;
     background-color: transparent;
     border: none;
-    /* border: 2px solid red; */
 }
 
 .start-game-modal {
@@ -20,6 +19,7 @@ button.start-game-popup-click {
     color: var(--color-4);
     background-color: var(--color-1);
     border: 2px solid var(--color-4);
+    margin-left: -25%;
 }
 
 .start-game-button-wrapper {

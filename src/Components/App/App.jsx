@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUser, getUsersIndex } from '../../../apiCalls';
+
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -16,7 +17,7 @@ function App() {
 
   const [userId, setUserId] =  useState(null);
   const [userData, setUserData] = useState({});
-  const [isLogedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [users, setUsers] = useState([]);
   const [isFriends, setIsFriends] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
@@ -27,7 +28,7 @@ function App() {
   };
 
   useEffect(() => {
-    const fetchLogedInUser = async () => {
+    const fetchLoggedInUser = async () => {
       try {
         const loginResponse = await getUser(userId);
         if(loginResponse) {
@@ -43,13 +44,13 @@ function App() {
           setIsLoggedIn(false) 
         }
       } catch (err) {
-        console.error('Error fetching loged in User')
+        console.error('Error fetching logged in User')
       }
     }
-    fetchLogedInUser();
+    if (userId) fetchLoggedInUser();
   }, [userId]);  
 
-  // ALL USERS
+  
   useEffect(() => {
     const fetchUsers = async () => {
       if (userId) {
@@ -65,8 +66,8 @@ function App() {
     }, [userId]);
 
   const userIsLoggedIn = () => {
-    setIsLoggedIn(true)
-  }
+    setIsLoggedIn(true);
+  };
 
   const userLogOut = () => {
     setIsLoggedIn(false);
@@ -75,17 +76,17 @@ function App() {
 
   return (
     <>
-      {isLogedIn && <Header userLogOut={userLogOut} />}
+      {isLoggedIn && <Header userLogOut={userLogOut} userData={userData} />}
       <Routes>
-        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} defineUserId={defineUserId} userData={userData} />} />
-        <Route path='/:userId/my_games/' element={isLogedIn ? <MyGames userData={userData} isLogedIn={isLogedIn} myGames={myGames} userID={userId} userIsLoggedIn={userIsLoggedIn} friendsList={friendsList} /> : <Navigate to="/" />} />
-        <Route path='/search/frien-emies' element={isLogedIn ? <Users userData={userData} userId={userId} users={users} isFriends={isFriends} setIsFriends={setIsFriends} setUserId={setUserId} friendsList={friendsList}  /> : <Navigate to="/" /> } />
-        <Route path='/:userId/frien-emies' element={isLogedIn ? <Friends userData={userData} userId={userId} users={users} isFriends={isFriends} friendsList={friendsList} setIsFriends={setIsFriends} /> : <Navigate to="/" />} />
-        <Route path='/gameId' element={isLogedIn ? <GamePlay userId={userId} userData={userData} playerId={1} gameId={1}/> : <Navigate to="/" />} />
-        <Route path='/:userId/statistics' element={isLogedIn ? <Stats userData={userData}/> : <Navigate to="/" />} />
-        <Route path="*" element={isLogedIn ? <ErrorPage /> : <Navigate to="/" />} />
+        <Route path='/' element={<Login userIsLoggedIn={userIsLoggedIn} defineUserId={defineUserId} />} />
+        <Route path='/:userId/my_games/' element={isLoggedIn ? <MyGames isLoggedIn={isLoggedIn} userData={userData} /> : <Navigate to="/" />} />
+        <Route path='/search/frien-emies' element={isLoggedIn ? <Users userData={userData} users={users} setIsFriends={setIsFriends} /> : <Navigate to="/" /> } />
+        <Route path='/:userId/frien-emies' element={isLoggedIn ? <Friends userData={userData}  /> : <Navigate to="/" />} />
+        <Route path='/:gameId' element={isLoggedIn ? <GamePlay playerId={userId} /> : <Navigate to="/" />} />
+        <Route path='/:userId/statistics' element={isLoggedIn ? <Stats userData={userData}/> : <Navigate to="/" />} />
+        <Route path="*" element={isLoggedIn ? <ErrorPage /> : <Navigate to="/" />} />
       </Routes>
-      {isLogedIn && <Footer userId={userId}/>}
+      {isLoggedIn && <Footer userData={userData}/>}
     </>
   );
 }

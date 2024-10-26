@@ -1,0 +1,19 @@
+{
+    "data": {
+      "attributes": {
+        "black_player_id": 4,
+        "black_player_points": 0,
+        "black_player_user_name": "joe",
+        "game_champion": null,
+        "game_complete": false,
+        "game_outcome": null,
+        "turn_color": "white",
+        "turn_number": 0,
+        "white_player_id": 1,
+        "white_player_points": 0,
+        "white_player_user_name": "seth"
+      },
+      "id": 2,
+      "type": "game_information"
+    }
+  }

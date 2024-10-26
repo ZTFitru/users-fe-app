@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import GameplayPopUp from '../GameplayPopUp/GameplayPopUp';
+
 import defaultChessImage from '../../assets/chess-with-frienemies-1.svg';
 import './MyGameCard.css';
 
-function MyGameCard({ gameId, gameImage, attributes, onImageClick, userData }) {
-  const [selectedGame, setSelectedGame] = useState(null)
+function MyGameCard({ gameId, gameImage, attributes, userData }) {
 
-  const gameSlected = (gameId) => {
+  const [selectedGame, setSelectedGame] = useState(null);
+
+  const gameSelected = (gameId) => {
     setSelectedGame(gameId)
   }
 
@@ -21,35 +23,31 @@ function MyGameCard({ gameId, gameImage, attributes, onImageClick, userData }) {
     turn_color
   } = attributes;
   const id = userData?.id;
-  console.log('user id', id);
-  console.log('white player id', white_player_id);
   attributes.playerColor = Number(id) == Number(white_player_id) ? 'white' : 'black';
   attributes.playerName = userData.username
   attributes.opponentColor = Number(id) === Number(white_player_id) ? 'black' : 'white';
   attributes.opponentName = attributes[`${attributes.opponentColor}_player_user_name`];
   attributes.nextToMove = attributes.playerColor === turn_color ? attributes.playerName : attributes.opponentName;
-  // console.log('userdata', attributes);
-  
 
   return (
     <div id={gameId} className='my-games-card-wrapper'>
-      <img src={gameImage || defaultChessImage} 
-        onClick={gameSlected}
+      <img src={gameImage || defaultChessImage}
+        onClick={gameSelected}
         alt={gameId}
         onError={event => {
           event.target.src = avatarPlaceholder
           event.onerror = null
         }}
       />{selectedGame && (
-          <GameplayPopUp
+        <GameplayPopUp
           attributes={attributes}
-          gameId={selectedGame}
+          gameId={gameId}
           onClose={closePopUp}
         />
       )}
-      <h3>{gameId}: Game with {attributes.opponentName}</h3> 
+      <h3>{gameId}: Game with {attributes.opponentName}</h3>
     </div>
   )
-}
+};
 
 export default MyGameCard;

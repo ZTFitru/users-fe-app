@@ -6,11 +6,9 @@ export const getUser = async (userId) => {
         if (!res.ok) {
             throw new Error(`There was an error fetching the loggin in user: ${res.status}`)
         }
-
         const data = await res.json()
         return data
     } catch (err) {
-        console.log('Error in fetching the loggedIn User:', err)
         throw err
     }
 }
@@ -23,9 +21,9 @@ export const getUsersIndex = async (userId) => {
         }
 
         const allUsersData = await res.json();
+        
         return allUsersData
     } catch (err) {
-        console.log('Error in fetching the users:', err)
         throw err
     }
 }
@@ -40,7 +38,6 @@ export const getFriendsIndex = async (userId) => {
         const data = await res.json()
         return data
     } catch (err) {
-        console.log('Error in fetching Frien-EMIES list:', err)
         throw err
     }
 }
@@ -53,16 +50,16 @@ export const getGamesIndex = async (userId) => {
         }
 
         const data = await res.json();
+        console.log('user game index <><>', data)
         return data
     } catch (err) {
-        console.log('Error in fetching games list:', err)
         throw err
     }
 }
 
 export const getGameStats = async (gameId) => {
     try {
-        const res = await fetch(`https://chess-game-be-fmpc.onrender.com/api/v1/games/${gameId}`)
+        const res = await fetch(`https://chess-game-be-fmpc.onrender.com/games/${gameId}`)
         if (!res.ok) {
             throw new Error(`There's been an error loading the game stats: ${res.status}`)
         }
@@ -70,7 +67,6 @@ export const getGameStats = async (gameId) => {
         const data = await res.json();
         return data;
     } catch (err) {
-        console.log('Error in fetching game stats', err)
     }
 }
 
@@ -79,7 +75,6 @@ export const getAllGameStats = async (gameIds) => {
         const allGameStats = await Promise.all(gameIds.map(id => getGameStats(id)));
         return allGameStats;
     } catch (err) {
-        console.log('Error in fetching your game stats.')
     }
 } 
 
@@ -108,7 +103,6 @@ export const postLogInUser = async (user) => {
 }
 
 export const postAddFriend = async (userId, user_id) => {
-    console.log('api call ->>>', user_id)
     try {
         const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/add_friend`, {
             method: 'POST',
@@ -132,13 +126,21 @@ export const postAddFriend = async (userId, user_id) => {
 }
 
 export const postStartGame = async (userId, friendId) => {
+    console.log('api call user--->', userId)
+    console.log('api call friend---->', friendId)
     try {
         const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/start_game`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ friendId })
+            body: JSON.stringify({ "user_id": friendId
+                // 'white_player_id': userId,
+                // 'black_player_id': friendId, 
+                // 'white_player_user_name' : userName,
+                // 'black_player_user_name': friendName
+            })
+            // { “user_id”: 2 }
         });
 
         if (!res.ok) {
@@ -146,6 +148,7 @@ export const postStartGame = async (userId, friendId) => {
         }
 
         const resData = await res.json();
+        console.log('whats the matter ----->', resData)
         return resData
     } catch (err) {
         console.error('Error in POSTing the user login:', err)
@@ -179,12 +182,12 @@ export const deleteLogOutUser = async (userId) => {
 
 export const deleteFriend = async (userId, friendId) => {
     try {
-        const res = await fetch(`https://b8c66bf6-d958-4e26-836c-432537824df7.mock.pstmn.io/api/v1/users/${userId}/remove_friend`, {
+        const res = await fetch(`https://chess-with-frein-emies-e45d9fb62d80.herokuapp.com/api/v1/users/${userId}/remove_friend`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(friendId) 
+            body: JSON.stringify({"user_id": friendId}) 
         });
         
         const resData = await res.json();

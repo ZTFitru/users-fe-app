@@ -1,55 +1,50 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import chessLogo from '../../assets/chess-with-frienemies-1.svg';
-// import eye from '../../assets/eye.png'
-import { postLogInUser } from '../../../apiCalls.jsx'
+import { postLogInUser } from '../../../apiCalls.jsx';
 import './Login.css';
 
 function Login({ userIsLoggedIn, defineUserId }) {
-
+    
     const [email, setEmail] = useState('');
-    // const [userEmailInput, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const [userPasswordInput, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
     const navigate = useNavigate();
-    // const { userId } = useParams()
-    // console.log('Log in id --->',defineUserId)
 
     const signInBtn = async (e) => {
         e.preventDefault();
-      
-        const userCredentials = { email, password };
-      
-        try {
-          const userData = await postLogInUser(userCredentials);
-          if (userData.data.id && userData.data.attributes) {
-            defineUserId(userData.data.id);
-            userIsLoggedIn(userData.data.id);
-            navigate(`/${userData.data.id}/my_games/`)
-            // navigate(`/search/frien-emies`)
-          } else {
-            setError('Username or password is incorrect.');
-          }
-        } catch (err) {
-          setError('Login failed. Please try again.');
-          console.error(err);
-        }
-      };
 
-    // love this
+        const userCredentials = { email, password };
+
+        try {
+            const userData = await postLogInUser(userCredentials);
+            if (userData.data.id && userData.data.attributes) {
+                defineUserId(userData.data.id);
+                userIsLoggedIn(userData.data.id);
+                navigate(`/${userData.data.id}/my_games/`)
+            } else {
+                setError('Username or password is incorrect.');
+            }
+        } catch (err) {
+            setError('Login failed. Please try again.');
+            console.error(err);
+        }
+    };
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
-      };
+    };
 
     return (
         <section className='login-section'>
-            <h1><div className='login-chess-with'>Chess with </div><div className='login-frien-emies'>Frien-EMIES</div></h1>
-            <img src={chessLogo} alt='chess pieces' className='login-chess-logo' />
+            <div className='logo-wrapper'>
+                <h1><div className='login-chess-with'>Chess with </div><div className='login-frien-emies'>Frien-EMIES</div></h1>
+                <img src={chessLogo} alt='chess pieces' className='login-chess-logo' />
+            </div>
             <div className='login-sign-in-wrapper'>
                 <h2>Sign In</h2>
                 <form onSubmit={signInBtn}>
@@ -69,7 +64,6 @@ function Login({ userIsLoggedIn, defineUserId }) {
                         <label className='login-password-label'>Password</label>
                         <input
                             placeholder='Enter password'
-                            // type='password'
                             type={showPassword ? 'text' : 'password'}
                             value={password}
                             className='login-password-input'
@@ -77,7 +71,7 @@ function Login({ userIsLoggedIn, defineUserId }) {
                             required
                         />
                         <i onClick={togglePasswordVisibility} className='toggel-password-visiblity'>
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            {showPassword ? <FaEyeSlash className='eyeball-visiblity' /> : <FaEye className='eyeball-hidden' />}
                         </i>
                     </div>
                     <button type='submit' className='submit-button'>
@@ -87,6 +81,6 @@ function Login({ userIsLoggedIn, defineUserId }) {
             </div>
         </section >
     )
-}
+};
 
 export default Login;

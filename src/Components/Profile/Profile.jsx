@@ -28,7 +28,7 @@ function Profile({ userData }) {
         </div>
         <div className="setting-wrapper">
           <FaGlobe className="ion"/>
-          <p>Whishlist</p>
+          <p>Whish list</p>
         </div>
         <div className="setting-wrapper">
           <IoMdHeart className="ion"/>
