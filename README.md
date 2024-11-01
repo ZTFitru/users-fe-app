@@ -9,6 +9,11 @@ Chess with Fren-EMIES is designed to cater to casual and competitive players, cr
 
 This project represents the user-side of a dynamic chess game application, developed in collaboration with a backend team to ensure effective integration of game data, friend lists, and user management. Chess with Fren-EMIES allows the user to log in, add or remove friends, and can play chess with other users that are on the friends list.  
 
+Connected repositories:
+Game FE: (https://github.com/seth-way/chess_fe_microservice)
+Game BE: (https://github.com/frien-emies/chess-game-be)
+Users BE: (https://github.com/frien-emies/users_BE)
+
 
 ### Technologies
 
@@ -67,7 +72,7 @@ This project represents the user-side of a dynamic chess game application, devel
 This team project was composed of 11 developers broken into 4 subteams:
 1. FE Users team: 2 developers
 2. BE Users team: 2 developers
-3. FE Games team: 3 developers
+3. FE Games team: 3 developers 
 4. BE Games team: 3 developers
 
 This repo represents the FE Users team code, the host application for the entire project. We are in our 27th week of an intensive web-development training program. It took us 6 days of planning and 6 days or 35 hours to code to completion.
